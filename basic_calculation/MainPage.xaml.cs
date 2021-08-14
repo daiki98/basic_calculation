@@ -13,6 +13,7 @@ namespace basic_calculation
         public MainPage()
         {
             InitializeComponent();
+            Console.WriteLine("Hello, Xamarin!");
         }
     }
 }
