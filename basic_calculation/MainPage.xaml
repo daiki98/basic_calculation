@@ -1,7 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local = "clr-namespace:XAMLUI.ViewModels"
              x:Class="basic_calculation.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel/>
+    </ContentPage.BindingContext>
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,6 +25,23 @@
                Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
 
         <Editor Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"
-                Placeholder="Enter Note Here"/>
+                Placeholder="Enter Note Here"
+                Text="{Binding TheNote}"/>
+
+        <Button Grid.Row="2" Grid.Column="0" Text="Save" Command="{Binding SaveCommand}"/>
+
+        <Button Grid.Row="2" Grid.Column="1" Text="Erase" Command="{Binding EraseCommand}"/>
+
+        <CollectionView ItemsSource="{Binding AllNotes}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Frame>
+                            <Label Text="{Binding .}"/>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
 </ContentPage>
