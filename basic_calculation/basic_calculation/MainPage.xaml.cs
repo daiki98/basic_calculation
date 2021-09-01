@@ -11,7 +11,9 @@ namespace basic_calculation
 {
     public partial class MainPage : ContentPage
     {
-        int currentState = 1;
+        //ステイタス判断してないしいまはいらんかな？？
+        //今後使わなそうなら削除
+        //int currentState = 1;
 
         public MainPage()
         {
@@ -19,8 +21,9 @@ namespace basic_calculation
             OnClear(this, null);
         }
 
-
-        // 式入力部分
+        
+    /*  つかってないし削除？？
+        
         void OnEntryTextChanged(object sender, TextChangedEventArgs e)
         {
             _ = e.NewTextValue;
@@ -30,7 +33,7 @@ namespace basic_calculation
         {
             _ = ((Entry)sender).Text;
         }
-
+    */
 
         // 数字
         void OnSelectNumber(object sender, EventArgs e)
@@ -39,6 +42,7 @@ namespace basic_calculation
             string pressed = button.Text;
             questionText.Text += pressed;
 
+            /*　ここもいらない？？
             if (questionText.Text == "" || currentState < 0)
             {
                 questionText.Text = "";
@@ -47,6 +51,7 @@ namespace basic_calculation
                     currentState *= -1;
                 }
             }
+            */
         }
 
 
@@ -57,6 +62,7 @@ namespace basic_calculation
             string pressed = button.Text;
             questionText.Text += pressed;
 
+            /*　ここもいらない
             if (questionText.Text == "" || currentState < 0)
             {
                 questionText.Text = "";
@@ -65,6 +71,7 @@ namespace basic_calculation
                     currentState *= -1;
                 }
             }
+            */
         }
 
 
@@ -75,6 +82,7 @@ namespace basic_calculation
             string pressed = button.Text;
             questionText.Text += pressed;
 
+            /* ここもいらない
             if (questionText.Text == "" || currentState < 0)
             {
                 questionText.Text = "";
@@ -83,13 +91,14 @@ namespace basic_calculation
                     currentState *= -1;
                 }
             }
+            */
         }
 
 
         // Cボタン
         void OnClear(object sender, EventArgs e)
         {
-            currentState = 1;
+            
             questionText.Text = "";
             resultText.Text = "";
         }
@@ -102,6 +111,7 @@ namespace basic_calculation
             string pressed = button.Text;
             questionText.Text += pressed;
 
+            /* ここもいらない？？
             if (questionText.Text == "" || currentState < 0)
             {
                 questionText.Text = "";
@@ -110,6 +120,7 @@ namespace basic_calculation
                     currentState *= -1;
                 }
             }
+            */
         }
 
         //Delボタン
@@ -123,6 +134,21 @@ namespace basic_calculation
 
         }
 
+        /*      やること
+         *     ★ Fを逆ポーランド法で()を消した状態する
+         *      ①式変形　()をない形にする
+         *      ②計算     
+         *      
+         *      提案方法(ダイスケ）
+         *      操車場アルゴリズムで順序変更(計算も？？）
+         *      
+         *      操車場アルゴリズムはClassificationYardのクラスに
+         *      
+         *     ★()がなく，□を含む式を□について解く
+         *       二分法を使って解く
+         *       アルゴリズムはbesectionCalulationのクラスに記述
+         *      
+         */
 
         // STARTボタン
         void OnCalculate(object sender, EventArgs e)
@@ -137,26 +163,22 @@ namespace basic_calculation
                 string Right = str.Substring(str.IndexOf("=") + 1);
 
                 //式 0=F(x)  F(x)=Right(右辺)-Left(左辺)
-                string f = Right + "-(" + Left + ")";
-                //resultText.Text = f;
-                char[] F = f.ToCharArray();
+                string F = Right + "-(" + Left + ")";
+                resultText.Text = F;
 
-                if (f.Contains("(") && f.Contains(")"))
-                {
-
-                }
+                
             }
             else if(str.Contains("=0"))
             {
-                string f = str.Substring(0, str.IndexOf("="));
-                char[] F = f.ToCharArray();
-                //resultText.Text = f;
+                string F = str.Substring(0, str.IndexOf("="));
+                
+                resultText.Text = F;
             }
             else
             {
-                string f= str.Substring(str.IndexOf("=") + 1);
-                char[] F = f.ToCharArray();
-                //resultText.Text = F;
+                string f= str.Substring(str.IndexOf("="));
+                string F = f.Substring(1);
+                resultText.Text = F;
             }
         }
     }
