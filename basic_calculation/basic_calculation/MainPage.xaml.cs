@@ -11,9 +11,6 @@ namespace basic_calculation
 {
     public partial class MainPage : ContentPage
     {
-        //ステイタス判断してないしいまはいらんかな？？
-        //今後使わなそうなら削除
-        //int currentState = 1;
 
         public MainPage()
         {
@@ -21,37 +18,12 @@ namespace basic_calculation
             OnClear(this, null);
         }
 
-        
-    /*  つかってないし削除？？
-        
-        void OnEntryTextChanged(object sender, TextChangedEventArgs e)
-        {
-            _ = e.NewTextValue;
-        }
-
-        void OnEntryCompleted(object sender, EventArgs e)
-        {
-            _ = ((Entry)sender).Text;
-        }
-    */
-
         // 数字
         void OnSelectNumber(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             string pressed = button.Text;
             questionText.Text += pressed;
-
-            /*　ここもいらない？？
-            if (questionText.Text == "" || currentState < 0)
-            {
-                questionText.Text = "";
-                if (currentState < 0)
-                {
-                    currentState *= -1;
-                }
-            }
-            */
         }
 
 
@@ -61,17 +33,6 @@ namespace basic_calculation
             Button button = (Button)sender;
             string pressed = button.Text;
             questionText.Text += pressed;
-
-            /*　ここもいらない
-            if (questionText.Text == "" || currentState < 0)
-            {
-                questionText.Text = "";
-                if (currentState < 0)
-                {
-                    currentState *= -1;
-                }
-            }
-            */
         }
 
 
@@ -81,17 +42,6 @@ namespace basic_calculation
             Button button = (Button)sender;
             string pressed = button.Text;
             questionText.Text += pressed;
-
-            /* ここもいらない
-            if (questionText.Text == "" || currentState < 0)
-            {
-                questionText.Text = "";
-                if (currentState < 0)
-                {
-                    currentState *= -1;
-                }
-            }
-            */
         }
 
 
@@ -110,17 +60,6 @@ namespace basic_calculation
             Button button = (Button)sender;
             string pressed = button.Text;
             questionText.Text += pressed;
-
-            /* ここもいらない？？
-            if (questionText.Text == "" || currentState < 0)
-            {
-                questionText.Text = "";
-                if (currentState < 0)
-                {
-                    currentState *= -1;
-                }
-            }
-            */
         }
 
         //Delボタン
@@ -133,22 +72,6 @@ namespace basic_calculation
             }
 
         }
-
-        /*      やること
-         *     ★ Fを逆ポーランド法で()を消した状態する
-         *      ①式変形　()をない形にする
-         *      ②計算     
-         *      
-         *      提案方法(ダイスケ）
-         *      操車場アルゴリズムで順序変更(計算も？？）
-         *      
-         *      操車場アルゴリズムはClassificationYardのクラスに
-         *      
-         *     ★()がなく，□を含む式を□について解く
-         *       二分法を使って解く
-         *       アルゴリズムはbesectionCalulationのクラスに記述
-         *      
-         */
 
         // STARTボタン
         void OnCalculate(object sender, EventArgs e)
@@ -163,22 +86,243 @@ namespace basic_calculation
                 string Right = str.Substring(str.IndexOf("=") + 1);
 
                 //式 0=F(x)  F(x)=Right(右辺)-Left(左辺)
-                string F = Right + "-(" + Left + ")";
-                resultText.Text = F;
+                string f1 = Right + "-(" + Left + ")";
+                string f2 = f1.Replace("×", "*");
+                string f3 = f2.Replace("÷", "/");
+                //resultText.Text = f;
+                char[] F = f3.ToCharArray();
 
-                
+                Stack<char> buffer = new Stack<char>();
+                Stack<char> st = new Stack<char>();
+                resultText.Text = string.Empty;
+
+                foreach (char token in F)
+                {
+                    switch (token)
+                    {
+                        case '(':
+                            st.Push(token);
+                            break;
+                        case ')':
+                            while (st.Count > 0)
+                            {
+                                char t = st.Pop();
+                                if (t == '(')
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    buffer.Push(t);
+                                }
+                            }
+                            break;
+
+                        case '*':
+                        case '/':
+                            while (st.Count > 0)
+                            {
+                                if (st.Peek() == '*' || st.Peek() == '/')
+                                {
+                                    buffer.Push(st.Pop());
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            st.Push(token);
+                            break;
+
+                        case '+':
+                        case '-':
+                            while (st.Count > 0)
+                            {
+                                if (st.Peek() == '*' || st.Peek() == '/' || st.Peek() == '+' || st.Peek() == '-')
+                                {
+                                    buffer.Push(st.Pop());
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            st.Push(token);
+                            break;
+
+                        default:
+                            buffer.Push(token);
+                            break;
+                    }
+                }
+
+                while (st.Count > 0)
+                {
+                    buffer.Push(st.Pop());
+                }
+                string r = new String(buffer.Reverse().ToArray<char>());
+                resultText.Text = resultText.Text + r + "\r\n";
+
+
             }
+
             else if(str.Contains("=0"))
             {
-                string F = str.Substring(0, str.IndexOf("="));
-                
-                resultText.Text = F;
+                string f1 = str.Substring(0, str.IndexOf("="));
+                string f2 = f1.Replace("×", "*");
+                string f3 = f2.Replace("÷", "/");
+                //resultText.Text = f;
+                char[] F = f3.ToCharArray();
+
+                Stack<char> buffer = new Stack<char>();
+                Stack<char> st = new Stack<char>();
+                resultText.Text = string.Empty;
+
+                foreach (char token in F)
+                {
+                    switch (token)
+                    {
+                        case '(':
+                            st.Push(token);
+                            break;
+                        case ')':
+                            while (st.Count > 0)
+                            {
+                                char t = st.Pop();
+                                if (t == '(')
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    buffer.Push(t);
+                                }
+                            }
+                            break;
+
+                        case '*':
+                        case '/':
+                            while (st.Count > 0)
+                            {
+                                if (st.Peek() == '*' || st.Peek() == '/')
+                                {
+                                    buffer.Push(st.Pop());
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            st.Push(token);
+                            break;
+
+                        case '+':
+                        case '-':
+                            while (st.Count > 0)
+                            {
+                                if (st.Peek() == '*' || st.Peek() == '/' || st.Peek() == '+' || st.Peek() == '-')
+                                {
+                                    buffer.Push(st.Pop());
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            st.Push(token);
+                            break;
+
+                        default:
+                            buffer.Push(token);
+                            break;
+                    }
+                }
+
+                while (st.Count > 0)
+                {
+                    buffer.Push(st.Pop());
+                }
+                string r = new String(buffer.Reverse().ToArray<char>());
+                resultText.Text = resultText.Text + r + "\r\n";
             }
             else
             {
-                string f= str.Substring(str.IndexOf("="));
-                string F = f.Substring(1);
-                resultText.Text = F;
+                string f1= str.Substring(str.IndexOf("="));
+                string f2 = f1.Replace("×", "*");
+                string f3 = f2.Replace("÷", "/");
+                //resultText.Text = f;
+                char[] F = f3.ToCharArray();
+
+                Stack<char> buffer = new Stack<char>();
+                Stack<char> st = new Stack<char>();
+                resultText.Text = string.Empty;
+
+                foreach (char token in F)
+                {
+                    switch (token)
+                    {
+                        case '(':
+                            st.Push(token);
+                            break;
+                        case ')':
+                            while (st.Count > 0)
+                            {
+                                char t = st.Pop();
+                                if (t == '(')
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    buffer.Push(t);
+                                }
+                            }
+                            break;
+
+                        case '*':
+                        case '/':
+                            while (st.Count > 0)
+                            {
+                                if (st.Peek() == '*' || st.Peek() == '/')
+                                {
+                                    buffer.Push(st.Pop());
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            st.Push(token);
+                            break;
+
+                        case '+':
+                        case '-':
+                            while (st.Count > 0)
+                            {
+                                if (st.Peek() == '*' || st.Peek() == '/' || st.Peek() == '+' || st.Peek() == '-')
+                                {
+                                    buffer.Push(st.Pop());
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            st.Push(token);
+                            break;
+
+                        default:
+                            buffer.Push(token);
+                            break;
+                    }
+                }
+
+                while (st.Count > 0)
+                {
+                    buffer.Push(st.Pop());
+                }
+                string r = new String(buffer.Reverse().ToArray<char>());
+                resultText.Text = resultText.Text + r + "\r\n";
             }
         }
     }
