@@ -12,6 +12,8 @@ namespace basic_calculation
     public partial class MainPage : ContentPage
     {
 
+        int currentState = 0;
+
         public MainPage()
         {
             InitializeComponent();
@@ -89,12 +91,14 @@ namespace basic_calculation
                 string f2 = f1.Replace("×", "*");
                 string f3 = f2.Replace("÷", "/");
                 char[] F = f3.ToCharArray();
+                string space = " ";
+                char Space = space[0];
+                
 
 
                 //逆ポーランド記法化
                 Stack<char> buffer = new Stack<char>();//バッファスタック
                 Stack<char> st = new Stack<char>();//作業用スタック
-                resultText.Text = string.Empty;
 
                 foreach (char token in F)
                 {
@@ -114,6 +118,7 @@ namespace basic_calculation
                                 }
                                 else
                                 {
+                                    buffer.Push(Space);
                                     buffer.Push(t);
                                 }
                             }
@@ -125,6 +130,7 @@ namespace basic_calculation
                             {
                                 if (st.Peek() == '*' || st.Peek() == '/')
                                 {
+                                    buffer.Push(Space);
                                     buffer.Push(st.Pop());
                                 }
                                 else
@@ -133,6 +139,7 @@ namespace basic_calculation
                                 }
                             }
                             st.Push(token);
+                            currentState += 1;
                             break;
 
                         case '+':
@@ -141,6 +148,7 @@ namespace basic_calculation
                             {
                                 if (st.Peek() == '*' || st.Peek() == '/' || st.Peek() == '+' || st.Peek() == '-')
                                 {
+                                    buffer.Push(Space);
                                     buffer.Push(st.Pop());
                                 }
                                 else
@@ -149,19 +157,59 @@ namespace basic_calculation
                                 }
                             }
                             st.Push(token);
+                            currentState += 1;
                             break;
 
                         //数字（1桁）の場合
                         //2桁以上を利用する場合、F(x)(=Right(右辺)-Left(左辺))の項ごとに空白か","などで区切る必要がある
                         default:
-                            buffer.Push(token);
+                            if(st.Count > 0 && buffer.Count > 0 )
+                            {
+                                if(currentState > 0)
+                                {
+                                    buffer.Push(Space);
+                                    buffer.Push(token);
+                                    currentState *= 0;
+                                    break;
+                                }
+                                else if(currentState == 0)
+                                {
+                                    buffer.Push(token);
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                buffer.Push(token);
+                                break;
+                            }
                             break;
+                                
+                            //&& currentState > 0 && buffer.Pop() != '*' || buffer.Pop() != '/' || buffer.Pop() != '+' || buffer.Pop() != '-')
+                            //{
+                            //    buffer.Push(Space);
+                            //    buffer.Push(token);
+                            //    currentState *= 0;
+                            //    break;
+                            //}
+                            //else if (st.Count > 0 && buffer.Count > 0 && currentState == 0 && buffer.Pop() != '*' || buffer.Pop() != '/' || buffer.Pop() != '+' || buffer.Pop() != '-')
+                            //{
+                            //    buffer.Push(token);
+                            //    currentState *= 0;
+                            //    break;
+                            //}
+                            //else
+                            //{
+                            //    buffer.Push(token);
+                            //}
+                            //break;
                     }
                 }
 
                 //スタックが空になるまでpopしてバッファへ移動
                 while (st.Count > 0)
                 {
+                    buffer.Push(Space);
                     buffer.Push(st.Pop());
                 }
 
@@ -170,86 +218,86 @@ namespace basic_calculation
                 resultText.Text = resultText.Text + r + "\r\n";
 
 
-                //"□"に数値を代入する
-                string ans = "0";
-                string res = resultText.Text;
-                string res2;
+            //    //"□"に数値を代入する
+            //    string ans = "0";
+            //    string res = resultText.Text;
+            //    string res2;
 
-                foreach (int n in Enumerable.Range(-100, 100))
-                {
-                    string m = n.ToString();
-                    res2 = res.Replace("□", m);
+            //    foreach (int n in Enumerable.Range(-100, 100))
+            //    {
+            //        string m = n.ToString();
+            //        res2 = res.Replace("□", m);
 
-                    //計算過程
-                    //ここも1桁の場合でしか稼働できないため、2桁以上の場合を考える必要あり。
-                    Stack<string> inputRPN = new Stack<string>();//逆ポーランド記法化した式を入れるスタック
-                    Stack<double> calcResult = new Stack<double>();//計算結果を入れるスタック
+            //        //計算過程
+            //        //ここも1桁の場合でしか稼働できないため、2桁以上の場合を考える必要あり。
+            //        Stack<string> inputRPN = new Stack<string>();//逆ポーランド記法化した式を入れるスタック
+            //        Stack<double> calcResult = new Stack<double>();//計算結果を入れるスタック
 
-                    foreach (char s in res2)//逆ポーランド記法の式をスタックに積む
-                    {
-                        inputRPN.Push(s.ToString());
-                    }
+            //        foreach (char s in res2)//逆ポーランド記法の式をスタックに積む
+            //        {
+            //            inputRPN.Push(s.ToString());
+            //        }
 
-                    Stack<string> reversedRPN = new Stack<string>();
+            //        Stack<string> reversedRPN = new Stack<string>();
 
-                    while (inputRPN.Count > 0)//式の積み方を逆順にしたスタック
-                    {
-                        reversedRPN.Push(inputRPN.Pop());
-                    }
+            //        while (inputRPN.Count > 0)//式の積み方を逆順にしたスタック
+            //        {
+            //            reversedRPN.Push(inputRPN.Pop());
+            //        }
 
-                    while (reversedRPN.Count > 0)
-                    {
-                        string token = reversedRPN.Pop();
-                        double token_double;
-                        if (double.TryParse(token, out token_double))//数値の場合
-                        {
-                            calcResult.Push(token_double);
-                        }
+            //        while (reversedRPN.Count > 0)
+            //        {
+            //            string token = reversedRPN.Pop();
+            //            double token_double;
+            //            if (double.TryParse(token, out token_double))//数値の場合
+            //            {
+            //                calcResult.Push(token_double);
+            //            }
 
-                        else
-                        {
-                            if (token == "+")
-                            {
-                                double A = calcResult.Pop();
-                                double B = calcResult.Pop();
-                                calcResult.Push(B + A);
-                            }
+            //            else
+            //            {
+            //                if (token == "+")
+            //                {
+            //                    double A = calcResult.Pop();
+            //                    double B = calcResult.Pop();
+            //                    calcResult.Push(B + A);
+            //                }
 
-                            if (token == "-")
-                            {
-                                double A = calcResult.Pop();
-                                double B = 0;
-                                if (calcResult.Count > 0)
-                                {
-                                    B = calcResult.Pop();
-                                }
-                                calcResult.Push(B - A);
-                            }
+            //                if (token == "-")
+            //                {
+            //                    double A = calcResult.Pop();
+            //                    double B = 0;
+            //                    if (calcResult.Count > 0)
+            //                    {
+            //                        B = calcResult.Pop();
+            //                    }
+            //                    calcResult.Push(B - A);
+            //                }
 
-                            if (token == "*")
-                            {
-                                double A = calcResult.Pop();
-                                double B = calcResult.Pop();
-                                calcResult.Push(B * A);
-                            }
+            //                if (token == "*")
+            //                {
+            //                    double A = calcResult.Pop();
+            //                    double B = calcResult.Pop();
+            //                    calcResult.Push(B * A);
+            //                }
 
-                            if (token == "/")
-                            {
-                                double A = calcResult.Pop();
-                                double B = calcResult.Pop();
-                                calcResult.Push(B / A);
-                            }
-                        }
-                    }
+            //                if (token == "/")
+            //                {
+            //                    double A = calcResult.Pop();
+            //                    double B = calcResult.Pop();
+            //                    calcResult.Push(B / A);
+            //                }
+            //            }
+            //        }
 
-                    //□に数字を代入して計算した結果がans(0)と同じ場合、
-                    //resultTextをm(□への代入値)とする。
-                    if (calcResult.Peek().ToString() == ans)
-                    {
-                        resultText.Text = m;
-                    }
+            //        //□に数字を代入して計算した結果がans(0)と同じ場合、
+            //        //resultTextをm(□への代入値)とする。
+            //        if (calcResult.Peek().ToString() == ans)
+            //        {
+            //            resultText.Text = m;
+            //        }
 
-                }
+            //    }
             }
 
 
