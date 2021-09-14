@@ -160,8 +160,7 @@ namespace basic_calculation
                             currentState += 1;
                             break;
 
-                        //数字（1桁）の場合
-                        //2桁以上を利用する場合、F(x)(=Right(右辺)-Left(左辺))の項ごとに空白か","などで区切る必要がある
+                        //数字の場合
                         default:
                             if(st.Count > 0 && buffer.Count > 0 )
                             {
@@ -184,25 +183,6 @@ namespace basic_calculation
                                 break;
                             }
                             break;
-                                
-                            //&& currentState > 0 && buffer.Pop() != '*' || buffer.Pop() != '/' || buffer.Pop() != '+' || buffer.Pop() != '-')
-                            //{
-                            //    buffer.Push(Space);
-                            //    buffer.Push(token);
-                            //    currentState *= 0;
-                            //    break;
-                            //}
-                            //else if (st.Count > 0 && buffer.Count > 0 && currentState == 0 && buffer.Pop() != '*' || buffer.Pop() != '/' || buffer.Pop() != '+' || buffer.Pop() != '-')
-                            //{
-                            //    buffer.Push(token);
-                            //    currentState *= 0;
-                            //    break;
-                            //}
-                            //else
-                            //{
-                            //    buffer.Push(token);
-                            //}
-                            //break;
                     }
                 }
 
