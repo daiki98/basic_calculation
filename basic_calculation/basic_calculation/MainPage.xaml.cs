@@ -195,89 +195,98 @@ namespace basic_calculation
 
                 //スタックの順番を逆順にして文字列に変換
                 string r = new string(buffer.Reverse().ToArray());
-                resultText.Text = resultText.Text + r + "\r\n";
+                string res = resultText.Text + r + "\r\n";
 
 
-            //    //"□"に数値を代入する
-            //    string ans = "0";
-            //    string res = resultText.Text;
-            //    string res2;
+                //計算部分
+                //流れ
+                //1.□にある数字を代入
+                //2.□のない式で計算
+                //3.解が０になった場合、画面に□に代入した値を表示
 
-            //    foreach (int n in Enumerable.Range(-100, 100))
-            //    {
-            //        string m = n.ToString();
-            //        res2 = res.Replace("□", m);
+                string ans = "0";
+                string res2;
 
-            //        //計算過程
-            //        //ここも1桁の場合でしか稼働できないため、2桁以上の場合を考える必要あり。
-            //        Stack<string> inputRPN = new Stack<string>();//逆ポーランド記法化した式を入れるスタック
-            //        Stack<double> calcResult = new Stack<double>();//計算結果を入れるスタック
+                //スタック
+                Stack<string> inputRPN = new Stack<string>();//逆ポーランド記法化した式を入れるスタック
+                Stack<double> calcResult = new Stack<double>();//計算結果を入れるスタック
+                Stack<string> reversedRPN = new Stack<string>();//inputRPNを逆順（正しい順）で積むスタック
 
-            //        foreach (char s in res2)//逆ポーランド記法の式をスタックに積む
-            //        {
-            //            inputRPN.Push(s.ToString());
-            //        }
+                foreach (int n in Enumerable.Range(-10, 10))//とりあえず-10～10の中から探す（n(m)が代入値）
+                {
+                    string m = n.ToString();
+                    res2 = res.Replace("□", m);
 
-            //        Stack<string> reversedRPN = new Stack<string>();
+                    foreach (char x in res2)//逆ポーランド記法の式をスタックに積む
+                    {
+                        inputRPN.Push(x.ToString());
+                    }
 
-            //        while (inputRPN.Count > 0)//式の積み方を逆順にしたスタック
-            //        {
-            //            reversedRPN.Push(inputRPN.Pop());
-            //        }
+                    while (inputRPN.Count > 0)//式の積み方を逆順にする
+                    {
+                        reversedRPN.Push(inputRPN.Pop());
+                    }
 
-            //        while (reversedRPN.Count > 0)
-            //        {
-            //            string token = reversedRPN.Pop();
-            //            double token_double;
-            //            if (double.TryParse(token, out token_double))//数値の場合
-            //            {
-            //                calcResult.Push(token_double);
-            //            }
+                    while (reversedRPN.Count > 0)
+                    {
+                        string token = reversedRPN.Pop();
 
-            //            else
-            //            {
-            //                if (token == "+")
-            //                {
-            //                    double A = calcResult.Pop();
-            //                    double B = calcResult.Pop();
-            //                    calcResult.Push(B + A);
-            //                }
+                        switch (token)
+                        {
+                            case "+":
+                                double A = calcResult.Pop();
+                                double B = calcResult.Pop();
+                                calcResult.Push(B + A);
+                                break;
 
-            //                if (token == "-")
-            //                {
-            //                    double A = calcResult.Pop();
-            //                    double B = 0;
-            //                    if (calcResult.Count > 0)
-            //                    {
-            //                        B = calcResult.Pop();
-            //                    }
-            //                    calcResult.Push(B - A);
-            //                }
+                            case "-":
+                                double A1 = calcResult.Pop();
+                                double B1 = 0;
+                                if (calcResult.Count > 0)
+                                {
+                                    B1 = calcResult.Pop();
+                                }
+                                calcResult.Push(B1 - A1);
+                                break;
 
-            //                if (token == "*")
-            //                {
-            //                    double A = calcResult.Pop();
-            //                    double B = calcResult.Pop();
-            //                    calcResult.Push(B * A);
-            //                }
+                            case "*":
+                                double A2 = calcResult.Pop();
+                                double B2 = calcResult.Pop();
+                                calcResult.Push(B2 * A2);
+                                break;
 
-            //                if (token == "/")
-            //                {
-            //                    double A = calcResult.Pop();
-            //                    double B = calcResult.Pop();
-            //                    calcResult.Push(B / A);
-            //                }
-            //            }
-            //        }
+                            case "/":
+                                double A3 = calcResult.Pop();
+                                double B3 = calcResult.Pop();
+                                calcResult.Push(B3 * A3);
+                                break;
 
-            //        //□に数字を代入して計算した結果がans(0)と同じ場合、
-            //        //resultTextをm(□への代入値)とする。
-            //        if (calcResult.Peek().ToString() == ans)
-            //        {
-            //            resultText.Text = m;
-            //        }
+                            case " "://後置記法に半角スペースを入れていたため、スペースは無視する
+                                continue;
 
-            //    }
+                            default:
+                                if (double.TryParse(token, out double token_double))//数値の場合
+                                {
+                                    calcResult.Push(token_double);
+                                }
+                                break;
+                        }
+                    }
+
+                    //□に数字を代入して計算した結果がans(0)と同じ場合、
+                    //resultTextをm(□への代入値)とする。
+                    if (calcResult.Peek().ToString() == ans)
+                    {
+                        resultText.Text = m;
+                        break;
+                    }
+
+                    else if (calcResult.Peek().ToString() != ans)
+                    {
+                        break;
+                    }
+                    break;
+                }
             }
 
 
@@ -289,15 +298,20 @@ namespace basic_calculation
                 string f2 = f1.Replace("×", "*");
                 string f3 = f2.Replace("÷", "/");
                 char[] F = f3.ToCharArray();
+                string space = " ";
+                char Space = space[0];
 
-                Stack<char> buffer = new Stack<char>();
-                Stack<char> st = new Stack<char>();
-                resultText.Text = string.Empty;
+
+
+                //逆ポーランド記法化
+                Stack<char> buffer = new Stack<char>();//バッファスタック
+                Stack<char> st = new Stack<char>();//作業用スタック
 
                 foreach (char token in F)
                 {
                     switch (token)
                     {
+                        //鍵かっこ処理
                         case '(':
                             st.Push(token);
                             break;
@@ -311,6 +325,7 @@ namespace basic_calculation
                                 }
                                 else
                                 {
+                                    buffer.Push(Space);
                                     buffer.Push(t);
                                 }
                             }
@@ -322,6 +337,7 @@ namespace basic_calculation
                             {
                                 if (st.Peek() == '*' || st.Peek() == '/')
                                 {
+                                    buffer.Push(Space);
                                     buffer.Push(st.Pop());
                                 }
                                 else
@@ -330,6 +346,7 @@ namespace basic_calculation
                                 }
                             }
                             st.Push(token);
+                            currentState += 1;
                             break;
 
                         case '+':
@@ -338,6 +355,7 @@ namespace basic_calculation
                             {
                                 if (st.Peek() == '*' || st.Peek() == '/' || st.Peek() == '+' || st.Peek() == '-')
                                 {
+                                    buffer.Push(Space);
                                     buffer.Push(st.Pop());
                                 }
                                 else
@@ -346,20 +364,45 @@ namespace basic_calculation
                                 }
                             }
                             st.Push(token);
+                            currentState += 1;
                             break;
 
+                        //数字の場合
                         default:
-                            buffer.Push(token);
+                            if (st.Count > 0 && buffer.Count > 0)
+                            {
+                                if (currentState > 0)
+                                {
+                                    buffer.Push(Space);
+                                    buffer.Push(token);
+                                    currentState *= 0;
+                                    break;
+                                }
+                                else if (currentState == 0)
+                                {
+                                    buffer.Push(token);
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                buffer.Push(token);
+                                break;
+                            }
                             break;
                     }
                 }
 
+                //スタックが空になるまでpopしてバッファへ移動
                 while (st.Count > 0)
                 {
+                    buffer.Push(Space);
                     buffer.Push(st.Pop());
                 }
+
+                //スタックの順番を逆順にして文字列に変換
                 string r = new string(buffer.Reverse().ToArray());
-                resultText.Text = resultText.Text + r + "\r\n";
+                string res = resultText.Text + r + "\r\n";
             }
 
 
@@ -371,15 +414,20 @@ namespace basic_calculation
                 string f2 = f1.Replace("×", "*");
                 string f3 = f2.Replace("÷", "/");
                 char[] F = f3.ToCharArray();
+                string space = " ";
+                char Space = space[0];
 
-                Stack<char> buffer = new Stack<char>();
-                Stack<char> st = new Stack<char>();
-                resultText.Text = string.Empty;
+
+
+                //逆ポーランド記法化
+                Stack<char> buffer = new Stack<char>();//バッファスタック
+                Stack<char> st = new Stack<char>();//作業用スタック
 
                 foreach (char token in F)
                 {
                     switch (token)
                     {
+                        //鍵かっこ処理
                         case '(':
                             st.Push(token);
                             break;
@@ -393,6 +441,7 @@ namespace basic_calculation
                                 }
                                 else
                                 {
+                                    buffer.Push(Space);
                                     buffer.Push(t);
                                 }
                             }
@@ -404,6 +453,7 @@ namespace basic_calculation
                             {
                                 if (st.Peek() == '*' || st.Peek() == '/')
                                 {
+                                    buffer.Push(Space);
                                     buffer.Push(st.Pop());
                                 }
                                 else
@@ -412,6 +462,7 @@ namespace basic_calculation
                                 }
                             }
                             st.Push(token);
+                            currentState += 1;
                             break;
 
                         case '+':
@@ -420,6 +471,7 @@ namespace basic_calculation
                             {
                                 if (st.Peek() == '*' || st.Peek() == '/' || st.Peek() == '+' || st.Peek() == '-')
                                 {
+                                    buffer.Push(Space);
                                     buffer.Push(st.Pop());
                                 }
                                 else
@@ -428,20 +480,45 @@ namespace basic_calculation
                                 }
                             }
                             st.Push(token);
+                            currentState += 1;
                             break;
 
+                        //数字の場合
                         default:
-                            buffer.Push(token);
+                            if (st.Count > 0 && buffer.Count > 0)
+                            {
+                                if (currentState > 0)
+                                {
+                                    buffer.Push(Space);
+                                    buffer.Push(token);
+                                    currentState *= 0;
+                                    break;
+                                }
+                                else if (currentState == 0)
+                                {
+                                    buffer.Push(token);
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                buffer.Push(token);
+                                break;
+                            }
                             break;
                     }
                 }
 
+                //スタックが空になるまでpopしてバッファへ移動
                 while (st.Count > 0)
                 {
+                    buffer.Push(Space);
                     buffer.Push(st.Pop());
                 }
+
+                //スタックの順番を逆順にして文字列に変換
                 string r = new string(buffer.Reverse().ToArray());
-                resultText.Text = resultText.Text + r + "\r\n";
+                string res = resultText.Text + r + "\r\n";
             }
         }
     }
