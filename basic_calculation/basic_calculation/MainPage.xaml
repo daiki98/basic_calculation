@@ -38,7 +38,7 @@
         <StackLayout Grid.Row="0" Grid.ColumnSpan="4" Padding="20,0">
 
             <Entry x:Name="questionText"
-                    FontSize="43"
+                    FontSize="20"
                     MaxLength="15"
                     CursorPosition="5"
                     TextColor="White"
@@ -58,7 +58,7 @@
 
 
         <Label x:Name="resultText" 
-               FontSize="30"  
+               FontSize="20"  
                BackgroundColor="Black" 
                Text=""
                TextColor="White"
