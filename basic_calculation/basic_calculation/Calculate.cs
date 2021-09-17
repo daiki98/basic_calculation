@@ -7,7 +7,6 @@ namespace basic_calculation
 {
     public static class Calculate
     {
-
         //中置記法　→　後置記法
         public static string ReversePolishNotation(char[] input)
         {
@@ -16,7 +15,6 @@ namespace basic_calculation
 
             string space = " ";
             char Space = space[0];
-
             int currentState = 0;
 
             foreach (char token in input)
@@ -113,10 +111,9 @@ namespace basic_calculation
 
             //スタックの順番を逆順にして文字列に変換
             string r = new string(buffer.Reverse().ToArray());
-            string res =  r + "\r\n";
+            string res = r + "\r\n";
 
             return res;
-
         }
 
 

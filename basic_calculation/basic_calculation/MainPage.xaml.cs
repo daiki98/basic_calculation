@@ -36,7 +36,7 @@ namespace basic_calculation
 
 
         // 演算子
-        void OnSelectOperator(object sender, EventArgs e) 
+        void OnSelectOperator(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             string pressed = button.Text;
@@ -47,7 +47,6 @@ namespace basic_calculation
         // Cボタン
         void OnClear(object sender, EventArgs e)
         {
-            
             questionText.Text = "";
             resultText.Text = "";
         }
@@ -62,7 +61,7 @@ namespace basic_calculation
         }
 
         //Delボタン
-        void OnDel(object sender, EventArgs e)　　　　　											　
+        void OnDel(object sender, EventArgs e)
         {
             if (questionText.Text.Length > 0)
             {
@@ -89,15 +88,10 @@ namespace basic_calculation
                 char[] F = f2.ToCharArray();
 
                 string RPNres = Calculate.ReversePolishNotation(F);
-
-                resultText.Text = RPNres;
-
                 string Calres = Calculate.Calculation(RPNres);
 
                 resultText.Text = Calres;
             }
-
-
 
 
             //式が"= 0"で終わるとき
@@ -110,9 +104,9 @@ namespace basic_calculation
                 char[] F = f3.ToCharArray();
 
                 string RPNres = Calculate.ReversePolishNotation(F);
+                string Calres = Calculate.Calculation(RPNres);
 
-                resultText.Text = RPNres;
-
+                resultText.Text = Calres;
             }
 
 
@@ -126,9 +120,12 @@ namespace basic_calculation
                 char[] F = f3.ToCharArray();
 
                 string RPNres = Calculate.ReversePolishNotation(F);
+                string Calres = Calculate.Calculation(RPNres);
 
-                resultText.Text = RPNres;
+                resultText.Text = Calres;
             }
         }
     }
+
+
 }

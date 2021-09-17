@@ -58,7 +58,7 @@
 
 
         <Label x:Name="resultText" 
-               FontSize="30"  
+               FontSize="20"  
                BackgroundColor="Black" 
                Text=""
                TextColor="White"
