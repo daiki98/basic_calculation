@@ -90,7 +90,7 @@ namespace basic_calculation
 
                 string RPNres = Calculate.ReversePolishNotation(F);
 
-                //resultText.Text = RPNres;
+                resultText.Text = RPNres;
 
                 string Calres = Calculate.Calculation(RPNres);
 
