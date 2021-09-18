@@ -93,6 +93,10 @@ namespace basic_calculation
                         currentState += 1;
                         break;
 
+                    case '.':
+                        buffer.Push(token);
+                        break;
+
                     //数字の場合
                     default:
                         if (st.Count > 0 && buffer.Count > 0)
@@ -137,12 +141,12 @@ namespace basic_calculation
         //後置記法　→　計算
         public static string Calculation(string input)
         {
-            Stack<double> calcResult = new Stack<double>();
+            Stack<decimal> calcResult = new Stack<decimal>();
             string space = " ";
             char Space = space[0];
             string res = null;
 
-            foreach (double n in Enumerable.Range(-10000, 20000))//代入値(n)：－2000～2000
+            foreach (decimal n in Enumerable.Range(-1000,2000))//代入値(n)：－2000～2000
             {
                 string res2 = input.Replace("□", n.ToString());
                 string[] res3 = res2.Trim().Split(Space);
@@ -152,17 +156,17 @@ namespace basic_calculation
                     switch (token)
                     {
                         case "+":
-                            double A = calcResult.Pop();
-                            double B = calcResult.Pop();
+                            decimal A0 = calcResult.Pop();
+                            decimal B0 = calcResult.Pop();
                             if (token == "+")
                             {
-                                calcResult.Push(A + B);
+                                calcResult.Push(B0 + A0);
                             }
                             break;
 
                         case "-":
-                            double A1 = calcResult.Pop();
-                            double B1 = 0;
+                            decimal A1 = calcResult.Pop();
+                            decimal B1 = 0;
                             if (token == "-")
                             {
                                 if (calcResult.Count > 0)
@@ -174,17 +178,17 @@ namespace basic_calculation
                             break;
 
                         case "*":
-                            double A2 = calcResult.Pop();
-                            double B2 = calcResult.Pop();
+                            decimal A2 = calcResult.Pop();
+                            decimal B2 = calcResult.Pop();
                             if (token == "*")
                             {
-                                calcResult.Push(A2 * B2);
+                                calcResult.Push(B2 * A2);
                             }
                             break;
 
                         case "/":
-                            double A3 = calcResult.Pop();
-                            double B3 = calcResult.Pop();
+                            decimal A3 = calcResult.Pop();
+                            decimal B3 = calcResult.Pop();
                             if (token == "/")
                             {
                                 calcResult.Push(B3 / A3);
@@ -192,7 +196,7 @@ namespace basic_calculation
                             break;
 
                         default:
-                            calcResult.Push(double.Parse(token));
+                            calcResult.Push(decimal.Parse(token));
                             break;
                     }
                 }

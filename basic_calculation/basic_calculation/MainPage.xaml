@@ -104,11 +104,13 @@
                 BackgroundColor="White" TextColor="Black"
                 FontSize="36" BorderRadius="0" Clicked="OnSelectNumber"/>
 
+        <Button Text="." Grid.Row="5" Grid.Column="1" 
+                BackgroundColor="White" TextColor="Black"
+                FontSize="36" BorderRadius="0" Clicked="OnSelectNumber"/>
 
-        <Button Text="□" Grid.Row="5" Grid.Column="1" 
+        <Button Text="□" Grid.Row="5" Grid.Column="2" 
                 BackgroundColor="White" TextColor="Black"
                 FontSize="36" BorderRadius="0" Clicked="OnAnswer"/>
-
 
         <Button Text="÷" Grid.Row="2" Grid.Column="3"
                 BackgroundColor="Orange" TextColor="White"
@@ -122,7 +124,7 @@
         <Button Text="+" Grid.Row="5" Grid.Column="3"
                 BackgroundColor="Orange" TextColor="White"
                 FontSize="36" BorderRadius="0" Clicked="OnSelectOperator"/>
-        <Button Text="/" Grid.Row="5" Grid.Column="2"
+        <Button Text="/" Grid.Row="6" Grid.Column="3"
                 BackgroundColor="Orange" TextColor="White"
                 FontSize="36" BorderRadius="0" Clicked="OnSelectOperator"/>
 
@@ -131,7 +133,7 @@
                 BackgroundColor="Orange" TextColor="White"
                 FontSize="36" BorderRadius="0" Clicked="OnSelectOperator"/>
 
-        <Button Text=")" Grid.Row="6" Grid.Column="3"
+        <Button Text=")" Grid.Row="7" Grid.Column="2"
                 BackgroundColor="Orange" TextColor="White"
                 FontSize="36" BorderRadius="0" Clicked="OnSelectOperator"/>
 
@@ -142,7 +144,7 @@
                 BackgroundColor="#808080" TextColor="White"
                 FontSize="30" BorderRadius="0" Clicked="OnDel"/>
 
-        <Button Text="=" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2"
+        <Button Text="=" Grid.Row="7" Grid.Column="3" 
                 BackgroundColor="Orange" TextColor="White"
                 FontSize="36" BorderRadius="0" Clicked="OnSelectEqual"/>
 
