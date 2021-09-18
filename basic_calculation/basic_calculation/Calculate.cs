@@ -40,11 +40,28 @@ namespace basic_calculation
                         }
                         break;
 
-                    case '*':
                     case '/':
                         while (st.Count > 0)
                         {
-                            if (st.Peek() == '*' || st.Peek() == '/')
+                            if (st.Peek() == '/')
+                            {
+                                buffer.Push(Space);
+                                buffer.Push(st.Pop());
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        st.Push(token);
+                        currentState += 1;
+                        break;
+
+                    case '*':
+                    case '÷':
+                        while (st.Count > 0)
+                        {
+                            if (st.Peek() == '/' || st.Peek() == '*' || st.Peek() == '÷')
                             {
                                 buffer.Push(Space);
                                 buffer.Push(st.Pop());
@@ -62,7 +79,7 @@ namespace basic_calculation
                     case '-':
                         while (st.Count > 0)
                         {
-                            if (st.Peek() == '*' || st.Peek() == '/' || st.Peek() == '+' || st.Peek() == '-')
+                            if (st.Peek() == '/' || st.Peek() == '*' || st.Peek() == '÷' || st.Peek() == '+' || st.Peek() == '-')
                             {
                                 buffer.Push(Space);
                                 buffer.Push(st.Pop());
@@ -120,12 +137,12 @@ namespace basic_calculation
         //後置記法　→　計算
         public static string Calculation(string input)
         {
-            Stack<int> calcResult = new Stack<int>();
+            Stack<double> calcResult = new Stack<double>();
             string space = " ";
             char Space = space[0];
             string res = null;
 
-            foreach (int n in Enumerable.Range(-100, 200))//とりあえず0～10の中から探す（nが代入値）
+            foreach (double n in Enumerable.Range(-10000, 20000))//代入値(n)：－2000～2000
             {
                 string res2 = input.Replace("□", n.ToString());
                 string[] res3 = res2.Trim().Split(Space);
@@ -135,8 +152,8 @@ namespace basic_calculation
                     switch (token)
                     {
                         case "+":
-                            int A = calcResult.Pop();
-                            int B = calcResult.Pop();
+                            double A = calcResult.Pop();
+                            double B = calcResult.Pop();
                             if (token == "+")
                             {
                                 calcResult.Push(A + B);
@@ -144,8 +161,8 @@ namespace basic_calculation
                             break;
 
                         case "-":
-                            int A1 = calcResult.Pop();
-                            int B1 = 0;
+                            double A1 = calcResult.Pop();
+                            double B1 = 0;
                             if (token == "-")
                             {
                                 if (calcResult.Count > 0)
@@ -157,8 +174,8 @@ namespace basic_calculation
                             break;
 
                         case "*":
-                            int A2 = calcResult.Pop();
-                            int B2 = calcResult.Pop();
+                            double A2 = calcResult.Pop();
+                            double B2 = calcResult.Pop();
                             if (token == "*")
                             {
                                 calcResult.Push(A2 * B2);
@@ -166,8 +183,8 @@ namespace basic_calculation
                             break;
 
                         case "/":
-                            int A3 = calcResult.Pop();
-                            int B3 = calcResult.Pop();
+                            double A3 = calcResult.Pop();
+                            double B3 = calcResult.Pop();
                             if (token == "/")
                             {
                                 calcResult.Push(B3 / A3);
@@ -175,7 +192,7 @@ namespace basic_calculation
                             break;
 
                         default:
-                            calcResult.Push(int.Parse(token));
+                            calcResult.Push(double.Parse(token));
                             break;
                     }
                 }
