@@ -16,6 +16,7 @@ namespace basic_calculation
             string space = " ";
             char Space = space[0];
             int currentState = 0;
+            int currentState2 = 0;
 
             foreach (char token in input)
             {
@@ -24,6 +25,7 @@ namespace basic_calculation
                     case '(':
                         st.Push(token);
                         break;
+
                     case ')':
                         while (st.Count > 0)
                         {
@@ -93,9 +95,43 @@ namespace basic_calculation
                         currentState += 1;
                         break;
 
+                    case '□':
+                        if (buffer.Count > 0)
+                        {
+                            if (currentState > 0)
+                            {
+                                buffer.Push(Space);
+                                buffer.Push(token);
+                                currentState += 1;
+                                break;
+                            }
+                            else if (currentState == 0)
+                            {
+                                buffer.Push(Space);
+                                buffer.Push(token);
+                                buffer.Push(Space);
+                                buffer.Push('*');
+                                currentState += 1;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            buffer.Push(token);
+                            currentState *= 0;
+                            break;
+                        }
+                        break;
+
+                    case '%':
+                        buffer.Push(Space);
+                        buffer.Push(token);
+                        break;
+
                     case '.':
                         buffer.Push(token);
                         break;
+
 
                     //数字の場合
                     default:
@@ -117,6 +153,7 @@ namespace basic_calculation
                         else
                         {
                             buffer.Push(token);
+                            currentState *= 0;
                             break;
                         }
                         break;
@@ -145,10 +182,11 @@ namespace basic_calculation
             string space = " ";
             char Space = space[0];
             string res = null;
+            decimal m = 0.01M;//代入値の初期値
 
-            foreach (decimal n in Enumerable.Range(-1000,2000))//代入値(n)：－2000～2000
+            for (double num = 0.01D; num <= 100.00D; num += 0.01)//代入値(n)
             {
-                string res2 = input.Replace("□", n.ToString());
+                string res2 = input.Replace("□", m.ToString());
                 string[] res3 = res2.Trim().Split(Space);
 
                 foreach (string token in res3)
@@ -191,7 +229,18 @@ namespace basic_calculation
                             decimal B3 = calcResult.Pop();
                             if (token == "/")
                             {
-                                calcResult.Push(B3 / A3);
+                                decimal ans = B3 / A3;
+                                string ans2 = ans.ToString("F6");
+                                calcResult.Push(decimal.Parse(ans2));
+                            }
+                            break;
+
+                        case "%":
+                            decimal A4 = calcResult.Pop();
+                            decimal B4 = 100;
+                            if(token == "%")
+                            {
+                                calcResult.Push(A4 / B4);
                             }
                             break;
 
@@ -203,8 +252,12 @@ namespace basic_calculation
 
                 if (calcResult.Peek() == 0)
                 {
-                    res = n.ToString();
+                    res = m.ToString("g29");
                     break;
+                }
+                else
+                {
+                    m += 0.01M;//代入値の公差
                 }
             }
             return res;

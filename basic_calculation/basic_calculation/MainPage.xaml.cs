@@ -17,26 +17,7 @@ namespace basic_calculation
             OnClear(this, null);
         }
 
-        // 数字
-        void OnSelectNumber(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            string pressed = button.Text;
-            questionText.Text += pressed;
-        }
-
-
-        // □（解）
-        void OnAnswer(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            string pressed = button.Text;
-            questionText.Text += pressed;
-        }
-
-
-        // 演算子
-        void OnSelectOperator(object sender, EventArgs e)
+        void OnSelect(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             string pressed = button.Text;
@@ -49,15 +30,6 @@ namespace basic_calculation
         {
             questionText.Text = "";
             resultText.Text = "";
-        }
-
-
-        // =ボタン
-        void OnSelectEqual(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            string pressed = button.Text;
-            questionText.Text += pressed;
         }
 
         //Delボタン
