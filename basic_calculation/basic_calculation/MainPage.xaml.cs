@@ -46,7 +46,7 @@ namespace basic_calculation
         void OnCalculate(object sender, EventArgs e)
         {
             string str = questionText.Text;
-            if (str.Contains("=") && !str.Contains("0=") && !str.Contains("=0"))
+            if (str.Contains("=") && !str.StartsWith("0=") && !str.EndsWith("=0"))
             {
                 //左辺切り出し
                 string Left = str.Substring(0, str.IndexOf("="));
@@ -75,7 +75,7 @@ namespace basic_calculation
 
             //式が"= 0"で終わるとき
             //計算過程未挿入
-            else if (str.Contains("=0"))
+            else if (str.EndsWith("=0"))
             {
                 string f1 = str.Substring(0, str.IndexOf("="));
                 string f2 = f1.Replace("×", "*");
@@ -83,21 +83,21 @@ namespace basic_calculation
 
                 string RPNres = Calculate.ReversePolishNotation(F);
 
-                //resultText.Text = RPNres;
+                resultText.Text = RPNres;
 
-                string RPNres2 = RPNres.Replace("÷", "/");
+                //string RPNres2 = RPNres.Replace("÷", "/");
 
                 //resultText.Text = RPNres2;
 
-                string Calres = Calculate.Calculation(RPNres2);
+                //string Calres = Calculate.Calculation(RPNres2);
 
-                resultText.Text = Calres;
+                //resultText.Text = Calres;
             }
 
 
             //式が"0 ="で始まるとき
             //計算過程未挿入
-            else
+            else if (str.StartsWith("0="))
             {
                 string f1 = str.Substring(str.IndexOf("="));
                 string f2 = f1.Replace("×", "*");
@@ -105,15 +105,15 @@ namespace basic_calculation
 
                 string RPNres = Calculate.ReversePolishNotation(F);
 
-                //resultText.Text = RPNres;
+                resultText.Text = RPNres;
 
-                string RPNres2 = RPNres.Replace("÷", "/");
+                //string RPNres2 = RPNres.Replace("÷", "/");
 
                 //resultText.Text = RPNres2;
 
-                string Calres = Calculate.Calculation(RPNres2);
+                //string Calres = Calculate.Calculation(RPNres2);
 
-                resultText.Text = Calres;
+                //resultText.Text = Calres;
             }
         }
     }

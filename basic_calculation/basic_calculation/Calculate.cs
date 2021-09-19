@@ -16,7 +16,6 @@ namespace basic_calculation
             string space = " ";
             char Space = space[0];
             int currentState = 0;
-            int currentState2 = 0;
 
             foreach (char token in input)
             {
@@ -147,6 +146,7 @@ namespace basic_calculation
                             else if (currentState == 0)
                             {
                                 buffer.Push(token);
+                                currentState *= 0;
                                 break;
                             }
                         }
@@ -182,9 +182,9 @@ namespace basic_calculation
             string space = " ";
             char Space = space[0];
             string res = null;
-            decimal m = 0.01M;//代入値の初期値
+            decimal m = 0.001M;//代入値の初期値
 
-            for (double num = 0.01D; num <= 100.00D; num += 0.01)//代入値(n)
+            for (double num = 0.001D; num <= 1000.000D; num += 0.001)//代入値(n)
             {
                 string res2 = input.Replace("□", m.ToString());
                 string[] res3 = res2.Trim().Split(Space);
@@ -230,7 +230,7 @@ namespace basic_calculation
                             if (token == "/")
                             {
                                 decimal ans = B3 / A3;
-                                string ans2 = ans.ToString("F6");
+                                string ans2 = ans.ToString("F8");
                                 calcResult.Push(decimal.Parse(ans2));
                             }
                             break;
@@ -257,7 +257,7 @@ namespace basic_calculation
                 }
                 else
                 {
-                    m += 0.01M;//代入値の公差
+                    m += 0.001M;//代入値の公差
                 }
             }
             return res;
