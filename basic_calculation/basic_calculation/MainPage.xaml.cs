@@ -83,15 +83,15 @@ namespace basic_calculation
 
                 string RPNres = Calculate.ReversePolishNotation(F);
 
-                resultText.Text = RPNres;
+                //resultText.Text = RPNres;
 
-                //string RPNres2 = RPNres.Replace("÷", "/");
+                string RPNres2 = RPNres.Replace("÷", "/");
 
                 //resultText.Text = RPNres2;
 
-                //string Calres = Calculate.Calculation(RPNres2);
+                string Calres = Calculate.Calculation(RPNres2);
 
-                //resultText.Text = Calres;
+                resultText.Text = Calres;
             }
 
 
@@ -105,15 +105,15 @@ namespace basic_calculation
 
                 string RPNres = Calculate.ReversePolishNotation(F);
 
-                resultText.Text = RPNres;
+                //resultText.Text = RPNres;
 
-                //string RPNres2 = RPNres.Replace("÷", "/");
+                string RPNres2 = RPNres.Replace("÷", "/");
 
                 //resultText.Text = RPNres2;
 
-                //string Calres = Calculate.Calculation(RPNres2);
+                string Calres = Calculate.Calculation(RPNres2);
 
-                //resultText.Text = Calres;
+                resultText.Text = Calres;
             }
         }
     }

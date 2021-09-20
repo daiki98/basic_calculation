@@ -52,13 +52,13 @@
 
 
         <Label Text="A."
-               FontSize="50"
+               FontSize="43"
                TextColor="White"
                Grid.Row="1" Grid.Column="0" Padding="20,0"/>
 
 
         <Label x:Name="resultText" 
-               FontSize="20"  
+               FontSize="43"  
                BackgroundColor="Black" 
                Text=""
                TextColor="White"

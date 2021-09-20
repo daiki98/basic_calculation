@@ -49,13 +49,27 @@ namespace basic_calculation
                                 buffer.Push(Space);
                                 buffer.Push(st.Pop());
                             }
+                            else if (st.Peek() == '÷')
+                            {
+                                buffer.Push(Space);
+                                buffer.Push(st.Pop());
+                                st.Push('*');
+                                currentState += 1;
+                            }
                             else
                             {
                                 break;
                             }
                         }
-                        st.Push(token);
-                        currentState += 1;
+                        if (currentState == 0)
+                        {
+                            st.Push(token);
+                            currentState += 1;
+                        }
+                        else
+                        {
+                            break;
+                        }
                         break;
 
                     case '*':
@@ -182,13 +196,12 @@ namespace basic_calculation
             string space = " ";
             char Space = space[0];
             string res = null;
-            decimal m = 0.001M;//代入値の初期値
+            decimal m = -100.00M;//代入値の初期値
 
-            for (double num = 0.001D; num <= 1000.000D; num += 0.001)//代入値(n)
+            for (double num = -100.00D; num <= 2000.00D; num += 0.01)//代入値(n)
             {
                 string res2 = input.Replace("□", m.ToString());
                 string[] res3 = res2.Trim().Split(Space);
-
                 foreach (string token in res3)
                 {
                     switch (token)
@@ -196,52 +209,45 @@ namespace basic_calculation
                         case "+":
                             decimal A0 = calcResult.Pop();
                             decimal B0 = calcResult.Pop();
-                            if (token == "+")
-                            {
-                                calcResult.Push(B0 + A0);
-                            }
+                            calcResult.Push(B0 + A0);
                             break;
 
                         case "-":
                             decimal A1 = calcResult.Pop();
                             decimal B1 = 0;
-                            if (token == "-")
+                            if (calcResult.Count > 0)
                             {
-                                if (calcResult.Count > 0)
-                                {
-                                    B1 = calcResult.Pop();
-                                }
-                                calcResult.Push(B1 - A1);
+                                B1 = calcResult.Pop();
                             }
+                            calcResult.Push(B1 - A1);
                             break;
 
                         case "*":
                             decimal A2 = calcResult.Pop();
                             decimal B2 = calcResult.Pop();
-                            if (token == "*")
-                            {
-                                calcResult.Push(B2 * A2);
-                            }
+                            calcResult.Push(B2 * A2);
                             break;
 
                         case "/":
                             decimal A3 = calcResult.Pop();
                             decimal B3 = calcResult.Pop();
-                            if (token == "/")
+                            if (A3 == 0)
+                            {
+                                break;
+                            }
+                            else
                             {
                                 decimal ans = B3 / A3;
                                 string ans2 = ans.ToString("F8");
                                 calcResult.Push(decimal.Parse(ans2));
+                                //calcResult.Push(B3 / A3);
+                                break;
                             }
-                            break;
 
                         case "%":
                             decimal A4 = calcResult.Pop();
                             decimal B4 = 100;
-                            if(token == "%")
-                            {
-                                calcResult.Push(A4 / B4);
-                            }
+                            calcResult.Push(A4 / B4);
                             break;
 
                         default:
@@ -250,15 +256,15 @@ namespace basic_calculation
                     }
                 }
 
+
                 if (calcResult.Peek() == 0)
                 {
-                    res = m.ToString("g29");
+                    res = m.ToString("G29");
                     break;
                 }
-                else
-                {
-                    m += 0.001M;//代入値の公差
-                }
+
+                m += 0.01M;
+
             }
             return res;
         }
