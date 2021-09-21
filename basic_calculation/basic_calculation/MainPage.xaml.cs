@@ -45,7 +45,13 @@ namespace basic_calculation
         // STARTボタン
         void OnCalculate(object sender, EventArgs e)
         {
+            string siginificantNnm = siginificantfigure.Text;
             string str = questionText.Text;
+
+            int S_num = int.Parse(siginificantNnm);
+            
+            
+
             if (str.Contains("=") && !str.StartsWith("0=") && !str.EndsWith("=0"))
             {
                 //左辺切り出し
@@ -67,7 +73,7 @@ namespace basic_calculation
 
                 //resultText.Text = RPNres2;
 
-                string Calres = Calculate.Calculation(RPNres2);
+                string Calres = Calculate.Calculation(RPNres2,S_num);
 
                 resultText.Text = Calres;
             }
@@ -89,7 +95,7 @@ namespace basic_calculation
 
                 //resultText.Text = RPNres2;
 
-                string Calres = Calculate.Calculation(RPNres2);
+                string Calres = Calculate.Calculation(RPNres2,S_num);
 
                 resultText.Text = Calres;
             }
@@ -111,7 +117,7 @@ namespace basic_calculation
 
                 //resultText.Text = RPNres2;
 
-                string Calres = Calculate.Calculation(RPNres2);
+                string Calres = Calculate.Calculation(RPNres2,S_num);
 
                 resultText.Text = Calres;
             }

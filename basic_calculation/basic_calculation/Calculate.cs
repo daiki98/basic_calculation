@@ -190,16 +190,18 @@ namespace basic_calculation
 
 
         //後置記法　→　計算
-        public static string Calculation(string input)
+        public static string Calculation(string input,int siginicantnum)
         {
             Stack<decimal> calcResult = new Stack<decimal>();
             string space = " ";
             char Space = space[0];
             string res = null;
             decimal m = -100.00M;//代入値の初期値
+            decimal h =0.001M;//増減幅
 
             for (double num = -100.00D; num <= 2000.00D; num += 0.01)//代入値(n)
             {
+                
                 string res2 = input.Replace("□", m.ToString());
                 string[] res3 = res2.Trim().Split(Space);
                 foreach (string token in res3)
@@ -238,8 +240,11 @@ namespace basic_calculation
                             else
                             {
                                 decimal ans = B3 / A3;
-                                string ans2 = ans.ToString("F8");
-                                calcResult.Push(decimal.Parse(ans2));
+                                string A;
+
+                                string ans2 = ans.ToString("F"+siginicantnum) ;
+                  
+                                    calcResult.Push(decimal.Parse(ans2));
                                 //calcResult.Push(B3 / A3);
                                 break;
                             }
@@ -263,7 +268,29 @@ namespace basic_calculation
                     break;
                 }
 
-                m += 0.01M;
+                if (siginicantnum == '0')
+                {
+                    h = 0.1M;
+                }
+                else if (siginicantnum == '1')
+                {
+                    h = 0.01M;
+                }
+                else if (siginicantnum == '2')
+                {
+                    h = 0.001M;
+                }
+                else if (siginicantnum == '3')
+                {
+                    h = 0.0001M;
+                }
+                else if (siginicantnum == '4')
+                {
+                    h = 0.00001M;
+                }
+                
+
+                    m +=h;
 
             }
             return res;
