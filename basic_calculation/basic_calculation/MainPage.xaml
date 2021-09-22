@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="basic_calculation.MainPage">
-             
-    
+
+
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <OnPlatform.iOS>0,20,0,0
@@ -11,7 +11,7 @@
         </OnPlatform>
     </ContentPage.Padding>
 
-    
+
     <Grid Padding="5,0" RowSpacing="1" ColumnSpacing="1" BackgroundColor="Black">
 
 
@@ -26,7 +26,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -58,7 +58,7 @@
 
 
         <Label x:Name="resultText" 
-               FontSize="20"  
+               FontSize="43"  
                BackgroundColor="Black" 
                Text=""
                TextColor="White"
@@ -66,8 +66,8 @@
                VerticalTextAlignment="Center"
                LineBreakMode="NoWrap" 
                Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Padding="20,0"/>
-        
-        
+
+
         <Button Text="7" Grid.Row="2" Grid.Column="0"
                 BackgroundColor="White" TextColor="Black"
                 FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
@@ -77,8 +77,8 @@
         <Button Text="9" Grid.Row="2" Grid.Column="2"
                 BackgroundColor="White" TextColor="Black"
                 FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
-        
-        
+
+
         <Button Text="4" Grid.Row="3" Grid.Column="0"
                 BackgroundColor="White" TextColor="Black"
                 FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
@@ -88,8 +88,8 @@
         <Button Text="6" Grid.Row="3" Grid.Column="2"
                 BackgroundColor="White" TextColor="Black"
                 FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
-        
-        
+
+
         <Button Text="1" Grid.Row="4" Grid.Column="0"
                 BackgroundColor="White" TextColor="Black"
                 FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
@@ -99,7 +99,7 @@
         <Button Text="3" Grid.Row="4" Grid.Column="2"
                 BackgroundColor="White" TextColor="Black"
                 FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
-        
+
         <Button Text="0" Grid.Row="5" Grid.Column="0" 
                 BackgroundColor="White" TextColor="Black"
                 FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
@@ -127,7 +127,7 @@
         <Button Text="/" Grid.Row="6" Grid.Column="3"
                 BackgroundColor="Orange" TextColor="White"
                 FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
-        
+
         <Button Text="%" Grid.Row="1" Grid.Column="3"
                 BackgroundColor="Orange" TextColor="White"
                 FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
@@ -158,3 +158,4 @@
 
     </Grid>
 </ContentPage>
+

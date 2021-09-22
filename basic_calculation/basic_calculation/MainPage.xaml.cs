@@ -43,88 +43,92 @@ namespace basic_calculation
             string str = questionText.Text;
             if (str.Contains("=") && str.Contains("□"))
             {
-                if (str.Contains("++") || str.Contains("+*") || str.Contains("+÷") || str.Contains("+/") || str.Contains("+%") ||
-                    str.Contains("-+") || str.Contains("-*") || str.Contains("-÷") || str.Contains("-/") || str.Contains("-%") ||
-                    str.Contains("*+") || str.Contains("**") || str.Contains("*÷") || str.Contains("*/") || str.Contains("*%") ||
-                    str.Contains("÷+") || str.Contains("÷*") || str.Contains("÷÷") || str.Contains("÷/") || str.Contains("÷%") ||
-                    str.Contains("/+") || str.Contains("/*") || str.Contains("/÷") || str.Contains("//") || str.Contains("/%") ||
-                    str.Contains("=+") || str.Contains("=*") || str.Contains("=÷") || str.Contains("=/") || str.Contains("=%") ||
-                    str.Contains("+=") || str.Contains("*=") || str.Contains("÷=") || str.Contains("/=") || str.Contains("%=") ||
-                    str.Contains("(+") || str.Contains("(*") || str.Contains("(÷") || str.Contains("(/") || str.Contains("(%") ||
-                    str.Contains("+)") || str.Contains("*)") || str.Contains("÷)") || str.Contains("/)") || str.Contains("-)") ||
-                    str.Contains("(=") || str.Contains("=)") || str.Contains("==") || str.Contains("%%") || str.Contains("()") || str.Contains(")("))
+                if (str.Contains("=") && !str.StartsWith("0=") && !str.EndsWith("=0"))
                 {
-                    resultText.Text = "Wrong input";
-                }
-                
-                else
-                {
-                    if (str.Contains("=") && !str.StartsWith("0=") && !str.EndsWith("=0"))
+                    if (str.Contains("++") || str.Contains("+×") || str.Contains("+÷") || str.Contains("+/") || str.Contains("+%") ||
+                        str.Contains("-+") || str.Contains("-×") || str.Contains("-÷") || str.Contains("-/") || str.Contains("-%") ||
+                        str.Contains("×+") || str.Contains("××") || str.Contains("×÷") || str.Contains("×/") || str.Contains("×%") ||
+                        str.Contains("÷+") || str.Contains("÷×") || str.Contains("÷÷") || str.Contains("÷/") || str.Contains("÷%") ||
+                        str.Contains("/+") || str.Contains("/×") || str.Contains("/÷") || str.Contains("//") || str.Contains("/%") ||
+                        str.Contains("=+") || str.Contains("=×") || str.Contains("=÷") || str.Contains("=/") || str.Contains("=%") ||
+                        str.Contains("+=") || str.Contains("×=") || str.Contains("÷=") || str.Contains("/=") || str.Contains("%=") ||
+                        str.Contains("(+") || str.Contains("(×") || str.Contains("(÷") || str.Contains("(/") || str.Contains("(%") ||
+                        str.Contains("+)") || str.Contains("×)") || str.Contains("÷)") || str.Contains("/)") || str.Contains("-)") ||
+                        str.Contains("(=") || str.Contains("=)") || str.Contains("==") || str.Contains("%%") || str.Contains("()") || str.Contains(")("))
                     {
-                        //左辺切り出し
-                        string Left = str.Substring(0, str.IndexOf("="));
-
-                        //右辺切り出し
-                        string Right = str.Substring(str.IndexOf("=") + 1);
-
-                        //式 0=F(x)  F(x)=Right(右辺)-Left(左辺)
-                        string f1 = Right + "-(" + Left + ")";
-                        string f2 = f1.Replace("×", "*");
-                        char[] F = f2.ToCharArray();
-
-                        string RPNres = Calculate.ReversePolishNotation(F);
-
-                        //resultText.Text = RPNres;
-
-                        string RPNres2 = RPNres.Replace("÷", "/");
-
-                        //resultText.Text = RPNres2;
-
-                        string Calres = Calculate.Calculation(RPNres2);
-
-                        resultText.Text = Calres;
+                        resultText.Text = "Wrong input";
                     }
 
-                    //式が"= 0"で終わるとき
-                    //計算過程未挿入
-                    else if (str.EndsWith("=0"))
+                    else
                     {
-                        string f1 = str.Substring(0, str.IndexOf("="));
-                        string f2 = f1.Replace("×", "*");
-                        char[] F = f2.ToCharArray();
+                        if (str.Contains("=") && !str.StartsWith("0=") && !str.EndsWith("=0"))
+                        {
+                            //左辺切り出し
+                            string Left = str.Substring(0, str.IndexOf("="));
 
-                        string RPNres = Calculate.ReversePolishNotation(F);
+                            //右辺切り出し
+                            string Right = str.Substring(str.IndexOf("=") + 1);
 
-                        //resultText.Text = RPNres;
+                            //式 0=F(x)  F(x)=Right(右辺)-Left(左辺)
+                            string f1 = Right + "-(" + Left + ")";
+                            string f2 = f1.Replace("×", "*");
+                            char[] F = f2.ToCharArray();
 
-                        string RPNres2 = RPNres.Replace("÷", "/");
+                            string RPNres = Calculate.ReversePolishNotation(F);
 
-                        //resultText.Text = RPNres2;
+                            //resultText.Text = RPNres;
 
-                        string Calres = Calculate.Calculation(RPNres2);
+                            string RPNres2 = RPNres.Replace("÷", "/");
 
-                        resultText.Text = Calres;
-                    }
+                            //resultText.Text = RPNres2;
 
-                    //式が"0 ="で始まるとき
-                    //計算過程未挿入
-                    else if (str.StartsWith("0="))
-                    {
-                        string f1 = str.Substring(str.IndexOf("="));
-                        string f2 = f1.Replace("×", "*");
-                        char[] F = f2.ToCharArray();
+                            string Calres = Calculate.Calculation(RPNres2);
 
-                        string RPNres = Calculate.ReversePolishNotation(F);
+                            resultText.Text = Calres;
+                        }
 
-                        //resultText.Text = RPNres;
+                        //式が"= 0"で終わるとき
+                        //計算過程未挿入
+                        else if (str.EndsWith("=0"))
+                        {
+                            string f1 = str.Substring(0, str.IndexOf("="));
+                            string f2 = f1.Replace("×", "*");
+                            char[] F = f2.ToCharArray();
 
-                        string RPNres2 = RPNres.Replace("÷", "/");
+                            string RPNres = Calculate.ReversePolishNotation(F);
 
-                        //resultText.Text = RPNres2;
+                            //resultText.Text = RPNres;
 
-                        string Calres = Calculate.Calculation(RPNres2);
+                            string RPNres2 = RPNres.Replace("÷", "/");
 
-                        resultText.Text = Calres;
+                            //resultText.Text = RPNres2;
+
+                            string Calres = Calculate.Calculation(RPNres2);
+
+                            resultText.Text = Calres;
+                        }
+
+
+                        //式が"0 ="で始まるとき
+                        //計算過程未挿入
+                        else if (str.StartsWith("0="))
+                        {
+                            string f1 = str.Substring(str.IndexOf("="));
+                            string f2 = f1.Replace("×", "*");
+                            char[] F = f2.ToCharArray();
+
+                            string RPNres = Calculate.ReversePolishNotation(F);
+
+                            //resultText.Text = RPNres;
+
+                            string RPNres2 = RPNres.Replace("÷", "/");
+
+                            //resultText.Text = RPNres2;
+
+                            string Calres = Calculate.Calculation(RPNres2);
+
+                            resultText.Text = Calres;
+                        }
                     }
                 }
             }
