@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace basic_calculation
 {
@@ -22,6 +20,11 @@ namespace basic_calculation
                 switch (token)
                 {
                     case '(':
+                        if (buffer.Count > 0 && currentState == 0)
+                        {
+                            st.Push('*');
+                            currentState += 1;
+                        }
                         st.Push(token);
                         break;
 
