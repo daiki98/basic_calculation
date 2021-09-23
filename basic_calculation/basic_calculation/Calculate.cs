@@ -269,6 +269,11 @@ namespace basic_calculation
                 m += 0.01M;
 
             }
+
+            if (res == null)
+            {
+                res = "Out of range";
+            }
             return res;
         }
     }

@@ -12,18 +12,18 @@
     </ContentPage.Padding>
 
 
-    <Grid Padding="5,0" RowSpacing="1" ColumnSpacing="1" BackgroundColor="Black">
+    <Grid Padding="5,0" RowSpacing="1" ColumnSpacing="1" BackgroundColor="#FFFFFF" Visual="Default">
 
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            
         </Grid.RowDefinitions>
 
 
@@ -32,129 +32,129 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
 
-        <StackLayout Grid.Row="0" Grid.ColumnSpan="4" Padding="20,0">
+        <StackLayout Grid.Row="0" Grid.ColumnSpan="5" Padding="20,0">
 
             <Entry x:Name="questionText"
                     FontSize="43"
                     MaxLength="20"
                     CursorPosition="5"
-                    TextColor="White"
+                    TextColor="Black"
                     Text="0"
-                    IsSpellCheckEnabled="false"
-                    IsTextPredictionEnabled="false"
                     VerticalOptions="FillAndExpand" 
-                    HorizontalOptions="FillAndExpand"/>
+                    HorizontalOptions="FillAndExpand" IsReadOnly="True" Keyboard="Numeric"/>
 
         </StackLayout>
 
 
-        <Label Text="A."
-               FontSize="43"
-               TextColor="White"
+        <Label Text="Ans"
+               FontSize="Small"
+               TextColor="Black"
+               VerticalTextAlignment="Center"
                Grid.Row="1" Grid.Column="0" Padding="20,0"/>
 
 
         <Label x:Name="resultText" 
-               FontSize="43"  
-               BackgroundColor="Black" 
+               FontSize="Medium"  
+               BackgroundColor="White" 
                Text=""
-               TextColor="White"
+               TextColor="Black"
                HorizontalTextAlignment="End" 
                VerticalTextAlignment="Center"
                LineBreakMode="NoWrap" 
-               Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Padding="20,0"/>
+               Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Padding="20,0"/>
 
 
         <Button Text="7" Grid.Row="2" Grid.Column="0"
-                BackgroundColor="White" TextColor="Black"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+                BackgroundColor="#B1B1B1" TextColor="White" 
+                FontSize="36" BorderRadius="0" Clicked="OnSelect"  />
         <Button Text="8" Grid.Row="2" Grid.Column="1"
-                BackgroundColor="White" TextColor="Black"
+                 BackgroundColor="#B1B1B1" TextColor="White"
                 FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
         <Button Text="9" Grid.Row="2" Grid.Column="2"
-                BackgroundColor="White" TextColor="Black"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+                 BackgroundColor="#B1B1B1" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" />
 
 
         <Button Text="4" Grid.Row="3" Grid.Column="0"
-                BackgroundColor="White" TextColor="Black"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+                 BackgroundColor="#B1B1B1" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" />
         <Button Text="5" Grid.Row="3" Grid.Column="1"
-                BackgroundColor="White" TextColor="Black"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+                 BackgroundColor="#B1B1B1" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" />
         <Button Text="6" Grid.Row="3" Grid.Column="2"
-                BackgroundColor="White" TextColor="Black"
+                 BackgroundColor="#B1B1B1" TextColor="White"
                 FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
 
 
         <Button Text="1" Grid.Row="4" Grid.Column="0"
-                BackgroundColor="White" TextColor="Black"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+                 BackgroundColor="#B1B1B1" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" />
         <Button Text="2" Grid.Row="4" Grid.Column="1"
-                BackgroundColor="White" TextColor="Black"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+                 BackgroundColor="#B1B1B1" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" />
         <Button Text="3" Grid.Row="4" Grid.Column="2"
-                BackgroundColor="White" TextColor="Black"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+                 BackgroundColor="#B1B1B1" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" />
 
         <Button Text="0" Grid.Row="5" Grid.Column="0" 
-                BackgroundColor="White" TextColor="Black"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+                 BackgroundColor="#B1B1B1" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" />
 
         <Button Text="." Grid.Row="5" Grid.Column="1" 
-                BackgroundColor="White" TextColor="Black"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+                 BackgroundColor="#B1B1B1" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" />
 
         <Button Text="□" Grid.Row="5" Grid.Column="2" 
-                BackgroundColor="White" TextColor="Black"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+                 BackgroundColor="#B1B1B1" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" />
 
-        <Button Text="÷" Grid.Row="2" Grid.Column="3"
-                BackgroundColor="Orange" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+        <Button Text="÷" Grid.Row="3" Grid.Column="4"
+                BackgroundColor="Gray" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" CornerRadius="10"/>
         <Button Text="×" Grid.Row="3" Grid.Column="3"
-                BackgroundColor="Orange" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+                BackgroundColor="Gray" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" CornerRadius="10"/>
         <Button Text="-" Grid.Row="4" Grid.Column="3"
-                BackgroundColor="Orange" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
-        <Button Text="+" Grid.Row="5" Grid.Column="3"
-                BackgroundColor="Orange" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
-        <Button Text="/" Grid.Row="6" Grid.Column="3"
-                BackgroundColor="Orange" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+                BackgroundColor="Gray" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" CornerRadius="10"/>
+        <Button Text="+" Grid.Row="4" Grid.Column="4"
+                BackgroundColor="Gray" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" CornerRadius="10"/>
+        <Button Text="/" Grid.Row="5" Grid.Column="3"
+                BackgroundColor="Gray" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" CornerRadius="10"/>
 
-        <Button Text="%" Grid.Row="1" Grid.Column="3"
-                BackgroundColor="Orange" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+        <Button Text="%" Grid.Row="5" Grid.Column="4"
+                BackgroundColor="Gray" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" CornerRadius="10"/>
 
 
-        <Button Text="(" Grid.Row="6" Grid.Column="2"
-                BackgroundColor="Orange" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+        <Button Text="(" Grid.Row="6" Grid.Column="3"
+                BackgroundColor="Gray" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" CornerRadius="10"/>
 
-        <Button Text=")" Grid.Row="7" Grid.Column="2"
-                BackgroundColor="Orange" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+        <Button Text=")" Grid.Row="6" Grid.Column="4"
+                BackgroundColor="Gray" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" CornerRadius="10"/>
 
-        <Button Text="C" Grid.Row="6" Grid.Column="0" 
-                BackgroundColor="#808080" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnClear"/>
-        <Button Text="DEL" Grid.Row="6" Grid.Column="1"
-                BackgroundColor="#808080" TextColor="White"
-                FontSize="30" BorderRadius="0" Clicked="OnDel"/>
+        <Button Text="C" Grid.Row="2" Grid.Column="4" 
+                BackgroundColor="Yellow" TextColor="Black"
+                FontSize="36" BorderRadius="0" Clicked="OnClear" CornerRadius="10"/>
+        <Button Text="DEL" Grid.Row="2" Grid.Column="3"
+                BackgroundColor="Yellow" TextColor="Black"
+                FontSize="Medium" BorderRadius="0" Clicked="OnDel" CornerRadius="10"/>
 
-        <Button Text="=" Grid.Row="7" Grid.Column="3" 
-                BackgroundColor="Orange" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
+        <Button Text="=" Grid.Row="6" Grid.Column="2" 
+                BackgroundColor="Gray" TextColor="White"
+                FontSize="36" BorderRadius="0" Clicked="OnSelect" CornerRadius="10"/>
 
-        <Button Text="Start" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
-                BackgroundColor="#808080" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnCalculate"/>
+        <Button Text="Cal" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                BackgroundColor="Yellow" TextColor="Black"
+                FontSize="30" BorderRadius="0" Clicked="OnCalculate" CornerRadius="10"/>
 
     </Grid>
 </ContentPage>

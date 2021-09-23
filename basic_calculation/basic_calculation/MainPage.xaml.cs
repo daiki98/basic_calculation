@@ -135,7 +135,7 @@ namespace basic_calculation
 
             else
             {
-                resultText.Text = "No □ or =";
+                resultText.Text = "Not Exsit □ or =";
             }
         }
     }
