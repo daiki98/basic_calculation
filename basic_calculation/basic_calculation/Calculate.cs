@@ -199,9 +199,9 @@ namespace basic_calculation
             string space = " ";
             char Space = space[0];
             string res = null;
-            decimal m = -100.00M;//代入値の初期値
+            decimal m = -1000.00M;//代入値の初期値
 
-            for (double num = -100.00D; num <= 2000.00D; num += 0.01)//代入値(n)
+            for (double num = -1000.00D; num <= 2000.00D; num += 0.01)//代入値(n)
             {
                 string res2 = input.Replace("□", m.ToString());
                 string[] res3 = res2.Trim().Split(Space);
@@ -243,7 +243,6 @@ namespace basic_calculation
                                 decimal ans = B3 / A3;
                                 string ans2 = ans.ToString("F8");
                                 calcResult.Push(decimal.Parse(ans2));
-                                //calcResult.Push(B3 / A3);
                                 break;
                             }
 

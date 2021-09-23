@@ -39,7 +39,7 @@
 
             <Entry x:Name="questionText"
                     FontSize="43"
-                    MaxLength="20"
+                    MaxLength="30"
                     CursorPosition="5"
                     TextColor="White"
                     Text="0"
