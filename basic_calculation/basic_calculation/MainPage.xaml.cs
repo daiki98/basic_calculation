@@ -60,6 +60,9 @@ namespace basic_calculation
 
                 else
                 {
+                    //条件消しました！！
+
+
                     //左辺切り出し
                     string Left = str.Substring(0, str.IndexOf("="));
 
@@ -88,7 +91,7 @@ namespace basic_calculation
 
             else
             {
-                resultText.Text = "No □or=";
+                resultText.Text = "Not Exsit □ or =";
             }
         }
     }

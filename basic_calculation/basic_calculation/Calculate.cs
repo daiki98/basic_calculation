@@ -95,20 +95,36 @@ namespace basic_calculation
 
                     case '+':
                     case '-':
-                        while (st.Count > 0)
+                        if (buffer.Count > 0 && currentState == 0)
                         {
-                            if (st.Peek() == '/' || st.Peek() == '*' || st.Peek() == '÷' || st.Peek() == '+' || st.Peek() == '-')
+                            while (st.Count > 0)
                             {
-                                buffer.Push(Space);
-                                buffer.Push(st.Pop());
+                                if (st.Peek() == '/' || st.Peek() == '*' || st.Peek() == '÷' || st.Peek() == '+' || st.Peek() == '-')
+                                {
+                                    buffer.Push(Space);
+                                    buffer.Push(st.Pop());
+                                }
+                                else
+                                {
+                                    break;
+                                }
                             }
-                            else
-                            {
-                                break;
-                            }
+                            st.Push(token);
+                            currentState += 1;
                         }
-                        st.Push(token);
-                        currentState += 1;
+
+                        else if (buffer.Count == 0 && currentState == 0)
+                        {
+                            buffer.Push(token);
+                            currentState *= 0;
+                        }
+
+                        else if (currentState > 0)
+                        {
+                            buffer.Push(Space);
+                            buffer.Push(token);
+                            currentState *= 0;
+                        }
                         break;
 
                     case '□':
@@ -199,9 +215,9 @@ namespace basic_calculation
             string space = " ";
             char Space = space[0];
             string res = null;
-            decimal m = -1000.00M;//代入値の初期値
+            decimal m = -100.00M;//代入値の初期値
 
-            for (double num = -1000.00D; num <= 2000.00D; num += 0.01)//代入値(n)
+            for (double num = -100.00D; num <= 2000.00D; num += 0.01)//代入値(n)
             {
                 string res2 = input.Replace("□", m.ToString());
                 string[] res3 = res2.Trim().Split(Space);
@@ -267,6 +283,10 @@ namespace basic_calculation
 
                 m += 0.01M;
 
+            }
+            if (res == null)
+            {
+                res = "Out of range";
             }
             return res;
         }
