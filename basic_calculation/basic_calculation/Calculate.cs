@@ -143,7 +143,7 @@ namespace basic_calculation
                                 buffer.Push(token);
                                 buffer.Push(Space);
                                 buffer.Push('*');
-                                currentState += 1;
+                                currentState *= 0;
                                 break;
                             }
                         }

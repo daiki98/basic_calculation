@@ -23,6 +23,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            
         </Grid.RowDefinitions>
 
 
@@ -77,7 +78,6 @@
                 BackgroundColor="#B1B1B1" TextColor="White"
                 FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
 
-
         <Button Text="4" Grid.Row="3" Grid.Column="0"
                 BackgroundColor="#B1B1B1" TextColor="White"
                 FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
@@ -85,9 +85,8 @@
                 BackgroundColor="#B1B1B1" TextColor="White"
                 FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
         <Button Text="6" Grid.Row="3" Grid.Column="2"
-                BackgroundColor="#B1B1B1" TextColor="White"
-                FontSize="36" BorderRadius="0" Clicked="OnSelect"/>
-
+                BackgroundColor="#B1B1B1" TextColor="White" 
+                FontSize="36" BorderRadius="0" Clicked="OnSelect"  />
 
         <Button Text="1" Grid.Row="4" Grid.Column="0"
                 BackgroundColor="#B1B1B1" TextColor="White"

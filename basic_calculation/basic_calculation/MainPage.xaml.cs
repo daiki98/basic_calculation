@@ -76,6 +76,8 @@ namespace basic_calculation
 
                     string RPNres = Calculate.ReversePolishNotation(F);
 
+                    //resultText.Text = RPNres;
+
                     string RPNres2 = RPNres.Replace("÷", "/");
 
                     string Calres = Calculate.Calculation(RPNres2);
