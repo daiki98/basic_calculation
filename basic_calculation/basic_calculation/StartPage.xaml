@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="basic_calculation.StartPage">
+    <ContentPage.Content>
+        <StackLayout Spacing="10" >
+            
+            <Label Text="四則逆算計算機"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+                   Margin="0,50,0,0" FontSize="Large" TextColor="#000000" />
+
+            <Label Text="＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝説明文＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                   FontSize="Medium" TextColor="#000000" />
+
+            <Label Text="解の範囲"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                   FontSize="Large" TextColor="#000000"
+                   />
+            <Label Text="上限" 
+                   VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                   FontSize="Medium" TextColor="#000000"
+                   />
+
+            <Label Text="{Binding 
+                     Source={x:Reference MaxSlider},
+                      Path=Value,
+                      StringFormat='{0:N1}'}"
+                   VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                   FontSize="Medium" TextColor="#000000"/>
+
+            <Slider Maximum="10000"
+                    Minimum="0"
+                    Value="2000"
+                    x:Name="MaxSlider" MaximumTrackColor="#000000" MinimumTrackColor="#000000" ThumbColor="#2AF80F"/>
+
+            <Label Text="下限" 
+                   VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                   FontSize="Medium" TextColor="#000000"
+                   />
+
+            <Label Text="{Binding 
+                     Source={x:Reference MinSlider},
+                      Path=Value,
+                      StringFormat='{0:N1}'}"
+                   VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                   FontSize="Medium" TextColor="#000000"/>
+
+
+            <Slider Maximum="1000"
+                    Minimum="0"
+                    Value="100"
+                    x:Name="MinSlider" MaximumTrackColor="#000000" MinimumTrackColor="#000000" ThumbColor="#2AF80F"/>
+
+            <Button x:Name="NextButton"
+                    Text="Go Calculate" />
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
