@@ -80,9 +80,13 @@ namespace basic_calculation
 
                     string RPNres2 = RPNres.Replace("÷", "/");
 
-                    string Calres = Calculate.Calculation(RPNres2);
+                    // string Calres = Calculate.Calculation(RPNres2);
 
-                    resultText.Text = Calres;
+                    //二分法！
+                    string Calres2 = (Calculate.BisectionCal(RPNres2)).ToString("F3");
+
+
+                    resultText.Text = Calres2;
                 }
             }
 
