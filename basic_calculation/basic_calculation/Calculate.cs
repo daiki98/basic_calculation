@@ -244,7 +244,8 @@ namespace basic_calculation
                         case "*":
                             decimal A2 = calcResult.Pop();
                             decimal B2 = calcResult.Pop();
-                            calcResult.Push(B2 * A2);
+                            decimal AB2 = decimal.Round(B2 * A2, 5);
+                            calcResult.Push(AB2);
                             break;
 
                         case "/":
@@ -256,6 +257,7 @@ namespace basic_calculation
                             }
                             else
                             {
+                                //calcResult.Push(B3 / A3);
                                 decimal ans = B3 / A3;
                                 string ans2 = ans.ToString("F8");
                                 calcResult.Push(decimal.Parse(ans2));
@@ -274,7 +276,6 @@ namespace basic_calculation
                     }
                 }
 
-
                 if (calcResult.Peek() == 0)
                 {
                     res = m.ToString("G29");
@@ -285,14 +286,14 @@ namespace basic_calculation
 
             }
 
-
+            //解が分数の場合
             if (res == null)
             {
-                decimal B = 1M;
-                for (double numB = 1D; numB <= 10D; numB += 1)
+                decimal B = 50M;
+                for (double numB = 1D; numB <= 50D; numB += 1)
                 {
-                    decimal b = 1M;
-                    for (double numb = 1D; numb <= 10D; numb += 1)
+                    decimal b = 50M;
+                    for (double numb = 1D; numb <= 50D; numb += 1)
                     {
                         string res2 = input.Replace("□", b.ToString() + " " + B.ToString() + " " + "/");
                         string[] res3 = res2.Trim().Split(Space);
@@ -332,9 +333,6 @@ namespace basic_calculation
                                     else
                                     {
                                         calcResult.Push(B3 / A3);
-                                        //decimal ans = B3 / A3;
-                                        //string ans2 = ans.ToString("F8");
-                                        //calcResult.Push(decimal.Parse(ans2));
                                         break;
                                     }
 
@@ -355,11 +353,18 @@ namespace basic_calculation
                             res = b.ToString() + "/" + B.ToString();
                             break;
                         }
-                        b += 1M;
+                        b -= 1M;
                     }
-                    B += 1M;
+                    B -= 1M;
                 }
             }
+
+            //解が範囲外のとき
+            if (res == null)
+            {
+                res = "Out of Range";
+            }
+
             return res;
         }
     }
