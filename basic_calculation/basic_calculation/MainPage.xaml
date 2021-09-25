@@ -17,7 +17,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -39,8 +39,8 @@
         <StackLayout Grid.Row="0" Grid.ColumnSpan="5" Padding="20,0">
 
             <Entry x:Name="questionText"
-                    FontSize="43"
-                    MaxLength="20"
+                    FontSize="Large"
+                    MaxLength="30"
                     CursorPosition="5"
                     TextColor="Black"
                     Text="0"
@@ -51,14 +51,14 @@
 
 
         <Label Text="Ans"
-               FontSize="Small"
+               FontSize="Large"
                TextColor="Black"
                VerticalTextAlignment="Center"
                Grid.Row="1" Grid.Column="0" Padding="20,0"/>
 
 
         <Label x:Name="resultText" 
-               FontSize="Medium"  
+               FontSize="Large"  
                BackgroundColor="White" 
                Text=""
                TextColor="Black"

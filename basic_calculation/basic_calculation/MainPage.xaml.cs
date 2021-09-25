@@ -88,7 +88,7 @@ namespace basic_calculation
 
             else if(str.Count(x => x == '=') > 1)
             {
-                resultText.Text = "=s";
+                resultText.Text = "Many =";
             }
 
             else
