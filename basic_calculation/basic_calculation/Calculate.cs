@@ -134,7 +134,7 @@ namespace basic_calculation
                             {
                                 buffer.Push(Space);
                                 buffer.Push(token);
-                                currentState += 1;
+                                currentState *= 0;
                                 break;
                             }
                             else if (currentState == 0)
@@ -244,7 +244,8 @@ namespace basic_calculation
                         case "*":
                             decimal A2 = calcResult.Pop();
                             decimal B2 = calcResult.Pop();
-                            calcResult.Push(B2 * A2);
+                            decimal AB2 = decimal.Round(B2 * A2, 5);
+                            calcResult.Push(AB2);
                             break;
 
                         case "/":
@@ -256,6 +257,7 @@ namespace basic_calculation
                             }
                             else
                             {
+                                //calcResult.Push(B3 / A3);
                                 decimal ans = B3 / A3;
                                 string ans2 = ans.ToString("F2");
                                 calcResult.Push(decimal.Parse(ans2));
@@ -274,7 +276,6 @@ namespace basic_calculation
                     }
                 }
 
-
                 if (calcResult.Peek() == 0)
                 {
                     res = m.ToString("F2");
@@ -284,10 +285,86 @@ namespace basic_calculation
                 m += 0.01M;
 
             }
+
+            //解が分数の場合
             if (res == null)
             {
-                res = "Out of range";
+                decimal B = 50M;
+                for (double numB = 1D; numB <= 50D; numB += 1)
+                {
+                    decimal b = 50M;
+                    for (double numb = 1D; numb <= 50D; numb += 1)
+                    {
+                        string res2 = input.Replace("□", b.ToString() + " " + B.ToString() + " " + "/");
+                        string[] res3 = res2.Trim().Split(Space);
+                        foreach (string token in res3)
+                        {
+                            switch (token)
+                            {
+                                case "+":
+                                    decimal A0 = calcResult.Pop();
+                                    decimal B0 = calcResult.Pop();
+                                    calcResult.Push(B0 + A0);
+                                    break;
+
+                                case "-":
+                                    decimal A1 = calcResult.Pop();
+                                    decimal B1 = 0;
+                                    if (calcResult.Count > 0)
+                                    {
+                                        B1 = calcResult.Pop();
+                                    }
+                                    calcResult.Push(B1 - A1);
+                                    break;
+
+                                case "*":
+                                    decimal A2 = calcResult.Pop();
+                                    decimal B2 = calcResult.Pop();
+                                    calcResult.Push(B2 * A2);
+                                    break;
+
+                                case "/":
+                                    decimal A3 = calcResult.Pop();
+                                    decimal B3 = calcResult.Pop();
+                                    if (A3 == 0)
+                                    {
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        calcResult.Push(B3 / A3);
+                                        break;
+                                    }
+
+                                case "%":
+                                    decimal A4 = calcResult.Pop();
+                                    decimal B4 = 100;
+                                    calcResult.Push(A4 / B4);
+                                    break;
+
+                                default:
+                                    calcResult.Push(decimal.Parse(token));
+                                    break;
+                            }
+                        }
+
+                        if (calcResult.Peek() == 0)
+                        {
+                            res = b.ToString() + "/" + B.ToString();
+                            break;
+                        }
+                        b -= 1M;
+                    }
+                    B -= 1M;
+                }
             }
+
+            //解が範囲外のとき
+            if (res == null)
+            {
+                res = "Out of Range";
+            }
+
             return res;
         }
     }
