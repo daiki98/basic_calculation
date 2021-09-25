@@ -257,7 +257,7 @@ namespace basic_calculation
                             else
                             {
                                 decimal ans = B3 / A3;
-                                string ans2 = ans.ToString("F8");
+                                string ans2 = ans.ToString("F2");
                                 calcResult.Push(decimal.Parse(ans2));
                                 break;
                             }
@@ -277,7 +277,7 @@ namespace basic_calculation
 
                 if (calcResult.Peek() == 0)
                 {
-                    res = m.ToString("G29");
+                    res = m.ToString("F2");
                     break;
                 }
 
