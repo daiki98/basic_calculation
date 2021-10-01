@@ -255,15 +255,6 @@ namespace basic_calculation
                                 calcResult.Push(Nume1.ToString() + "/" + Deno1.ToString());
                                 break;
 
-                            //decimal A1 = calcResult.Pop();
-                            //decimal B1 = 0;
-                            //if (calcResult.Count > 0)
-                            //{
-                            //    B1 = calcResult.Pop();
-                            //}
-                            //calcResult.Push(B1 - A1);
-                            //break;
-
                             case "*":
                                 //B2 = 1/3
                                 string B2 = calcResult.Pop();
@@ -317,28 +308,32 @@ namespace basic_calculation
                                 calcResult.Push(Nume4.ToString() + "/" + Deno4.ToString());
                                 break;
 
+                            //数値の場合
                             default:
+                                //分数の場合
                                 if (token.Contains("/"))
                                 {
                                     calcResult.Push(token);
                                 }
 
+                                //小数値の場合
                                 else if (token.Contains("."))
                                 {
                                     double num = double.Parse(token);
 
-                                    string s = token.Substring(token.IndexOf(".") + 1);
-                                    double sL = s.Length;
-                                    double Deno = Math.Pow(10, sL);
-                                    double Nume = num * Deno;
+                                    string s = token.Substring(token.IndexOf(".") + 1);//コンマの後の数値をs
+                                    double sL = s.Length;//sL：sの桁数
+                                    double Deno = Math.Pow(10, sL);//分母：10のsL乗
+                                    double Nume = num * Deno;//分子：小数値×10のsL乗
 
                                     calcResult.Push(Nume.ToString() + "/" + Deno.ToString());
                                 }
 
+                                //整数の場合(ex.2のとき)
                                 else
                                 {
-                                    double sL = token.Length;
-                                    double Deno = Math.Pow(10, sL - 1);
+                                    double sL = token.Length;//sL：桁数
+                                    double Deno = Math.Pow(10, sL - 1);//分母：10^(sL-1)
                                     calcResult.Push(token + "/" + Deno.ToString());
                                 }
                                 break;
