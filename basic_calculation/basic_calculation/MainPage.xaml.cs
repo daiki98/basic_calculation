@@ -53,16 +53,14 @@ namespace basic_calculation
                         str.Contains("+=") || str.Contains("×=") || str.Contains("÷=") || str.Contains("/=") ||
                         str.Contains("(+") || str.Contains("(×") || str.Contains("(÷") || str.Contains("(/") || str.Contains("(%") ||
                         str.Contains("+)") || str.Contains("×)") || str.Contains("÷)") || str.Contains("/)") || str.Contains("-)") ||
-                        str.Contains("(=") || str.Contains("=)") || str.Contains("==") || str.Contains("%%") || str.Contains("()") || str.Contains(")("))
+                        str.Contains("(=") || str.Contains("=)") || str.Contains("==") || str.Contains("%%") || str.Contains("()") || str.Contains(")(")||
+                        str.Contains("..") || str.Contains("..."))
                 {
-                    resultText.Text = "Wrong";
+                    resultText.Text = "Wrong Input";
                 }
 
                 else
                 {
-                    //条件消しました！！
-
-
                     //左辺切り出し
                     string Left = str.Substring(0, str.IndexOf("="));
 
@@ -72,17 +70,19 @@ namespace basic_calculation
                     //式 F(x)=Right(右辺)-Left(左辺)
                     string f1 = Right + "-(" + Left + ")";
                     string f2 = f1.Replace("×", "*");
-                    char[] F = f2.ToCharArray();
+                    string f3 = f2.Replace(")/", ")÷");
+                    string f4 = f3.Replace("/(", "÷(");
+                    char[] F = f4.ToCharArray();
 
-                    string RPNres = Calculate.ReversePolishNotation(F);
+                    //string RPNres = Calculate.ReversePolishNotation(F);
+
+                    string RPNres = Calculate2.ReversePolishNotation(F);
 
                     //resultText.Text = RPNres;
 
-                    string RPNres2 = RPNres.Replace("÷", "/");
+                    string Cal = Calculate2.Calculation(RPNres);
 
-                    string Calres = Calculate.Calculation(RPNres2);
-
-                    resultText.Text = Calres;
+                    resultText.Text = Cal;
                 }
             }
 

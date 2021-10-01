@@ -40,12 +40,14 @@
 
             <Entry x:Name="questionText"
                     FontSize="Large"
-                    MaxLength="30"
+                    MaxLength="40"
                     CursorPosition="5"
                     TextColor="Black"
                     Text="0"
                     VerticalOptions="FillAndExpand" 
-                    HorizontalOptions="FillAndExpand" IsReadOnly="True" Keyboard="Numeric"/>
+                    HorizontalOptions="FillAndExpand" 
+                    />
+            <!--IsReadOnly="True" Keyboard="Numeric"/>-->
 
         </StackLayout>
 
@@ -58,7 +60,7 @@
 
 
         <Label x:Name="resultText" 
-               FontSize="Large"  
+               FontSize="Small"  
                BackgroundColor="White" 
                Text=""
                TextColor="Black"
