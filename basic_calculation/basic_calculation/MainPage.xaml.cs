@@ -7,6 +7,8 @@ namespace basic_calculation
 {
     public partial class MainPage : ContentPage
     {
+
+        int SDnumber = 0; //0-S,1-D
         public MainPage()
         {
             InitializeComponent();
@@ -38,6 +40,25 @@ namespace basic_calculation
 
         }
 
+        //分数，小数変換ボタン
+        void OnSelectSD(object sender, EventArgs e)
+        {
+            Button SDbutton = (Button)sender;
+            string pressed = SDbutton.Text;
+
+            if (pressed == "S")
+            {
+                SDbutton.Text = "D";
+                SDnumber = 0;
+
+            }else if (pressed == "D")
+            {
+                SDbutton.Text = "S";
+                SDnumber = 1;
+            }
+
+        }
+
         // STARTボタン
         void OnCalculate(object sender, EventArgs e)
         {
@@ -61,49 +82,64 @@ namespace basic_calculation
 
                 else
                 {
+
                     //左辺切り出し
                     string Left = str.Substring(0, str.IndexOf("="));
+                    int L = Left.Length;
 
                     //右辺切り出し
                     string Right = str.Substring(str.IndexOf("=") + 1);
+                    int R = Right.Length;
 
-                    //式 F(x)=Right(右辺)-Left(左辺)
-                    string f1 = Right + "-(" + Left + ")";
-                    string f2 = f1.Replace("×", "*");
-                    char[] F1 = f2.ToCharArray();
-
-                    string RPNres = Calculate.ReversePolishNotation(F1);
-
-                    string RPNres2 = RPNres.Replace("÷", "/");
-
-                    //二分法
-                    string Calres = Calculate.BisectionCal(RPNres2).ToString("F7").TrimEnd('0');
-
-                    if (Calres.Contains("."))
+                    if (L < 1 || R < 1)
                     {
-                        int num2 = Calres.Split('.')[1].Length;
+                        resultText.Text = "Wrong";  //＝の後になんもないやつ
+                    }
+                    else
+                    {
 
-                        if (num2 > 5)//分数
+                        //式 F(x)=Right(右辺)-Left(左辺)
+                        string f1 = Right + "-(" + Left + ")";
+                        string f2 = f1.Replace("×", "*");
+                        char[] F = f2.ToCharArray();
+
+                        string RPNres = Calculate.ReversePolishNotation(F);       //  中置記法 →　後置記法(非分数）
+                        string RPNres2 = RPNres.Replace("÷", "/");
+
+
+                        double result_cal = Calculate.BisectionCal(RPNres2);  //二分法答え(double)
+                        bool IMjub = Calculate.IntMinJub(result_cal);       //答えが整数か少数か(trueで整数）；
+
+                        if (IMjub)
                         {
-                            string f3 = f2.Replace(")/", ")÷");
-                            string f4 = f3.Replace("/(", "÷(");
-                            char[] F2 = f4.ToCharArray();
-
-                            string RPNres1 = Calculate2.ReversePolishNotation(F2);
-
-                            string Calres2 = Calculate2.Calculation(RPNres1);
-
+                            string Calres2 = result_cal.ToString("F0");  //整数表示
                             resultText.Text = Calres2;
                         }
                         else
                         {
-                            resultText.Text = Calres;
+                            if (SDnumber == 0)                 //小数表示
+                            {
+                                string Calres2 = result_cal.ToString("F3");
+                                resultText.Text = Calres2;
+                            }
+                            else if (SDnumber == 1)               //分数表示
+                            {
+                                string f3 = f2.Replace(")/", ")÷");
+                                string f4 = f3.Replace("/(", "÷(");
+                                string f5 = f4.Replace("/□", "÷□");
+                                char[] F2 = f5.ToCharArray();
+
+                                string RPNres_f = Calculate.ReversePolishNotation_Fraction(F2);
+                                string Cal = Calculate.Calculation_Fraction(RPNres_f);
+                                resultText.Text = Cal;
+                            }
                         }
+
                     }
                 }
             }
 
-            else if(str.Count(x => x == '=') > 1)
+            else if (str.Count(x => x == '=') > 1)
             {
                 resultText.Text = "Many =";
             }
