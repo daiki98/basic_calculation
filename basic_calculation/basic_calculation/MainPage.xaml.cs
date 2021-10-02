@@ -43,18 +43,20 @@ namespace basic_calculation
         //分数，小数変換ボタン
         void OnSelectSD(object sender, EventArgs e)
         {
-            Label SDbutton = (Label)sender;
+            Button SDbutton = (Button)sender;
             string pressed = SDbutton.Text;
 
-            if (pressed == "小数")
+            if (pressed == "S")
             {
-                SDbutton.Text = "分数";
+                SDbutton.Text = "D";
                 SDnumber = 0;
+                SD.Text = "小数";
 
-            }else if (pressed == "分数")
+            }else if (pressed == "D")
             {
-                SDbutton.Text = "小数";
+                SDbutton.Text = "S";
                 SDnumber = 1;
+                SD.Text = "分数";
             }
 
         }

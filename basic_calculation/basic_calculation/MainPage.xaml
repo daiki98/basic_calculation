@@ -48,7 +48,7 @@
                     HorizontalOptions="FillAndExpand" IsReadOnly="True" Keyboard="Numeric"/>
 
 
-            <Label  x:Name="SDbutton"
+            <Label  x:Name="SD"
                    Text="小数" 
                    HorizontalOptions="End"
                    />
@@ -78,7 +78,7 @@
         
         
         <Button 
-                 Text="S⇔D" Grid.Row="1" Grid.Column="0"
+                 Text="S" Grid.Row="1" Grid.Column="0"
                 BackgroundColor="#FFFFFF" TextColor="Black"
                 FontSize="Small" BorderRadius="20" Clicked="OnSelectSD"/>
 
