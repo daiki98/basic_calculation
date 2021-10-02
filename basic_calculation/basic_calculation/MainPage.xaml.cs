@@ -70,19 +70,36 @@ namespace basic_calculation
                     //式 F(x)=Right(右辺)-Left(左辺)
                     string f1 = Right + "-(" + Left + ")";
                     string f2 = f1.Replace("×", "*");
-                    string f3 = f2.Replace(")/", ")÷");
-                    string f4 = f3.Replace("/(", "÷(");
-                    char[] F = f4.ToCharArray();
+                    char[] F1 = f2.ToCharArray();
 
-                    //string RPNres = Calculate.ReversePolishNotation(F);
+                    string RPNres = Calculate.ReversePolishNotation(F1);
 
-                    string RPNres = Calculate2.ReversePolishNotation(F);
+                    string RPNres2 = RPNres.Replace("÷", "/");
 
-                    //resultText.Text = RPNres;
+                    //二分法
+                    string Calres = Calculate.BisectionCal(RPNres2).ToString("F7").TrimEnd('0');
 
-                    string Cal = Calculate2.Calculation(RPNres);
+                    if (Calres.Contains("."))
+                    {
+                        int num2 = Calres.Split('.')[1].Length;
 
-                    resultText.Text = Cal;
+                        if (num2 > 5)//分数
+                        {
+                            string f3 = f2.Replace(")/", ")÷");
+                            string f4 = f3.Replace("/(", "÷(");
+                            char[] F2 = f4.ToCharArray();
+
+                            string RPNres1 = Calculate2.ReversePolishNotation(F2);
+
+                            string Calres2 = Calculate2.Calculation(RPNres1);
+
+                            resultText.Text = Calres2;
+                        }
+                        else
+                        {
+                            resultText.Text = Calres;
+                        }
+                    }
                 }
             }
 

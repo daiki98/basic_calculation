@@ -26,7 +26,7 @@ namespace basic_calculation
             }
             else if (jub < 0)
             {
-                while (Math.Abs(initial_val1 - initial_val2) > 0.000000000001)          //ここで精度決める
+                while (Math.Abs(initial_val1 - initial_val2) > 0.00000000001)          //ここで精度決める
                 {
 
                     mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
@@ -43,15 +43,7 @@ namespace basic_calculation
                     }
                 }
             }
-            return ToRoundDown(mid_val, 10);
-        }
-
-        public static double ToRoundDown(double dValue, int iDigits)
-        {
-            double dCoef = Math.Pow(10, iDigits);
-
-            return dValue > 0 ? Math.Floor(dValue * dCoef) / dCoef :
-                                Math.Ceiling(dValue * dCoef) / dCoef;
+            return mid_val;
         }
 
         public static string Calculation_forBisection(string input, double value)
@@ -98,15 +90,8 @@ namespace basic_calculation
                         }
                         else
                         {
-                            //calcResult.Push(B3 / A3);
-
-                            //double ans = B3 / A3;
-                            //double ans1 = ToRoundDown((double)ans, 14);
-                            //string ans2 = ans1.ToString();
-                            //calcResult.Push(double.Parse(ans2));
-
                             double ans = B3 / A3;
-                            string ans2 = ans.ToString("F12");
+                            string ans2 = ans.ToString("F10");
                             calcResult.Push(double.Parse(ans2));
                             break;
                         }
@@ -334,98 +319,6 @@ namespace basic_calculation
             //スタックの順番を逆順にして文字列に変換
             string r = new string(buffer.Reverse().ToArray());
             string res = r + "\r\n";
-
-            return res;
-        }
-
-
-        //後置記法　→　計算
-        //解が分数の場合
-        public static string Calculation(string input)
-        {
-            Stack<decimal> calcResult = new Stack<decimal>();
-            string space = " ";
-            char Space = space[0];
-            string res = null;
-
-            decimal B = 50;
-            for (decimal numB = 1; numB <= 50; numB += 1)
-            {
-                decimal b = 50;
-                for (decimal numb = 1; numb <= 50; numb += 1)
-                {
-                    string res2 = input.Replace("□", b.ToString() + " " + B.ToString() + " " + "/");
-                    string[] res3 = res2.Trim().Split(Space);
-                    foreach (string token in res3)
-                    {
-                        switch (token)
-                        {
-                            case "+":
-                                decimal A0 = calcResult.Pop();
-                                decimal B0 = calcResult.Pop();
-                                calcResult.Push(B0 + A0);
-                                break;
-
-                            case "-":
-                                decimal A1 = calcResult.Pop();
-                                decimal B1 = 0;
-                                if (calcResult.Count > 0)
-                                {
-                                    B1 = calcResult.Pop();
-                                }
-                                calcResult.Push(B1 - A1);
-                                break;
-
-                            case "*":
-                                decimal A2 = calcResult.Pop();
-                                decimal B2 = calcResult.Pop();
-                                calcResult.Push(B2 * A2);
-                                break;
-
-                            case "/":
-                                decimal A3 = calcResult.Pop();
-                                decimal B3 = calcResult.Pop();
-                                if (A3 == 0)
-                                {
-                                    break;
-                                }
-                                else
-                                {
-                                    calcResult.Push(B3 / A3);
-                                    //decimal ans = B3 / A3;
-                                    //double ans1 = ToRoundDown((double)ans, 20);
-                                    //string ans2 = ans1.ToString();
-                                    //calcResult.Push(decimal.Parse(ans2));
-                                    break;
-                                }
-
-                            case "%":
-                                decimal A4 = calcResult.Pop();
-                                decimal B4 = 100;
-                                calcResult.Push(A4 / B4);
-                                break;
-
-                            default:
-                                calcResult.Push(decimal.Parse(token));
-                                break;
-                        }
-                    }
-
-                    if (calcResult.Peek() == 0)
-                    {
-                        res = b.ToString() + "/" + B.ToString();
-                        break;
-                    }
-                    b -= 1;
-                }
-                B -= 1;
-            }
-
-            //解が範囲外のとき
-            if (res == null)
-            {
-                res = "Out of Range";
-            }
 
             return res;
         }
