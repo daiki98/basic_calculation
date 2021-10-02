@@ -50,16 +50,16 @@
                     Keyboard="Numeric"
                     />
 
+            <Label x:Name="SDbutton"
+                   Text="小数"
+                   HorizontalOptions="End"
+                   />
+
         </StackLayout>
 
-
-       
-
         
-
-
         <Label x:Name="resultText" 
-               FontSize="Small"  
+               FontSize="Medium"  
                BackgroundColor="White" 
                Text=""
                TextColor="Black"
@@ -77,9 +77,9 @@
         
         
         <Button 
-                 x:Name="SDbutton" Text="S" Grid.Row="1" Grid.Column="0"
+                Text="S⇔D" Grid.Row="1" Grid.Column="0"
                 BackgroundColor="#FFFFFF" TextColor="Black"
-                FontSize="Medium" BorderRadius="20" Clicked="OnSelectSD"/>
+                FontSize="Small" BorderRadius="20" Clicked="OnSelectSD"/>
 
         <Button Text="7" Grid.Row="2" Grid.Column="0"
                 BackgroundColor="#B1B1B1" TextColor="White"
@@ -157,7 +157,7 @@
                 FontSize="36" BorderRadius="0" Clicked="OnClear" CornerRadius="10"/>
         <Button Text="DEL" Grid.Row="2" Grid.Column="3"
                 BackgroundColor="#02FFFA" TextColor="Black"
-                FontSize="Large" BorderRadius="0" Clicked="OnDel" CornerRadius="10"/>
+                FontSize="Default" BorderRadius="0" Clicked="OnDel" CornerRadius="10"/>
 
         <Button Text="=" Grid.Row="6" Grid.Column="2" 
                 BackgroundColor="Gray" TextColor="White"

@@ -43,17 +43,17 @@ namespace basic_calculation
         //分数，小数変換ボタン
         void OnSelectSD(object sender, EventArgs e)
         {
-            Button SDbutton = (Button)sender;
+            Label SDbutton = (Label)sender;
             string pressed = SDbutton.Text;
 
-            if (pressed == "S")
+            if (pressed == "小数")
             {
-                SDbutton.Text = "D";
+                SDbutton.Text = "分数";
                 SDnumber = 0;
 
-            }else if (pressed == "D")
+            }else if (pressed == "分数")
             {
-                SDbutton.Text = "S";
+                SDbutton.Text = "小数";
                 SDnumber = 1;
             }
 
@@ -91,7 +91,7 @@ namespace basic_calculation
                     string Right = str.Substring(str.IndexOf("=") + 1);
                     int R = Right.Length;
 
-                    if (L < 1 || R < 1)
+                    if (L < 1||R<1)
                     {
                         resultText.Text = "Wrong";  //＝の後になんもないやつ
                     }
