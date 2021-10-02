@@ -52,7 +52,8 @@ namespace basic_calculation
                 SDnumber = 0;
                 SD.Text = "小数";
 
-            }else if (pressed == "D")
+            }
+            else if (pressed == "D")
             {
                 SDbutton.Text = "S";
                 SDnumber = 1;
@@ -76,10 +77,9 @@ namespace basic_calculation
                         str.Contains("+=") || str.Contains("×=") || str.Contains("÷=") || str.Contains("/=") ||
                         str.Contains("(+") || str.Contains("(×") || str.Contains("(÷") || str.Contains("(/") || str.Contains("(%") ||
                         str.Contains("+)") || str.Contains("×)") || str.Contains("÷)") || str.Contains("/)") || str.Contains("-)") ||
-                        str.Contains("(=") || str.Contains("=)") || str.Contains("==") || str.Contains("%%") || str.Contains("()") || str.Contains(")(")||
-                        str.Contains("..") || str.Contains("..."))
+                        str.Contains("(=") || str.Contains("=)") || str.Contains("==") || str.Contains("%%") || str.Contains("()") || str.Contains(")("))
                 {
-                    resultText.Text = "Wrong Input";
+                    resultText.Text = "Wrong";
                 }
 
                 else
@@ -93,7 +93,7 @@ namespace basic_calculation
                     string Right = str.Substring(str.IndexOf("=") + 1);
                     int R = Right.Length;
 
-                    if (L < 1||R<1)
+                    if (L < 1 || R < 1)
                     {
                         resultText.Text = "Wrong";  //＝の後になんもないやつ
                     }
@@ -132,6 +132,7 @@ namespace basic_calculation
                                 char[] F2 = f5.ToCharArray();
 
                                 string RPNres_f = Calculate.ReversePolishNotation_Fraction(F2);
+                                //resultText.Text = RPNres_f;
                                 string Cal = Calculate.Calculation_Fraction(RPNres_f);
                                 resultText.Text = Cal;
                             }

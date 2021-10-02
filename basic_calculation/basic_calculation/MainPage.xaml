@@ -23,7 +23,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            
+
         </Grid.RowDefinitions>
 
 
@@ -40,30 +40,25 @@
 
             <Entry x:Name="questionText"
                     FontSize="Large"
-                    MaxLength="40"
+                    MaxLength="30"
                     CursorPosition="5"
                     TextColor="Black"
                     Text="0"
                     VerticalOptions="FillAndExpand" 
-                    HorizontalOptions="FillAndExpand" 
-                    IsReadOnly="True"
-                    Keyboard="Numeric"
-                    />
+                    HorizontalOptions="FillAndExpand" IsReadOnly="True" Keyboard="Numeric"/>
 
-<<<<<<< HEAD
-            <Label x:Name="SDbutton"
-                   Text="小数"
-=======
 
             <Label  x:Name="SD"
                    Text="小数" 
->>>>>>> 024fbcebdbdc598208de5c81d437e2eee1f58001
                    HorizontalOptions="End"
                    />
 
         </StackLayout>
 
-        
+
+
+
+
         <Label x:Name="resultText" 
                FontSize="Medium"  
                BackgroundColor="White" 
@@ -73,21 +68,17 @@
                VerticalTextAlignment="Center"
                LineBreakMode="NoWrap" 
                Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Padding="20,0"/>
-        
+
         <Label Text="Ans"
                BackgroundColor="White"
                FontSize="Small"
                TextColor="Black"
                VerticalTextAlignment="Center"
                Grid.Row="1" Grid.Column="1" Padding="20,0"/>
-        
-        
+
+
         <Button 
-<<<<<<< HEAD
-                Text="S⇔D" Grid.Row="1" Grid.Column="0"
-=======
                  Text="S" Grid.Row="1" Grid.Column="0"
->>>>>>> 024fbcebdbdc598208de5c81d437e2eee1f58001
                 BackgroundColor="#FFFFFF" TextColor="Black"
                 FontSize="Small" BorderRadius="20" Clicked="OnSelectSD"/>
 
@@ -179,4 +170,5 @@
 
     </Grid>
 </ContentPage>
+
 

@@ -828,9 +828,7 @@ namespace basic_calculation
                                 //整数の場合(ex.2のとき)
                                 else
                                 {
-                                    double sL = token.Length;//sL：桁数
-                                    double Deno = Math.Pow(10, sL - 1);//分母：10^(sL-1)
-                                    calcResult.Push(token + "/" + Deno.ToString());
+                                    calcResult.Push(token + "/" + "1");
                                 }
                                 break;
                         }
