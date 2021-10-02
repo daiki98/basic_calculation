@@ -12,7 +12,7 @@
     </ContentPage.Padding>
 
 
-    <Grid Padding="5,0" RowSpacing="1" ColumnSpacing="1" BackgroundColor="#FFFFFF" Visual="Default">
+    <Grid Padding="5,0" RowSpacing="1" ColumnSpacing="1" BackgroundColor="#FDFDFD" Visual="Default">
 
 
         <Grid.RowDefinitions>
@@ -50,11 +50,9 @@
         </StackLayout>
 
 
-        <Label Text="Ans"
-               FontSize="Large"
-               TextColor="Black"
-               VerticalTextAlignment="Center"
-               Grid.Row="1" Grid.Column="0" Padding="20,0"/>
+       
+
+        
 
 
         <Label x:Name="resultText" 
@@ -65,8 +63,20 @@
                HorizontalTextAlignment="End" 
                VerticalTextAlignment="Center"
                LineBreakMode="NoWrap" 
-               Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Padding="20,0"/>
-
+               Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Padding="20,0"/>
+        
+        <Label Text="Ans"
+               BackgroundColor="White"
+               FontSize="Small"
+               TextColor="Black"
+               VerticalTextAlignment="Center"
+               Grid.Row="1" Grid.Column="1" Padding="20,0"/>
+        
+        
+        <Button 
+                 x:Name="SDbutton" Text="S" Grid.Row="1" Grid.Column="0"
+                BackgroundColor="#FFFFFF" TextColor="Black"
+                FontSize="Medium" BorderRadius="20" Clicked="OnSelectSD"/>
 
         <Button Text="7" Grid.Row="2" Grid.Column="0"
                 BackgroundColor="#B1B1B1" TextColor="White"
@@ -140,10 +150,10 @@
                 FontSize="36" BorderRadius="0" Clicked="OnSelect" CornerRadius="10"/>
 
         <Button Text="C" Grid.Row="2" Grid.Column="4" 
-                BackgroundColor="Yellow" TextColor="Black"
+                BackgroundColor="#02FFFA" TextColor="Black"
                 FontSize="36" BorderRadius="0" Clicked="OnClear" CornerRadius="10"/>
         <Button Text="DEL" Grid.Row="2" Grid.Column="3"
-                BackgroundColor="Yellow" TextColor="Black"
+                BackgroundColor="#02FFFA" TextColor="Black"
                 FontSize="Large" BorderRadius="0" Clicked="OnDel" CornerRadius="10"/>
 
         <Button Text="=" Grid.Row="6" Grid.Column="2" 
@@ -151,7 +161,7 @@
                 FontSize="36" BorderRadius="0" Clicked="OnSelect" CornerRadius="10"/>
 
         <Button Text="Cal" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
-                BackgroundColor="Yellow" TextColor="Black"
+                BackgroundColor="#02FFFA" TextColor="Black"
                 FontSize="Large" BorderRadius="0" Clicked="OnCalculate" CornerRadius="10"/>
 
     </Grid>

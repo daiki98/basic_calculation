@@ -7,6 +7,8 @@ namespace basic_calculation
 {
     public partial class MainPage : ContentPage
     {
+
+        int SDnumber = 0; //0-S,1-D
         public MainPage()
         {
             InitializeComponent();
@@ -34,6 +36,25 @@ namespace basic_calculation
             if (questionText.Text.Length > 0)
             {
                 questionText.Text = questionText.Text.Substring(0, questionText.Text.Length - 1);
+            }
+
+        }
+
+        //分数，小数変換ボタン
+        void OnSelectSD(object sender, EventArgs e)
+        {
+            Button SDbutton = (Button)sender;
+            string pressed = SDbutton.Text;
+
+            if (pressed == "S")
+            {
+                SDbutton.Text = "D";
+                SDnumber = 0;
+
+            }else if (pressed == "D")
+            {
+                SDbutton.Text = "S";
+                SDnumber = 1;
             }
 
         }
@@ -74,19 +95,38 @@ namespace basic_calculation
                     string f2 = f1.Replace("×", "*");
                     char[] F = f2.ToCharArray();
 
-                    string RPNres = Calculate.ReversePolishNotation(F);
-
-                    //resultText.Text = RPNres;
-
+                    string RPNres = Calculate.ReversePolishNotation(F);       //  中置記法 →　後置記法(非分数）
                     string RPNres2 = RPNres.Replace("÷", "/");
 
-                    // string Calres = Calculate.Calculation(RPNres2);
 
-                    //二分法！
-                    string Calres2 = (Calculate.BisectionCal(RPNres2)).ToString("F3");
+                    double result_cal = Calculate.BisectionCal(RPNres2);  //二分法答え(double)
+                    bool IMjub = Calculate.IntMinJub(result_cal);       //答えが整数か少数か(trueで整数）；
+
+                    if (IMjub)
+                    {
+                        String Calres2 = result_cal.ToString("F0");  //整数表示
+                        resultText.Text = Calres2;
+                    }
+                    else
+                    {
+                        if (SDnumber==0)                 //小数表示
+                        {
+                            String Calres2 = result_cal.ToString("F3"); 
+                            resultText.Text = Calres2;
+                        }
+                        else if (SDnumber==1)               //分数表示
+                        {
+                            string f3 = f2.Replace(")/", ")÷");
+                            string f4 = f3.Replace("/(", "÷(");
+                            char[] F2 = f4.ToCharArray();
+
+                            string RPNres_f = Calculate.ReversePolishNotation_Fraction(F2);
+                            string Cal = Calculate.Calculation_Fraction(RPNres_f);
+                            resultText.Text = Cal;
+                        }
+                    }
 
 
-                    resultText.Text = Calres2;
                 }
             }
 
