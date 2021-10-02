@@ -50,8 +50,14 @@
                     Keyboard="Numeric"
                     />
 
+<<<<<<< HEAD
             <Label x:Name="SDbutton"
                    Text="小数"
+=======
+
+            <Label  x:Name="SD"
+                   Text="小数" 
+>>>>>>> 024fbcebdbdc598208de5c81d437e2eee1f58001
                    HorizontalOptions="End"
                    />
 
@@ -77,7 +83,11 @@
         
         
         <Button 
+<<<<<<< HEAD
                 Text="S⇔D" Grid.Row="1" Grid.Column="0"
+=======
+                 Text="S" Grid.Row="1" Grid.Column="0"
+>>>>>>> 024fbcebdbdc598208de5c81d437e2eee1f58001
                 BackgroundColor="#FFFFFF" TextColor="Black"
                 FontSize="Small" BorderRadius="20" Clicked="OnSelectSD"/>
 

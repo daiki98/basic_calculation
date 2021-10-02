@@ -13,54 +13,7 @@
                 HorizontalOptions="Center" 
                    Margin="0,50,0,0" FontSize="Large" TextColor="#000000" />
 
-            <Label Text="＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝説明文＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝"
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Center"
-                   FontSize="Medium" TextColor="#000000" />
-
-            <Label Text="解の範囲"
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Center"
-                   FontSize="Large" TextColor="#000000"
-                   />
-            <Label Text="上限" 
-                   VerticalOptions="Center" 
-                    HorizontalOptions="Center"
-                   FontSize="Medium" TextColor="#000000"
-                   />
-
-            <Label Text="{Binding 
-                     Source={x:Reference MaxSlider},
-                      Path=Value,
-                      StringFormat='{0:N1}'}"
-                   VerticalOptions="Center" 
-                    HorizontalOptions="Center"
-                   FontSize="Medium" TextColor="#000000"/>
-
-            <Slider Maximum="10000"
-                    Minimum="0"
-                    Value="2000"
-                    x:Name="MaxSlider" MaximumTrackColor="#000000" MinimumTrackColor="#000000" ThumbColor="#2AF80F"/>
-
-            <Label Text="下限" 
-                   VerticalOptions="Center" 
-                    HorizontalOptions="Center"
-                   FontSize="Medium" TextColor="#000000"
-                   />
-
-            <Label Text="{Binding 
-                     Source={x:Reference MinSlider},
-                      Path=Value,
-                      StringFormat='{0:N1}'}"
-                   VerticalOptions="Center" 
-                    HorizontalOptions="Center"
-                   FontSize="Medium" TextColor="#000000"/>
-
-
-            <Slider Maximum="1000"
-                    Minimum="0"
-                    Value="100"
-                    x:Name="MinSlider" MaximumTrackColor="#000000" MinimumTrackColor="#000000" ThumbColor="#2AF80F"/>
+          
 
             <Button x:Name="NextButton"
                     Text="Go Calculate" />
