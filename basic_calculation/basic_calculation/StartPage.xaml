@@ -5,19 +5,117 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="basic_calculation.StartPage">
-    <ContentPage.Content>
-        <StackLayout Spacing="10" >
+
+    <StackLayout  Orientation="Vertical">
+        
+        <Label Text="四則逆算計算機"
+                   Padding="0,10,0,0"
+                   FontSize="Large" 
+                   HorizontalTextAlignment="Center" 
+                   VerticalTextAlignment="Center"/>
+
+        <StackLayout Orientation="Horizontal"
+                     VerticalOptions="Center"
+                     >
+
+            <Image Source="DirectionImage.jpg"
+               HeightRequest="100"
+               WidthRequest="100"/>
+
+            <Label Text="数字ボタン"
+                   HorizontalTextAlignment="Center" 
+                   VerticalTextAlignment="Center"
+                   FontSize="Medium"/>
+
+        </StackLayout>
+
+
+        <StackLayout Orientation="Horizontal"
+                     VerticalOptions="Start">
+
+            <Image Source="DirectionImage.jpg"
+               HeightRequest="100"
+               WidthRequest="100"/>
+
+            <Label Text="演算子"
+                   HorizontalTextAlignment="Center" 
+                   VerticalTextAlignment="Center"
+                   FontSize="Medium"/>
+
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal"
+                     VerticalOptions="Start">
+
+            <Image Source="DirectionImage.jpg"
+               HeightRequest="100"
+               WidthRequest="100"/>
             
-            <Label Text="四則逆算計算機"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" 
-                   Margin="0,50,0,0" FontSize="Large" TextColor="#000000" />
-
-          
-
-            <Button x:Name="NextButton"
-                    Text="Go Calculate" />
+            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="S   　    小数ボタン          "
+                   HorizontalTextAlignment="Center" 
+                   VerticalTextAlignment="Center"/>
+            </StackLayout>
+                <Label Text="D　      分数ボタン"
+                   HorizontalTextAlignment="Start" 
+                   VerticalTextAlignment="Center"/>
+                
+                <StackLayout Orientation="Horizontal"> 
+                    <Label Text="DEL  　文字削除ボタン"
+                   HorizontalTextAlignment="Center" 
+                   VerticalTextAlignment="Center"/>
+                </StackLayout>
+                
+                <Label Text="C　       リセットボタン"
+                   HorizontalTextAlignment="Start" 
+                   VerticalTextAlignment="Center"/>
+            </StackLayout>
             
         </StackLayout>
-    </ContentPage.Content>
+
+        <StackLayout Orientation="Horizontal"
+                     VerticalOptions="Start">
+
+            <Image Source="DirectionImage.jpg"
+               HeightRequest="100"
+               WidthRequest="100"/>
+
+            <Label Text="方程式のXなどの変数を□に"
+                   HorizontalTextAlignment="Center" 
+                   VerticalTextAlignment="Center"
+                   FontSize="Small"/>
+
+        </StackLayout>
+        
+        <StackLayout Orientation="Horizontal"
+                     VerticalOptions="Start">
+
+            <Image Source="DirectionImage.jpg"
+               HeightRequest="100"
+               WidthRequest="100"/>
+
+            <Label Text="計算スタート"
+                   HorizontalTextAlignment="Center" 
+                   VerticalTextAlignment="Center"
+                   FontSize="Medium"/>
+
+        </StackLayout>
+
+
+
+        <Button x:Name="NextButton"
+                    Text="Go Calculate" />
+        
+        
+        <Label Text="注意書き"
+                   HorizontalTextAlignment="Center" 
+                   VerticalTextAlignment="Center"
+                   FontSize="Medium"/>
+
+    </StackLayout>
+
+
+    
+
 </ContentPage>

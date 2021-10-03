@@ -17,6 +17,8 @@ namespace basic_calculation
             InitializeComponent();
             NextButton.Clicked += NextButton_Clicked;
             NavigationPage.SetHasNavigationBar(this, false);
+
+          //  Direction.Source = ImageSource.FromResource("basic_calculation.Image.DirectionImage.jpg"); 
         }
 
         private void NextButton_Clicked(object sender, EventArgs e)
