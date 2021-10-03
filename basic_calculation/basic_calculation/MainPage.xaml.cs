@@ -127,14 +127,14 @@ namespace basic_calculation
                             {
                                 string f3 = f2.Replace(")/", ")÷");
                                 string f4 = f3.Replace("/(", "÷(");
-                                //string f5 = f4.Replace("/□", "÷□");
-                                //char[] F2 = f5.ToCharArray();
+                                string f5 = f4.Replace("/□", "÷□");
+                                char[] F2 = f5.ToCharArray();
 
-                                resultText.Text = f4;
-                                //string RPNres_f = Calculate.ReversePolishNotation_Fraction(F2);
+                                //resultText.Text = f4;
+                                string RPNres_f = Calculate.ReversePolishNotation_Fraction(F2);
                                 //resultText.Text = RPNres_f;
-                                //string Cal = Calculate.Calculation_Fraction(RPNres_f);
-                                //resultText.Text = Cal;
+                                string Cal = Calculate.Calculation_Fraction(RPNres_f);
+                                resultText.Text = Cal;
                             }
                         }
 
