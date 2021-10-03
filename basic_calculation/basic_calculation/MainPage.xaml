@@ -49,9 +49,9 @@
 
 
             <Label  x:Name="SD"
-                   Text="小数" 
-                   HorizontalOptions="End"
-                   />
+                    Text="分数" 
+                    HorizontalOptions="End"
+                    />
 
         </StackLayout>
 
@@ -78,7 +78,7 @@
 
 
         <Button 
-                 Text="S" Grid.Row="1" Grid.Column="0"
+                Text="S" Grid.Row="1" Grid.Column="0"
                 BackgroundColor="#FFFFFF" TextColor="Black"
                 FontSize="Small" BorderRadius="20" Clicked="OnSelectSD"/>
 

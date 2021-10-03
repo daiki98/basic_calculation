@@ -34,8 +34,8 @@ namespace basic_calculation
 
             if (jub >= 0)
             {
-                initial_val1 = initial_val1 + 100;
-                initial_val2 = initial_val2 - 100;
+                initial_val1 += 100;
+                initial_val2 -= 100;
                 double REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
                 double REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
 
@@ -43,8 +43,8 @@ namespace basic_calculation
 
                 while (Rejub > 0)
                 {
-                    initial_val1 = initial_val1 + 100;
-                    initial_val2 = initial_val2 - 100;
+                    initial_val1 += 100;
+                    initial_val2 -= 100;
                     REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
                     REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
 
@@ -188,7 +188,7 @@ namespace basic_calculation
             else
             {
 
-                return false;　//少数
+                return false;//少数
             }
         }
 
@@ -251,28 +251,34 @@ namespace basic_calculation
                                 buffer.Push(Space);
                                 buffer.Push(st.Pop());
                                 st.Push('*');
-                                currentState += 1;
+                                break;
                             }
                             else if (st.Peek() == '*' && buffer.Peek() != '÷')
                             {
                                 buffer.Push(Space);
                                 buffer.Push(st.Pop());
-                                st.Push(token);
-                                currentState += 1;
                             }
                             else
                             {
                                 break;
                             }
                         }
-                        if (currentState == 0)
+                        if (st.Count > 0)
                         {
-                            st.Push(token);
-                            currentState += 1;
+                            if (st.Peek() == '*' && buffer.Peek() == '÷')
+                            {
+                                currentState += 1;
+                            }
+                            else
+                            {
+                                st.Push(token);
+                                currentState += 1;
+                            }
                         }
                         else
                         {
-                            break;
+                            st.Push(token);
+                            currentState += 1;
                         }
                         break;
 
@@ -788,7 +794,7 @@ namespace basic_calculation
                                 double nume3 = numeA3 * denoB3;//nume2 = 1*3 = 3
 
                                 //約分
-                                double G3 = Euclid.Gcd(nume3, deno3);//最大公約数G2
+                                double G3 = Euclid.Gcd(nume3, deno3);//最大公約数G3
                                 double Deno3 = deno3 / G3;
                                 double Nume3 = nume3 / G3;
 
@@ -815,17 +821,17 @@ namespace basic_calculation
                                 //小数値の場合
                                 else if (token.Contains("."))
                                 {
-                                    double num = double.Parse(token);
+                                    double num = double.Parse(token);//(ex.0.12)
 
-                                    string s = token.Substring(token.IndexOf(".") + 1);//コンマの後の数値をs
-                                    double sL = s.Length;//sL：sの桁数
-                                    double Deno = Math.Pow(10, sL);//分母：10のsL乗
-                                    double Nume = num * Deno;//分子：小数値×10のsL乗
+                                    string s = token.Substring(token.IndexOf(".") + 1);//コンマの後の数値をs(=12)
+                                    double sL = s.Length;//sL：sの桁数(2)
+                                    double Deno = Math.Pow(10, sL);//分母：10のsL乗(=10^2=100)
+                                    double Nume = num * Deno;//分子：小数値×10のsL乗(=0.12*100=12)
 
-                                    calcResult.Push(Nume.ToString() + "/" + Deno.ToString());
+                                    calcResult.Push(Nume.ToString() + "/" + Deno.ToString());//(12/100)
                                 }
 
-                                //整数の場合(ex.2のとき)
+                                //整数の場合
                                 else
                                 {
                                     calcResult.Push(token + "/" + "1");

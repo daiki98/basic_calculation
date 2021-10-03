@@ -8,7 +8,7 @@ namespace basic_calculation
     public partial class MainPage : ContentPage
     {
 
-        int SDnumber = 0; //0-S,1-D
+        int SDnumber = 1; //0-S,1-D
         public MainPage()
         {
             InitializeComponent();
@@ -99,7 +99,6 @@ namespace basic_calculation
                     }
                     else
                     {
-
                         //式 F(x)=Right(右辺)-Left(左辺)
                         string f1 = Right + "-(" + Left + ")";
                         string f2 = f1.Replace("×", "*");
@@ -128,13 +127,14 @@ namespace basic_calculation
                             {
                                 string f3 = f2.Replace(")/", ")÷");
                                 string f4 = f3.Replace("/(", "÷(");
-                                string f5 = f4.Replace("/□", "÷□");
-                                char[] F2 = f5.ToCharArray();
+                                //string f5 = f4.Replace("/□", "÷□");
+                                //char[] F2 = f5.ToCharArray();
 
-                                string RPNres_f = Calculate.ReversePolishNotation_Fraction(F2);
+                                resultText.Text = f4;
+                                //string RPNres_f = Calculate.ReversePolishNotation_Fraction(F2);
                                 //resultText.Text = RPNres_f;
-                                string Cal = Calculate.Calculation_Fraction(RPNres_f);
-                                resultText.Text = Cal;
+                                //string Cal = Calculate.Calculation_Fraction(RPNres_f);
+                                //resultText.Text = Cal;
                             }
                         }
 
