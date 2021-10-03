@@ -21,7 +21,7 @@ namespace basic_calculation
          *     IntMinJub()（整数，少数判定） 
          *    
          */
-        public static double BisectionCal(string input)
+        public static double BisectionCal(string input, int ffnum)
         {
             double initial_val1 = 10000d;       //正の初期値
             double initial_val2 = -10000d;      //負の初期値
@@ -32,71 +32,205 @@ namespace basic_calculation
 
             double jub = res_initial1 * res_initial2;       //範囲の中に解があるか判断するやつ　正ー無し，負ーあり
 
-            if (jub >= 0)
+            if (ffnum == 1)//分数関数，高次方程式
             {
-                initial_val1 += 100;
-                initial_val2 -= 100;
-                double REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
-                double REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
+                if (jub >= 0)//初期値で答えが無い場合
+                {
+                    double REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));        //再計算
+                    double REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
+                    double Rejub = REres_initial1 * REres_initial2;
 
-                double Rejub = REres_initial1 * REres_initial2;
+                    //プラス側に範囲をずらす
+                    for (int i = 0; i < 50; i++)
+                    {
+                        initial_val1 += 5000;
+                        initial_val2 += 5000;
+                        REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
+                        REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
+                        Rejub = REres_initial1 * REres_initial2;
 
-                while (Rejub > 0)
+                        //解が見つかった場合
+                        if (Rejub < 0)
+                        {
+                            while (Math.Abs(initial_val1 - initial_val2) > 0.00001)          //ここで精度決める
+                            {
+
+                                mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
+
+                                double res_mid = double.Parse(Calculation_forBisection(input, mid_val));        //中間値の値
+
+                                if (REres_initial1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
+                                {
+                                    initial_val1 = mid_val;
+
+                                }
+                                else
+                                {
+                                    initial_val2 = mid_val;
+
+                                }
+
+                            }
+                            ffnum = 0;
+                            return ToRoundDown(mid_val, 10);
+                        }
+                    }
+
+                    initial_val1 = 10000d;       //初期値をリセット
+                    initial_val2 = -10000d;
+
+                    //プラス側に無く，マイナス側に範囲ずらす
+                    for (int i = 0; i < 25; i++)
+                    {
+
+                        initial_val1 -= 5000;
+                        initial_val2 -= 5000;
+                        REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
+                        REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
+                        Rejub = REres_initial1 * REres_initial2;
+
+                        //解が見つかった時
+                        if (Rejub < 0)
+                        {
+                            while (Math.Abs(initial_val1 - initial_val2) > 0.00001)          //ここで精度決める
+                            {
+
+                                mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
+
+                                double res_mid = double.Parse(Calculation_forBisection(input, mid_val));        //中間値の値
+
+                                if (REres_initial1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
+                                {
+                                    initial_val1 = mid_val;
+
+                                }
+                                else
+                                {
+                                    initial_val2 = mid_val;
+
+                                }
+
+                            }
+                            
+                            return ToRoundDown(mid_val, 10);
+                        }
+                    }
+
+                    //プラスにもマイナスにも解がない場合
+                    if (Rejub > 0)
+                    {
+
+                        return 595959595d;
+
+                    }
+
+                    //初期値で答えがある場合（高次，分数関数）
+                }
+                else
+                {
+
+                    double REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
+                    double REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
+                    double Rejub = REres_initial1 * REres_initial2;
+
+                    while (Math.Abs(initial_val1 - initial_val2) > 0.00001)          //ここで精度決める
+                    {
+
+                        mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
+
+                        double res_mid = double.Parse(Calculation_forBisection(input, mid_val));        //中間値の値
+
+                        if (REres_initial1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
+                        {
+                            initial_val1 = mid_val;
+
+                        }
+                        else
+                        {
+                            initial_val2 = mid_val;
+
+                        }
+                    }
+                }
+                ffnum = 0;
+                return ToRoundDown(mid_val, 10);
+
+            }
+
+            //1次方程式の時
+            else if (ffnum == 0)
+            {
+
+
+                if (jub >= 0)
                 {
                     initial_val1 += 100;
                     initial_val2 -= 100;
-                    REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
-                    REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
+                    double REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
+                    double REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
 
-                    Rejub = REres_initial1 * REres_initial2;
+                    double Rejub = REres_initial1 * REres_initial2;
+
+                    while (Rejub >= 0)
+                    {
+                        initial_val1 += 100;
+                        initial_val2 -= 100;
+                        REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
+                        REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
+
+                        Rejub = REres_initial1 * REres_initial2;
+                    }
+
+                    while (Math.Abs(initial_val1 - initial_val2) > 0.00001)          //ここで精度決める
+                    {
+
+                        mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
+
+                        double res_mid = double.Parse(Calculation_forBisection(input, mid_val));        //中間値の値
+
+                        if (REres_initial1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
+                        {
+                            initial_val1 = mid_val;
+
+                        }
+                        else
+                        {
+                            initial_val2 = mid_val;
+
+                        }
+
+                    }
+
                 }
-
-                while (Math.Abs(initial_val1 - initial_val2) > 0.00001)          //ここで精度決める
+                else if (jub < 0)
                 {
-
-                    mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
-
-                    double res_mid = double.Parse(Calculation_forBisection(input, mid_val));        //中間値の値
-
-                    if (REres_initial1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
+                    while (Math.Abs(initial_val1 - initial_val2) > 0.00001)          //ここで精度決める
                     {
-                        initial_val1 = mid_val;
 
-                    }
-                    else
-                    {
-                        initial_val2 = mid_val;
+                        mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
 
-                    }
+                        double res_mid = double.Parse(Calculation_forBisection(input, mid_val));        //中間値の値
 
-                }
+                        if (res_initial1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
+                        {
+                            initial_val1 = mid_val;
 
-            }
-            else if (jub < 0)
-            {
-                while (Math.Abs(initial_val1 - initial_val2) > 0.00001)          //ここで精度決める
-                {
+                        }
+                        else
+                        {
+                            initial_val2 = mid_val;
 
-                    mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
-
-                    double res_mid = double.Parse(Calculation_forBisection(input, mid_val));        //中間値の値
-
-                    if (res_initial1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
-                    {
-                        initial_val1 = mid_val;
-
-                    }
-                    else
-                    {
-                        initial_val2 = mid_val;
+                        }
 
                     }
 
                 }
+                
+            }return ToRoundDown(mid_val, 10);
 
-            }
-            return ToRoundDown(mid_val, 10);
+
         }
+
 
 
         public static double ToRoundDown(double dValue, int iDigits)
