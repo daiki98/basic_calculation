@@ -48,16 +48,16 @@ namespace basic_calculation
             Button SDbutton = (Button)sender;
             string pressed = SDbutton.Text;
 
-            if (pressed == "S")
+            if (pressed == "D")
             {
-                SDbutton.Text = "D";
+                SDbutton.Text = "F";
                 SDnumber = 0;
                 SD.Text = "小数";
 
             }
-            else if (pressed == "D")
+            else if (pressed == "F")
             {
-                SDbutton.Text = "S";
+                SDbutton.Text = "D";
                 SDnumber = 1;
                 SD.Text = "分数";
             }
@@ -105,7 +105,10 @@ namespace basic_calculation
                             || str.Contains("/7□") || str.Contains("/8□")|| str.Contains("/9□") || str.Contains("÷□") || str.Contains("÷2□") || str.Contains("÷3□")
                             || str.Contains("÷4□") || str.Contains("÷5□") || str.Contains("÷6□") || str.Contains("÷7□") || str.Contains("÷8□") || str.Contains("÷9□")
                             || str.Contains("×□") || str.Contains("×2□") || str.Contains("×3□") || str.Contains("×4□") || str.Contains("×5□") || str.Contains("×6□") 
-                            || str.Contains("×7□") || str.Contains("×8□") || str.Contains("×9□") || str.Contains("□×"))
+                            || str.Contains("×7□") || str.Contains("×8□") || str.Contains("×9□") || str.Contains("□×")|| str.Contains("/(□") || str.Contains("/(2□") || 
+                            str.Contains("/(3□") || str.Contains("/(4□") || str.Contains("/(5□") || str.Contains("/(6□")|| str.Contains("/(7□") || str.Contains("/(8□") || 
+                            str.Contains("/(9□") || str.Contains("÷(□") || str.Contains("÷(2□") || str.Contains("÷(3□")|| str.Contains("÷(4□") || str.Contains("÷(5□")
+                            || str.Contains("÷(6□") || str.Contains("÷(7□") || str.Contains("÷(8□") || str.Contains("÷(9□"))
                         {
                             FFnum = 1;
                         }
