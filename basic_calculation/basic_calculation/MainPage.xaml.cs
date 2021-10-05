@@ -127,7 +127,7 @@ namespace basic_calculation
 
                         if (result_cal == 595959595)
                         {
-                            resultText.Text = "解なし";
+                            resultText.Text = "Sorry...";
                             FFnum = 0;
                         }
                         else 
