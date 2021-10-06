@@ -101,7 +101,7 @@ namespace basic_calculation
                     }
                     else
                     {    //分数関数,高次方程式か判断(多分全然足りてない）//またあとで考えるし，とりあえずこれで
-                        if(str.Contains("/□")|| str.Contains("/2□") || str.Contains("/3□") || str.Contains("/4□") || str.Contains("/5□") || str.Contains("/6□")
+                        if (str.Contains("/□")|| str.Contains("/2□") || str.Contains("/3□") || str.Contains("/4□") || str.Contains("/5□") || str.Contains("/6□")
                             || str.Contains("/7□") || str.Contains("/8□")|| str.Contains("/9□") || str.Contains("÷□") || str.Contains("÷2□") || str.Contains("÷3□")
                             || str.Contains("÷4□") || str.Contains("÷5□") || str.Contains("÷6□") || str.Contains("÷7□") || str.Contains("÷8□") || str.Contains("÷9□")
                             || str.Contains("×□") || str.Contains("×2□") || str.Contains("×3□") || str.Contains("×4□") || str.Contains("×5□") || str.Contains("×6□") 
@@ -114,12 +114,11 @@ namespace basic_calculation
                         string f1 = Right + "-(" + Left + ")";
                         string f2 = f1.Replace("×", "*");
                         char[] F = f2.ToCharArray();
-
-                        string RPNres = Calculate.ReversePolishNotation(F);       //  中置記法 →　後置記法(非分数）
+                        string RPNres = Calculate.ReversePolishNotation(F);//  中置記法 →　後置記法(非分数）
+                        //resultText.Text = RPNres;
                         string RPNres2 = RPNres.Replace("÷", "/");
-
-
-                        double result_cal = Calculate.BisectionCal(RPNres2,FFnum);  //二分法答え(double)
+                        //resultText.Text = RPNres2;
+                        double result_cal = Calculate.BisectionCal(RPNres2, FFnum);  //二分法答え(double)
                         FFnum = 0;
 
                         if (result_cal == 595959595)
@@ -127,7 +126,7 @@ namespace basic_calculation
                             resultText.Text = "解なし";
                             FFnum = 0;
                         }
-                        else 
+                        else
                         {
                             bool IMjub = Calculate.IntMinJub(result_cal);       //答えが整数か少数か(trueで整数）；
 
@@ -157,12 +156,13 @@ namespace basic_calculation
                                     string f3 = f2.Replace(")/", ")÷");
                                     string f4 = f3.Replace("/(", "÷(");
                                     string f5 = f4.Replace("/□", "÷□");
-                                    char[] F2 = f5.ToCharArray();
+                                    string f6 = f5.Replace("□/", "□÷");
+                                    char[] F2 = f6.ToCharArray();
 
-                                    //resultText.Text = f4;
+                                    //resultText.Text = f6;
+
                                     string RPNres_f = Calculate.ReversePolishNotation_Fraction(F2);
                                     //resultText.Text = RPNres_f;
-                                    resultText.Text = RPNres_f;
                                     string Cal = Calculate.Calculation_Fraction(RPNres_f);
                                     if (Cal.Contains("/1"))
                                     {

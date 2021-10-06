@@ -368,6 +368,7 @@ namespace basic_calculation
                             {
                                 buffer.Push(Space);
                                 buffer.Push(t);
+                                currentState += 1;
                             }
                         }
                         break;
@@ -385,6 +386,7 @@ namespace basic_calculation
                                 buffer.Push(Space);
                                 buffer.Push(st.Pop());
                                 st.Push('*');
+                                currentState += 1;
                                 break;
                             }
                             else if (st.Peek() == '*' && buffer.Peek() != '÷')
@@ -397,23 +399,8 @@ namespace basic_calculation
                                 break;
                             }
                         }
-                        if (st.Count > 0)
-                        {
-                            if (st.Peek() == '*' && buffer.Peek() == '÷')
-                            {
-                                currentState += 1;
-                            }
-                            else
-                            {
-                                st.Push(token);
-                                currentState += 1;
-                            }
-                        }
-                        else
-                        {
-                            st.Push(token);
-                            currentState += 1;
-                        }
+                        st.Push(token);
+                        currentState += 1;
                         break;
 
                     case '*':
@@ -475,25 +462,30 @@ namespace basic_calculation
                             {
                                 buffer.Push(Space);
                                 buffer.Push(token);
-                                currentState *= 0;
-                                break;
                             }
                             else if (currentState == 0)
                             {
-                                buffer.Push(Space);
-                                buffer.Push(token);
-                                buffer.Push(Space);
-                                buffer.Push('*');
-                                currentState *= 0;
-                                break;
+                                if (st.Peek() == '/' || st.Peek() == '*' || st.Peek() == '÷')
+                                {
+                                    buffer.Push(Space);
+                                    buffer.Push(st.Pop());
+                                    buffer.Push(Space);
+                                    buffer.Push(token);
+                                    st.Push('*');
+                                }
+                                else
+                                {
+                                    buffer.Push(Space);
+                                    buffer.Push(token);
+                                    st.Push('*');
+                                }
                             }
                         }
                         else
                         {
                             buffer.Push(token);
-                            currentState *= 0;
-                            break;
                         }
+                        currentState *= 0;
                         break;
 
                     case '%':
@@ -514,22 +506,17 @@ namespace basic_calculation
                             {
                                 buffer.Push(Space);
                                 buffer.Push(token);
-                                currentState *= 0;
-                                break;
                             }
                             else if (currentState == 0)
                             {
                                 buffer.Push(token);
-                                currentState *= 0;
-                                break;
                             }
                         }
                         else
                         {
                             buffer.Push(token);
-                            currentState *= 0;
-                            break;
                         }
+                        currentState *= 0;
                         break;
                 }
             }
@@ -838,7 +825,7 @@ namespace basic_calculation
             for (decimal numB = 1; numB <= 50; numB += 1)
             {
                 decimal b = 50;
-                for (decimal numb = 1; numb <= 50; numb += 1)
+                for (decimal numb = 1; numb <= 100; numb += 1)
                 {
                     string res2 = input.Replace("□", b.ToString() + "/" + B.ToString());
                     string[] res3 = res2.Trim().Split(Space);
