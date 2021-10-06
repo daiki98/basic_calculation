@@ -48,8 +48,9 @@
                     HorizontalOptions="FillAndExpand" IsReadOnly="True" Keyboard="Numeric"/>
 
 
+            <!--最初Fだったんで"小数"にしときました-->
             <Label  x:Name="SD"
-                    Text="分数" 
+                    Text="小数" 
                     HorizontalOptions="End"
                     />
 

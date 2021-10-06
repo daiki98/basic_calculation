@@ -127,7 +127,46 @@ namespace basic_calculation
 
                         if (result_cal == 595959595)
                         {
-                            resultText.Text = "Sorry...";
+                            string f3 = f2.Replace(")/", ")÷");
+                            string f4 = f3.Replace("/(", "÷(");
+                            string f5 = f4.Replace("/□", "÷□");
+                            string f6 = f5.Replace("□/", "□÷");
+                            char[] F2 = f6.ToCharArray();
+
+                            string RPNres_f = Calculate.ReversePolishNotation_Fraction(F2);
+                            //resultText.Text = RPNres_f;
+                            string Cal = Calculate.Calculation_Fraction(RPNres_f);
+                            if (SDnumber == 0)
+                            {
+                                decimal CalL = decimal.Parse(Cal.Substring(0, Cal.IndexOf("/")));
+                                decimal CalR = decimal.Parse(Cal.Substring(Cal.IndexOf("/") + 1));
+                                decimal CalA = CalL / CalR;
+                                string CalA2 = CalA.ToString("F3");
+                                string CalA3 = CalA2.TrimEnd('0');
+                                if (CalA3.Substring(CalA3.Length - 1) == ".")
+                                {
+                                    string CalA4 = CalA3.Replace(".", "");
+                                    resultText.Text = CalA4;
+                                }
+                                else
+                                {
+                                    resultText.Text = CalA3;
+                                }
+                            }
+
+                            else if (SDnumber == 1)
+                            {
+                                string Cal2 = Cal.Substring(Cal.IndexOf("/") + 1);
+                                if (Cal2 == "1")
+                                {
+                                    string Cal3 = Cal.Replace("/1", "");
+                                    resultText.Text = Cal3;
+                                }
+                                else
+                                {
+                                    resultText.Text = Cal;
+                                }
+                            }
                             FFnum = 0;
                         }
                         else
@@ -168,6 +207,7 @@ namespace basic_calculation
                                     string RPNres_f = Calculate.ReversePolishNotation_Fraction(F2);
                                     //resultText.Text = RPNres_f;
                                     string Cal = Calculate.Calculation_Fraction(RPNres_f);
+                                    //resultText.Text = Cal;
                                     string Cal2 = Cal.Substring(Cal.IndexOf("/") + 1);
                                     if (Cal2 == "1")
                                     {
