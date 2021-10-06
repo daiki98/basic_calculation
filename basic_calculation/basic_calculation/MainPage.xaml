@@ -78,9 +78,9 @@
 
 
         <Button 
-                Text="S" Grid.Row="1" Grid.Column="0"
-                BackgroundColor="#FFFFFF" TextColor="Black"
-                FontSize="Small" BorderRadius="20" Clicked="OnSelectSD"/>
+                Text="F" Grid.Row="1" Grid.Column="0"
+                BackgroundColor="#02FFFA" TextColor="Black"
+                FontSize="30" BorderRadius="20" Clicked="OnSelectSD"/>
 
         <Button Text="7" Grid.Row="2" Grid.Column="0"
                 BackgroundColor="#B1B1B1" TextColor="White"

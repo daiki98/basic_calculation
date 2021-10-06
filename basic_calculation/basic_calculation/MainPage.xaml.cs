@@ -48,16 +48,16 @@ namespace basic_calculation
             Button SDbutton = (Button)sender;
             string pressed = SDbutton.Text;
 
-            if (pressed == "S")
+            if (pressed == "D")
             {
-                SDbutton.Text = "D";
+                SDbutton.Text = "F";
                 SDnumber = 0;
                 SD.Text = "小数";
 
             }
-            else if (pressed == "D")
+            else if (pressed == "F")
             {
-                SDbutton.Text = "S";
+                SDbutton.Text = "D";
                 SDnumber = 1;
                 SD.Text = "分数";
             }
@@ -101,11 +101,14 @@ namespace basic_calculation
                     }
                     else
                     {    //分数関数,高次方程式か判断(多分全然足りてない）//またあとで考えるし，とりあえずこれで
-                        if (str.Contains("/□")|| str.Contains("/2□") || str.Contains("/3□") || str.Contains("/4□") || str.Contains("/5□") || str.Contains("/6□")
-                            || str.Contains("/7□") || str.Contains("/8□")|| str.Contains("/9□") || str.Contains("÷□") || str.Contains("÷2□") || str.Contains("÷3□")
+                        if (str.Contains("/□") || str.Contains("/2□") || str.Contains("/3□") || str.Contains("/4□") || str.Contains("/5□") || str.Contains("/6□")
+                            || str.Contains("/7□") || str.Contains("/8□") || str.Contains("/9□") || str.Contains("÷□") || str.Contains("÷2□") || str.Contains("÷3□")
                             || str.Contains("÷4□") || str.Contains("÷5□") || str.Contains("÷6□") || str.Contains("÷7□") || str.Contains("÷8□") || str.Contains("÷9□")
-                            || str.Contains("×□") || str.Contains("×2□") || str.Contains("×3□") || str.Contains("×4□") || str.Contains("×5□") || str.Contains("×6□") 
-                            || str.Contains("×7□") || str.Contains("×8□") || str.Contains("×9□") || str.Contains("□×"))
+                            || str.Contains("×□") || str.Contains("×2□") || str.Contains("×3□") || str.Contains("×4□") || str.Contains("×5□") || str.Contains("×6□")
+                            || str.Contains("×7□") || str.Contains("×8□") || str.Contains("×9□") || str.Contains("□×") || str.Contains("/(□") || str.Contains("/(2□") ||
+                            str.Contains("/(3□") || str.Contains("/(4□") || str.Contains("/(5□") || str.Contains("/(6□") || str.Contains("/(7□") || str.Contains("/(8□") ||
+                            str.Contains("/(9□") || str.Contains("÷(□") || str.Contains("÷(2□") || str.Contains("÷(3□") || str.Contains("÷(4□") || str.Contains("÷(5□")
+                            || str.Contains("÷(6□") || str.Contains("÷(7□") || str.Contains("÷(8□") || str.Contains("÷(9□"))
                         {
                             FFnum = 1;
                         }
@@ -114,16 +117,17 @@ namespace basic_calculation
                         string f1 = Right + "-(" + Left + ")";
                         string f2 = f1.Replace("×", "*");
                         char[] F = f2.ToCharArray();
+
                         string RPNres = Calculate.ReversePolishNotation(F);//  中置記法 →　後置記法(非分数）
-                        //resultText.Text = RPNres;
                         string RPNres2 = RPNres.Replace("÷", "/");
-                        //resultText.Text = RPNres2;
+
+
                         double result_cal = Calculate.BisectionCal(RPNres2, FFnum);  //二分法答え(double)
                         FFnum = 0;
 
                         if (result_cal == 595959595)
                         {
-                            resultText.Text = "解なし";
+                            resultText.Text = "Sorry...";
                             FFnum = 0;
                         }
                         else
@@ -164,10 +168,11 @@ namespace basic_calculation
                                     string RPNres_f = Calculate.ReversePolishNotation_Fraction(F2);
                                     //resultText.Text = RPNres_f;
                                     string Cal = Calculate.Calculation_Fraction(RPNres_f);
-                                    if (Cal.Contains("/1"))
+                                    string Cal2 = Cal.Substring(Cal.IndexOf("/") + 1);
+                                    if (Cal2 == "1")
                                     {
-                                        string Cal2 = Cal.Replace("/1", "");
-                                        resultText.Text = Cal2;
+                                        string Cal3 = Cal.Replace("/1", "");
+                                        resultText.Text = Cal3;
                                     }
                                     else
                                     {

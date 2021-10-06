@@ -41,10 +41,10 @@ namespace basic_calculation
                     double Rejub = REres_initial1 * REres_initial2;
 
                     //プラス側に範囲をずらす
-                    for (int i = 0; i < 50; i++)
+                    for (int i = 0; i < 5000; i++)
                     {
-                        initial_val1 += 5000;
-                        initial_val2 += 5000;
+                        initial_val1 += 10d;
+                        initial_val2 += 10d;
                         REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
                         REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
                         Rejub = REres_initial1 * REres_initial2;
@@ -80,11 +80,11 @@ namespace basic_calculation
                     initial_val2 = -10000d;
 
                     //プラス側に無く，マイナス側に範囲ずらす
-                    for (int i = 0; i < 25; i++)
+                    for (int i = 0; i < 5000; i++)
                     {
 
-                        initial_val1 -= 5000;
-                        initial_val2 -= 5000;
+                        initial_val1 -= 10d;
+                        initial_val2 -= 10d;
                         REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
                         REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
                         Rejub = REres_initial1 * REres_initial2;
@@ -111,7 +111,7 @@ namespace basic_calculation
                                 }
 
                             }
-                            
+
                             return ToRoundDown(mid_val, 10);
                         }
                     }
@@ -225,11 +225,13 @@ namespace basic_calculation
                     }
 
                 }
-                
-            }return ToRoundDown(mid_val, 10);
+
+            }
+            return ToRoundDown(mid_val, 10);
 
 
         }
+
 
 
 
@@ -463,7 +465,7 @@ namespace basic_calculation
                                 buffer.Push(Space);
                                 buffer.Push(token);
                             }
-                            else if (currentState == 0)
+                            else if (currentState == 0 && st.Count > 0)
                             {
                                 if (st.Peek() == '/' || st.Peek() == '*' || st.Peek() == '÷')
                                 {
@@ -479,6 +481,12 @@ namespace basic_calculation
                                     buffer.Push(token);
                                     st.Push('*');
                                 }
+                            }
+                            else if (currentState == 0 && st.Count == 0)
+                            {
+                                buffer.Push(Space);
+                                buffer.Push(token);
+                                st.Push('*');
                             }
                         }
                         else
