@@ -67,7 +67,9 @@
                    HorizontalTextAlignment="Center" 
                    VerticalTextAlignment="Center"
                            Padding="50,0,0,0" FontAttributes="Bold"/>
+                    
                 </StackLayout>
+
                 <Label Text="F　      　分数"
                    HorizontalTextAlignment="Start" 
                    VerticalTextAlignment="Center"
@@ -79,7 +81,6 @@
                    VerticalTextAlignment="Center"
                            Padding="50,0,0,0" FontAttributes="Bold"/>
                 </StackLayout>
-
                 <Label Text="C　       リセット"
                    HorizontalTextAlignment="Start" 
                    VerticalTextAlignment="Center"
@@ -127,7 +128,6 @@
                     Text="Go Calculate" FontAttributes="Bold" HorizontalOptions="Center" 
                 BackgroundColor="#E9FBFD"
                 />
-
 
         <Label Text="注意書き(どーしても直せんかったエラーをここに書く？）"
                    HorizontalTextAlignment="Center" 

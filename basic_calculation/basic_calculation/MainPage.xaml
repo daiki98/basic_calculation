@@ -78,8 +78,7 @@
                Grid.Row="1" Grid.Column="1" Padding="20,0"/>
 
 
-        <Button 
-                Text="F" Grid.Row="1" Grid.Column="0"
+        <Button Text="F" Grid.Row="1" Grid.Column="0"
                 BackgroundColor="#02FFFA" TextColor="Black"
                 FontSize="30" BorderRadius="20" Clicked="OnSelectSD"/>
 
