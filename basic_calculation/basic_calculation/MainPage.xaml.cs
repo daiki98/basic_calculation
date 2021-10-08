@@ -86,6 +86,7 @@ namespace basic_calculation
 
                 else
                 {
+                    
 
                     //左辺切り出し
                     string Left = str.Substring(0, str.IndexOf("="));
@@ -95,24 +96,20 @@ namespace basic_calculation
                     string Right = str.Substring(str.IndexOf("=") + 1);
                     int R = Right.Length;
 
+
+
                     if (L < 1 || R < 1)
                     {
                         resultText.Text = "Wrong";  //＝の後になんもないやつ
                     }
                     else
-                    {    //分数関数,高次方程式か判断(多分全然足りてない）//またあとで考えるし，とりあえずこれで
-                        if (str.Contains("/□") || str.Contains("/2□") || str.Contains("/3□") || str.Contains("/4□") || str.Contains("/5□") || str.Contains("/6□")
-                            || str.Contains("/7□") || str.Contains("/8□") || str.Contains("/9□") || str.Contains("÷□") || str.Contains("÷2□") || str.Contains("÷3□")
-                            || str.Contains("÷4□") || str.Contains("÷5□") || str.Contains("÷6□") || str.Contains("÷7□") || str.Contains("÷8□") || str.Contains("÷9□")
-                            || str.Contains("×□") || str.Contains("×2□") || str.Contains("×3□") || str.Contains("×4□") || str.Contains("×5□") || str.Contains("×6□")
-                            || str.Contains("×7□") || str.Contains("×8□") || str.Contains("×9□") || str.Contains("□×") || str.Contains("/(□") || str.Contains("/(2□") ||
-                            str.Contains("/(3□") || str.Contains("/(4□") || str.Contains("/(5□") || str.Contains("/(6□") || str.Contains("/(7□") || str.Contains("/(8□") ||
-                            str.Contains("/(9□") || str.Contains("÷(□") || str.Contains("÷(2□") || str.Contains("÷(3□") || str.Contains("÷(4□") || str.Contains("÷(5□")
-                            || str.Contains("÷(6□") || str.Contains("÷(7□") || str.Contains("÷(8□") || str.Contains("÷(9□"))
-                        {
-                            FFnum = 1;
-                        }
-
+                    {
+                        /*
+                         * ここにFFnum変数ジャッジ
+                         * 
+                         */
+                      
+                        FFnum = 0;
                         //式 F(x)=Right(右辺)-Left(左辺)
                         string f1 = Right + "-(" + Left + ")";
                         string f2 = f1.Replace("×", "*");
@@ -123,7 +120,7 @@ namespace basic_calculation
 
 
                         double result_cal = Calculate.BisectionCal(RPNres2, FFnum);  //二分法答え(double)
-                        FFnum = 0;
+                        //FFnum = 1;
 
                         if (result_cal == 595959595)
                         {

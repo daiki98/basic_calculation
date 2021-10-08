@@ -7,7 +7,7 @@ namespace basic_calculation
     public static class Calculate
     {
 
-        /*      Calculation2も計算系やしCalculateのクラスにまとめてひとつにしたわ
+        /*      
          * 
          * 　 BisectionCal() 二分法
          * 　 ToRoundDown() 少数まるめ？？？
@@ -16,9 +16,7 @@ namespace basic_calculation
          *    Calculation()  //後置記法　→　計算(非分数）
          *    ReversePolishNotation_Fraction() 中置記法　→　後置記法(分数）
          *    Calculation_Fraction()  後置記法　→　計算(分数）
-         *    
-         *    追加
-         *     IntMinJub()（整数，少数判定） 
+         *    IntMinJub()（整数，少数判定） 
          *    
          */
         public static double BisectionCal(string input, int ffnum)
