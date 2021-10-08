@@ -739,13 +739,12 @@ namespace basic_calculation
             decimal B = 100;
             for (decimal numB = 1; numB <= 100; numB += 1)
             {
-                decimal b = 50;
-                for (decimal numb = 1; numb <= 100; numb += 1)
+                decimal b = 200;
+                for (decimal numb = 1; numb <= 400; numb += 1)
                 {
                     if (b == 0)
                     {
-                        b -= 1;
-                        continue;
+                        //b=0は避けるため空白
                     }
                     else
                     {

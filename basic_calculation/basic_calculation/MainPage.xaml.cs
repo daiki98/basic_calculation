@@ -79,7 +79,11 @@ namespace basic_calculation
                         str.Contains("+=") || str.Contains("×=") || str.Contains("÷=") || str.Contains("/=") ||
                         str.Contains("(+") || str.Contains("(×") || str.Contains("(÷") || str.Contains("(/") || str.Contains("(%") ||
                         str.Contains("+)") || str.Contains("×)") || str.Contains("÷)") || str.Contains("/)") || str.Contains("-)") ||
-                        str.Contains("(=") || str.Contains("=)") || str.Contains("==") || str.Contains("%%") || str.Contains("()") || str.Contains(")("))
+                        str.Contains("(=") || str.Contains("=)") || str.Contains("==") || str.Contains("%%") || str.Contains("()") || str.Contains(")(")||
+                        str.Contains(".+") || str.Contains(".×") || str.Contains(".÷") || str.Contains("./") || str.Contains(".%") ||
+                        str.Contains("+.") || str.Contains("-.") || str.Contains("×.") || str.Contains("÷.") || str.Contains("%.")||
+                        str.Contains(".-") || str.Contains("=.") || str.Contains(".=") || str.Contains(".."))
+
                 {
                     resultText.Text = "Wrong";
                 }
@@ -105,9 +109,9 @@ namespace basic_calculation
                             || str.Contains("/7□") || str.Contains("/8□") || str.Contains("/9□") || str.Contains("÷□") || str.Contains("÷2□") || str.Contains("÷3□")
                             || str.Contains("÷4□") || str.Contains("÷5□") || str.Contains("÷6□") || str.Contains("÷7□") || str.Contains("÷8□") || str.Contains("÷9□")
                             || str.Contains("×□") || str.Contains("×2□") || str.Contains("×3□") || str.Contains("×4□") || str.Contains("×5□") || str.Contains("×6□")
-                            || str.Contains("×7□") || str.Contains("×8□") || str.Contains("×9□") || str.Contains("□×") || str.Contains("/(□") || str.Contains("/(2□") ||
-                            str.Contains("/(3□") || str.Contains("/(4□") || str.Contains("/(5□") || str.Contains("/(6□") || str.Contains("/(7□") || str.Contains("/(8□") ||
-                            str.Contains("/(9□") || str.Contains("÷(□") || str.Contains("÷(2□") || str.Contains("÷(3□") || str.Contains("÷(4□") || str.Contains("÷(5□")
+                            || str.Contains("×7□") || str.Contains("×8□") || str.Contains("×9□") || str.Contains("□×") || str.Contains("/(□") || str.Contains("/(2□")
+                            || str.Contains("/(3□") || str.Contains("/(4□") || str.Contains("/(5□") || str.Contains("/(6□") || str.Contains("/(7□") || str.Contains("/(8□")
+                            || str.Contains("/(9□") || str.Contains("÷(□") || str.Contains("÷(2□") || str.Contains("÷(3□") || str.Contains("÷(4□") || str.Contains("÷(5□")
                             || str.Contains("÷(6□") || str.Contains("÷(7□") || str.Contains("÷(8□") || str.Contains("÷(9□"))
                         {
                             FFnum = 1;
@@ -208,8 +212,7 @@ namespace basic_calculation
                                     //resultText.Text = RPNres_f;
                                     string Cal = Calculate.Calculation_Fraction(RPNres_f);
                                     //resultText.Text = Cal;
-                                    string Cal2 = Cal.Substring(Cal.IndexOf("/") + 1);
-                                    if (Cal2 == "1")
+                                    if (Cal.Substring(Cal.IndexOf("/") + 1) == "1")
                                     {
                                         string Cal3 = Cal.Replace("/1", "");
                                         resultText.Text = Cal3;
