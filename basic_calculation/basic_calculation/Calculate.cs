@@ -7,7 +7,7 @@ namespace basic_calculation
     public static class Calculate
     {
 
-        /*      
+        /*      Calculation2も計算系やしCalculateのクラスにまとめてひとつにしたわ
          * 
          * 　 BisectionCal() 二分法
          * 　 ToRoundDown() 少数まるめ？？？
@@ -16,7 +16,9 @@ namespace basic_calculation
          *    Calculation()  //後置記法　→　計算(非分数）
          *    ReversePolishNotation_Fraction() 中置記法　→　後置記法(分数）
          *    Calculation_Fraction()  後置記法　→　計算(分数）
-         *    IntMinJub()（整数，少数判定） 
+         *    
+         *    追加
+         *     IntMinJub()（整数，少数判定） 
          *    
          */
         public static double BisectionCal(string input, int ffnum)
@@ -542,100 +544,6 @@ namespace basic_calculation
             return res;
         }
 
-
-        //後置記法　→　計算(非分数）
-        public static string Calculation(string input)
-        {
-            Stack<decimal> calcResult = new Stack<decimal>();
-            string space = " ";
-            char Space = space[0];
-            string res = null;
-
-            decimal B = 50;
-            for (decimal numB = 1; numB <= 50; numB += 1)
-            {
-                decimal b = 50;
-                for (decimal numb = 1; numb <= 50; numb += 1)
-                {
-                    string res2 = input.Replace("□", b.ToString() + " " + B.ToString() + " " + "/");
-                    string[] res3 = res2.Trim().Split(Space);
-                    foreach (string token in res3)
-                    {
-                        switch (token)
-                        {
-                            case "+":
-                                decimal A0 = calcResult.Pop();
-                                decimal B0 = calcResult.Pop();
-                                calcResult.Push(B0 + A0);
-                                break;
-
-                            case "-":
-                                decimal A1 = calcResult.Pop();
-                                decimal B1 = 0;
-                                if (calcResult.Count > 0)
-                                {
-                                    B1 = calcResult.Pop();
-                                }
-                                calcResult.Push(B1 - A1);
-                                break;
-
-                            case "*":
-                                decimal A2 = calcResult.Pop();
-                                decimal B2 = calcResult.Pop();
-                                calcResult.Push(B2 * A2);
-                                break;
-
-                            case "/":
-                                decimal A3 = calcResult.Pop();
-                                decimal B3 = calcResult.Pop();
-                                if (A3 == 0)
-                                {
-                                    break;
-                                }
-                                else
-                                {
-                                    calcResult.Push(B3 / A3);
-                                    //decimal ans = B3 / A3;
-                                    //double ans1 = ToRoundDown((double)ans, 20);
-                                    //string ans2 = ans1.ToString();
-                                    //calcResult.Push(decimal.Parse(ans2));
-                                    break;
-                                }
-
-                            case "%":
-                                decimal A4 = calcResult.Pop();
-                                decimal B4 = 100;
-                                calcResult.Push(A4 / B4);
-                                break;
-
-                            default:
-                                calcResult.Push(decimal.Parse(token));
-                                break;
-                        }
-                    }
-
-                    if (calcResult.Peek() == 0)
-                    {
-                        res = b.ToString() + "/" + B.ToString();
-                        break;
-                    }
-                    b -= 1;
-                }
-                B -= 1;
-            }
-
-            //解が範囲外のとき
-            if (res == null)
-            {
-                res = "Out of Range";
-            }
-
-            return res;
-        }
-
-
-
-
         //中置記法　→　後置記法(分数）
         public static string ReversePolishNotation_Fraction(char[] input)
         {
@@ -828,16 +736,15 @@ namespace basic_calculation
             char Space = space[0];
             string res = null;
 
-            decimal B = 50;
-            for (decimal numB = 1; numB <= 50; numB += 1)
+            decimal B = 100;
+            for (decimal numB = 1; numB <= 100; numB += 1)
             {
-                decimal b = 50;
-                for (decimal numb = 1; numb <= 100; numb += 1)
+                decimal b = 200;
+                for (decimal numb = 1; numb <= 400; numb += 1)
                 {
                     if (b == 0)
                     {
-                        b -= 1;
-                        continue;
+                        //b=0は避けるため空白
                     }
                     else
                     {

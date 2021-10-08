@@ -48,18 +48,16 @@ namespace basic_calculation
             Button SDbutton = (Button)sender;
             string pressed = SDbutton.Text;
 
-            if (pressed == "D")
+            if (pressed == "分数")
             {
-                SDbutton.Text = "F";
+                SDbutton.Text = "小数";
                 SDnumber = 0;
-                SD.Text = "小数";
 
             }
-            else if (pressed == "F")
+            else if (pressed == "小数")
             {
-                SDbutton.Text = "D";
+                SDbutton.Text = "分数";
                 SDnumber = 1;
-                SD.Text = "分数";
             }
 
         }
@@ -79,7 +77,11 @@ namespace basic_calculation
                         str.Contains("+=") || str.Contains("×=") || str.Contains("÷=") || str.Contains("/=") ||
                         str.Contains("(+") || str.Contains("(×") || str.Contains("(÷") || str.Contains("(/") || str.Contains("(%") ||
                         str.Contains("+)") || str.Contains("×)") || str.Contains("÷)") || str.Contains("/)") || str.Contains("-)") ||
-                        str.Contains("(=") || str.Contains("=)") || str.Contains("==") || str.Contains("%%") || str.Contains("()") || str.Contains(")("))
+                        str.Contains("(=") || str.Contains("=)") || str.Contains("==") || str.Contains("%%") || str.Contains("()") || str.Contains(")(")||
+                        str.Contains(".+") || str.Contains(".×") || str.Contains(".÷") || str.Contains("./") || str.Contains(".%") ||
+                        str.Contains("+.") || str.Contains("-.") || str.Contains("×.") || str.Contains("÷.") || str.Contains("%.")||
+                        str.Contains(".-") || str.Contains("=.") || str.Contains(".=") || str.Contains(".."))
+
                 {
                     resultText.Text = "Wrong";
                 }
@@ -103,6 +105,7 @@ namespace basic_calculation
                         resultText.Text = "Wrong";  //＝の後になんもないやつ
                     }
                     else
+<<<<<<< HEAD
                     {
                         /*
                          * ここにFFnum変数ジャッジ
@@ -110,6 +113,21 @@ namespace basic_calculation
                          */
                       
                         FFnum = 0;
+=======
+                    {    //分数関数,高次方程式か判断(多分全然足りてない）//またあとで考えるし，とりあえずこれで
+                        if (str.Contains("/□") || str.Contains("/2□") || str.Contains("/3□") || str.Contains("/4□") || str.Contains("/5□") || str.Contains("/6□")
+                            || str.Contains("/7□") || str.Contains("/8□") || str.Contains("/9□") || str.Contains("÷□") || str.Contains("÷2□") || str.Contains("÷3□")
+                            || str.Contains("÷4□") || str.Contains("÷5□") || str.Contains("÷6□") || str.Contains("÷7□") || str.Contains("÷8□") || str.Contains("÷9□")
+                            || str.Contains("×□") || str.Contains("×2□") || str.Contains("×3□") || str.Contains("×4□") || str.Contains("×5□") || str.Contains("×6□")
+                            || str.Contains("×7□") || str.Contains("×8□") || str.Contains("×9□") || str.Contains("□×") || str.Contains("/(□") || str.Contains("/(2□")
+                            || str.Contains("/(3□") || str.Contains("/(4□") || str.Contains("/(5□") || str.Contains("/(6□") || str.Contains("/(7□") || str.Contains("/(8□")
+                            || str.Contains("/(9□") || str.Contains("÷(□") || str.Contains("÷(2□") || str.Contains("÷(3□") || str.Contains("÷(4□") || str.Contains("÷(5□")
+                            || str.Contains("÷(6□") || str.Contains("÷(7□") || str.Contains("÷(8□") || str.Contains("÷(9□"))
+                        {
+                            FFnum = 1;
+                        }
+
+>>>>>>> 94503ef866ce03264a666f867757ce2a1153c801
                         //式 F(x)=Right(右辺)-Left(左辺)
                         string f1 = Right + "-(" + Left + ")";
                         string f2 = f1.Replace("×", "*");
@@ -205,8 +223,7 @@ namespace basic_calculation
                                     //resultText.Text = RPNres_f;
                                     string Cal = Calculate.Calculation_Fraction(RPNres_f);
                                     //resultText.Text = Cal;
-                                    string Cal2 = Cal.Substring(Cal.IndexOf("/") + 1);
-                                    if (Cal2 == "1")
+                                    if (Cal.Substring(Cal.IndexOf("/") + 1) == "1")
                                     {
                                         string Cal3 = Cal.Replace("/1", "");
                                         resultText.Text = Cal3;
