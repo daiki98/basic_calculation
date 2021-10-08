@@ -48,18 +48,16 @@ namespace basic_calculation
             Button SDbutton = (Button)sender;
             string pressed = SDbutton.Text;
 
-            if (pressed == "D")
+            if (pressed == "分数")
             {
-                SDbutton.Text = "F";
+                SDbutton.Text = "小数";
                 SDnumber = 0;
-                SD.Text = "小数";
 
             }
-            else if (pressed == "F")
+            else if (pressed == "小数")
             {
-                SDbutton.Text = "D";
+                SDbutton.Text = "分数";
                 SDnumber = 1;
-                SD.Text = "分数";
             }
 
         }
