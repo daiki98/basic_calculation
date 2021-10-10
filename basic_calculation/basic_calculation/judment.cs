@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace basic_calculation
 {
- 
    public static class judment
     {
         //個数判定
@@ -14,14 +13,12 @@ namespace basic_calculation
             return s.Length - s.Replace(c.ToString(), "").Length;
         }
 
-        public static bool FF(string input)
+        public static bool FF(string input)//式を入れる
         {
-            int S_index_num = input.IndexOf('/');
-            int D_index_num = input.IndexOf('÷');
-            int S_num = CountChar(input, '/');
-            int D_num = CountChar(input, '÷');
-
-            int end_index;
+            int S_index_num = input.IndexOf('/');//inputの/の番数
+            int D_index_num = input.IndexOf('÷');//inputの÷の番数
+            int S_num = CountChar(input, '/');//"/"の数
+            int D_num = CountChar(input, '÷');//"÷"の数
 
             if (S_num == 0 && D_num == 0)
             {
@@ -30,7 +27,7 @@ namespace basic_calculation
             }
             else if (S_num == 1 && D_num == 0)
             {
-                string next_char = input.Substring(S_index_num + 1, 1);
+                string next_char = input.Substring(S_index_num + 1, 1);//"/"の後の1文字を切り出し
 
                 if (next_char == "□")
                 {
@@ -39,8 +36,8 @@ namespace basic_calculation
                 }
                 else if (next_char == "(")
                 {
-                    string reinput = input.Substring(S_index_num + 1); //　（以降を切り出し
-                    string re2input = reinput.Substring(0, reinput.IndexOf(')'));
+                    string reinput = input.Substring(S_index_num + 1); //（以降を切り出し
+                    string re2input = reinput.Substring(0, reinput.IndexOf(')'));//)の前まで切り出し
                     if (re2input.Contains("□"))
                     {
                         return true; //分数関数
@@ -54,7 +51,7 @@ namespace basic_calculation
                 else
                 {
                     string next2_char;
-                    int l_input = input.Length;
+                    int l_input = input.Length;//式の長さ
 
                     for (int i = 2; i < l_input; i++)
                     {

@@ -65,10 +65,6 @@
         </StackLayout>
 
 
-
-
-
-
         <Label x:Name="resultText" 
                FontSize="Large"  
                BackgroundColor="White" 

@@ -88,8 +88,6 @@ namespace basic_calculation
 
                 else
                 {
-                    
-
                     //左辺切り出し
                     string Left = str.Substring(0, str.IndexOf("="));
                     int L = Left.Length;
@@ -97,8 +95,6 @@ namespace basic_calculation
                     //右辺切り出し
                     string Right = str.Substring(str.IndexOf("=") + 1);
                     int R = Right.Length;
-
-
 
                     if (L < 1 || R < 1)
                     {
@@ -119,10 +115,6 @@ namespace basic_calculation
                             FFnum = 0;
                         }
                         
-
-                        
-
-
                         //式 F(x)=Right(右辺)-Left(左辺)
                         string f1 = Right + "-(" + Left + ")";
                         string f2 = f1.Replace("×", "*");
@@ -137,46 +129,7 @@ namespace basic_calculation
 
                         if (result_cal == 595959595)
                         {
-                            string f3 = f2.Replace(")/", ")÷");
-                            string f4 = f3.Replace("/(", "÷(");
-                            string f5 = f4.Replace("/□", "÷□");
-                            string f6 = f5.Replace("□/", "□÷");
-                            char[] F2 = f6.ToCharArray();
-
-                            string RPNres_f = Calculate.ReversePolishNotation_Fraction(F2);
-                            //resultText.Text = RPNres_f;
-                            string Cal = Calculate.Calculation_Fraction(RPNres_f);
-                            if (SDnumber == 0)
-                            {
-                                decimal CalL = decimal.Parse(Cal.Substring(0, Cal.IndexOf("/")));
-                                decimal CalR = decimal.Parse(Cal.Substring(Cal.IndexOf("/") + 1));
-                                decimal CalA = CalL / CalR;
-                                string CalA2 = CalA.ToString("F3");
-                                string CalA3 = CalA2.TrimEnd('0');
-                                if (CalA3.Substring(CalA3.Length - 1) == ".")
-                                {
-                                    string CalA4 = CalA3.Replace(".", "");
-                                    resultText.Text = CalA4;
-                                }
-                                else
-                                {
-                                    resultText.Text = CalA3;
-                                }
-                            }
-
-                            else if (SDnumber == 1)
-                            {
-                                string Cal2 = Cal.Substring(Cal.IndexOf("/") + 1);
-                                if (Cal2 == "1")
-                                {
-                                    string Cal3 = Cal.Replace("/1", "");
-                                    resultText.Text = Cal3;
-                                }
-                                else
-                                {
-                                    resultText.Text = Cal;
-                                }
-                            }
+                            resultText.Text = "解なし";
                             FFnum = 0;
                         }
                         else
@@ -190,9 +143,9 @@ namespace basic_calculation
                             }
                             else
                             {
-                                if (SDnumber == 0)                 //小数表示
+                                if (SDnumber == 0)//小数表示
                                 {
-                                    string Calres2 = result_cal.ToString("F3");
+                                    string Calres2 = result_cal.ToString("F5");
                                     string Calres3 = Calres2.TrimEnd('0');
                                     if (Calres3.Substring(Calres3.Length - 1) == ".")
                                     {
@@ -204,29 +157,21 @@ namespace basic_calculation
                                         resultText.Text = Calres3;
                                     }
                                 }
-                                else if (SDnumber == 1)               //分数表示
+                                else if (SDnumber == 1)//分数表示
                                 {
-                                    string f3 = f2.Replace(")/", ")÷");
-                                    string f4 = f3.Replace("/(", "÷(");
-                                    string f5 = f4.Replace("/□", "÷□");
-                                    string f6 = f5.Replace("□/", "□÷");
-                                    char[] F2 = f6.ToCharArray();
+                                    string Calres2 = result_cal.ToString("F5");
+                                    string Calres3 = Calres2.TrimEnd('0');
+                                    string s = Calres3.Substring(Calres3.IndexOf(".") + 1);//コンマの後の数値をs(=12)
+                                    double sL = s.Length;//sL：sの桁数(2)
+                                    double Deno = Math.Pow(10, sL);//分母：10のsL乗(=10^2=100)
+                                    double Nume = double.Parse(Calres3) * Deno;//分子：小数値×10のsL乗(=0.12*100=12)
 
-                                    //resultText.Text = f6;
+                                    //約分
+                                    double G = Euclid.Gcd(Nume, Deno);//最大公約数G
+                                    double Deno2 = Deno / G;
+                                    double Nume2 = Nume / G;
 
-                                    string RPNres_f = Calculate.ReversePolishNotation_Fraction(F2);
-                                    //resultText.Text = RPNres_f;
-                                    string Cal = Calculate.Calculation_Fraction(RPNres_f);
-                                    //resultText.Text = Cal;
-                                    if (Cal.Substring(Cal.IndexOf("/") + 1) == "1")
-                                    {
-                                        string Cal3 = Cal.Replace("/1", "");
-                                        resultText.Text = Cal3;
-                                    }
-                                    else
-                                    {
-                                        resultText.Text = Cal;
-                                    }
+                                    resultText.Text = Nume2.ToString() + "/" + Deno2.ToString();
                                 }
                             }
                         }
