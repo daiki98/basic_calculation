@@ -16,7 +16,7 @@
 
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -59,7 +59,6 @@
                     BackgroundColor="#02FFFA" 
                     TextColor="Black"
                     Clicked="OnSelectSD"
-                    VerticalOptions="FillAndExpand"
                     HorizontalOptions="End"
                     BorderRadius="20"/>
 
@@ -78,14 +77,14 @@
                HorizontalTextAlignment="End" 
                VerticalTextAlignment="Center"
                LineBreakMode="NoWrap" 
-               Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Padding="20,0"/>
+               Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Padding="20,0"/>
 
         <Label Text="Ans"
                BackgroundColor="White"
                FontSize="Large"
                TextColor="Black"
                VerticalTextAlignment="Center"
-               Grid.Row="1" Grid.Column="1" Padding="20,0"/>
+               Grid.Row="1" Grid.Column="0" Padding="20,0"/>
 
 
         <!--<Button Text="D" Grid.Row="1" Grid.Column="0"

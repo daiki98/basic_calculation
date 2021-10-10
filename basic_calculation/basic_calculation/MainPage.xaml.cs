@@ -105,29 +105,24 @@ namespace basic_calculation
                         resultText.Text = "Wrong";  //＝の後になんもないやつ
                     }
                     else
-<<<<<<< HEAD
+
                     {
-                        /*
-                         * ここにFFnum変数ジャッジ
-                         * 
-                         */
-                      
-                        FFnum = 0;
-=======
-                    {    //分数関数,高次方程式か判断(多分全然足りてない）//またあとで考えるし，とりあえずこれで
-                        if (str.Contains("/□") || str.Contains("/2□") || str.Contains("/3□") || str.Contains("/4□") || str.Contains("/5□") || str.Contains("/6□")
-                            || str.Contains("/7□") || str.Contains("/8□") || str.Contains("/9□") || str.Contains("÷□") || str.Contains("÷2□") || str.Contains("÷3□")
-                            || str.Contains("÷4□") || str.Contains("÷5□") || str.Contains("÷6□") || str.Contains("÷7□") || str.Contains("÷8□") || str.Contains("÷9□")
-                            || str.Contains("×□") || str.Contains("×2□") || str.Contains("×3□") || str.Contains("×4□") || str.Contains("×5□") || str.Contains("×6□")
-                            || str.Contains("×7□") || str.Contains("×8□") || str.Contains("×9□") || str.Contains("□×") || str.Contains("/(□") || str.Contains("/(2□")
-                            || str.Contains("/(3□") || str.Contains("/(4□") || str.Contains("/(5□") || str.Contains("/(6□") || str.Contains("/(7□") || str.Contains("/(8□")
-                            || str.Contains("/(9□") || str.Contains("÷(□") || str.Contains("÷(2□") || str.Contains("÷(3□") || str.Contains("÷(4□") || str.Contains("÷(5□")
-                            || str.Contains("÷(6□") || str.Contains("÷(7□") || str.Contains("÷(8□") || str.Contains("÷(9□"))
+                        bool FFjudL = judment.FF(Left);
+                        bool FFjudR = judment.FF(Right);
+
+                        if (FFjudL == true || FFjudR == true)
                         {
                             FFnum = 1;
                         }
+                        else
+                        {
+                            FFnum = 0;
+                        }
+                        
 
->>>>>>> 94503ef866ce03264a666f867757ce2a1153c801
+                        
+
+
                         //式 F(x)=Right(右辺)-Left(左辺)
                         string f1 = Right + "-(" + Left + ")";
                         string f2 = f1.Replace("×", "*");

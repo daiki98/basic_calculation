@@ -1,71 +1,124 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace basic_calculation
 {
+ 
    public static class judment
     {
+        //個数判定
+        public static int CountChar(string s, char c)
+        {
+            return s.Length - s.Replace(c.ToString(), "").Length;
+        }
 
-        public static bool FF(string left ,string right)
-        { 
+        public static bool FF(string input)
+        {
+            int S_index_num = input.IndexOf('/');
+            int D_index_num = input.IndexOf('÷');
+            int S_num = CountChar(input, '/');
+            int D_num = CountChar(input, '÷');
 
-             
-           // ① 5 / (□+3）+3
-            
-            //式①に”/”が入っている時
-            if ()  
+            int end_index;
+
+            if (S_num == 0 && D_num == 0)
             {
-                /* 
-                 * 式①の以前の文字削除　　①　5/(□+3）+3 →　②　(□+3）+3 
-                 */ 
+                return false; //非分数関数
 
-                //式②に()が入っている
-                if ()
+            }
+            else if (S_num == 1 && D_num == 0)
+            {
+                string next_char = input.Substring(S_index_num + 1, 1);
+
+                if (next_char == "□")
                 {
-                    /*
-                     * 式②の( ) と）以降を削除   　②　(□+3）+3　→　③　□+3
-                     */
+                    return true; //分数関数
 
-                    //式③に□が入っている
-                    if ()
+                }
+                else if (next_char == "(")
+                {
+                    string reinput = input.Substring(S_index_num + 1); //　（以降を切り出し
+                    string re2input = reinput.Substring(0, reinput.IndexOf(')'));
+                    if (re2input.Contains("□"))
                     {
-                       //分数関数
-                        return true;
+                        return true; //分数関数
+                    }
+                    else
+                    {
+                        return false; //非分数関数
                     }
 
-                    //普通の分数
+                }
+                else
+                {
+                    string next2_char;
+                    int l_input = input.Length;
+
+                    for (int i = 2; i < l_input; i++)
+                    {
+                        next2_char = input.Substring(S_index_num + i, 1);
+                        if (next2_char != "□" || next2_char != "(")
+                        {
+                            return true;
+                        }
+                        else if (next2_char != "+" || next2_char != "-")
+                        {
+                            return false;
+                        }
+                    }
                     return false;
 
-                //  式①に□系が入っている　　　5/□ etc
-                }else if ()
-                {
-                    //分数関数
-                    return true;
                 }
-
-                //普通の分数
-                return false;
-
-                //高次方程式の時
-                //①　5+6□*2□　
-                // □を含んでいるか
-            }else if ()
+            }
+            else if (S_num == 0 && D_num == 1)
             {
-                /*□をいくつ含んでいるか取得
-                 * 
-                 * 2つ以上のとき
-                 * ①□の前後の文字をみる
-                 * ②演算子が来るまで読む
-                 * ③＋―の時は一次方程式
-                 * ④＊の時は，次の演算子が来るまで読む
-                 * ⑤その中で□がある場合は高次方程式
-                 */
+                string next_char = input.Substring(D_index_num + 1, 1);
 
+                if (next_char == "□")
+                {
+                    return true; //分数関数
+
+                }
+                else if (next_char == "(")
+                {
+                    string reinput = input.Substring(D_index_num + 1); //　（以降を切り出し
+                    string re2input = reinput.Substring(0, reinput.IndexOf(')'));
+                    if (re2input.Contains("□"))
+                    {
+                        return true; //分数関数
+                    }
+                    else
+                    {
+                        return false; //非分数関数
+                    }
+
+                }
+                else
+                {
+                    string next2_char;
+                    int l_input = input.Length;
+
+                    for (int i = 2; i < l_input; i++)
+                    {
+                        next2_char = input.Substring(D_index_num + i, 1);
+                        if (next2_char != "□" || next2_char != "(")
+                        {
+                            return true;
+                        }
+                        else if (next2_char != "+" || next2_char != "-")
+                        {
+                            return false;
+                        }
+                    }
+                    return false;
+                }
             }
 
             return false;
         }
+      
     }
-*/
+
 }
