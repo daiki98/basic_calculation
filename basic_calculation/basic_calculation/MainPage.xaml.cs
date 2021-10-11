@@ -103,6 +103,7 @@ namespace basic_calculation
                     else
 
                     {
+                      
                         bool FFjudL = judment.FF(Left);
                         bool FFjudR = judment.FF(Right);
 
@@ -114,7 +115,7 @@ namespace basic_calculation
                         {
                             FFnum = 0;
                         }
-                        
+                    
                         //式 F(x)=Right(右辺)-Left(左辺)
                         string f1 = Right + "-(" + Left + ")";
                         string f2 = f1.Replace("×", "*");

@@ -13,6 +13,8 @@ namespace basic_calculation
             return s.Length - s.Replace(c.ToString(), "").Length;
         }
 
+        
+
         public static bool FF(string input)//式を入れる
         {
             int S_index_num = input.IndexOf('/');//inputの/の番数
@@ -112,8 +114,67 @@ namespace basic_calculation
                     return false;
                 }
             }
+            else
+            {
+                int[] nums = new int[S_num];
+                string input2 = input;
+                for(int i = 0; i < S_num-1; i++)
+                {
+                    nums[i] = input2.IndexOf('/');
+                    input2 = input2.Substring(nums[i]+1);
+                }
+
+                for (int i = 0; i < S_num-1; i++)
+                {
+                    string next_char = input.Substring(nums[i] + 1, 1);//"/"の後の1文字を切り出し
+                    if (next_char == "□")
+                    {
+                        return true; //分数関数
+                        
+                    }
+                    else if (next_char == "(")
+                    {
+                        string reinput = input.Substring(nums[i] + 1); //（以降を切り出し
+                        string re2input = reinput.Substring(0, reinput.IndexOf(')'));//)の前まで切り出し
+                        if (re2input.Contains("□"))
+                        {
+                            return true; //分数関数
+                        }
+                        else
+                        {
+                            return false; //非分数関数
+                        }
+
+                    }
+                    else
+                    {
+                        string next2_char;
+                        int l_input = input.Length;//式の長さ
+
+                        for (int j = 1; j < l_input; j++)
+                        {
+                            next2_char = input.Substring(nums[i] + j, 1);
+                            if (next2_char != "□" || next2_char != "(")
+                            {
+                                return true;
+                            }
+                            else if (next2_char != "+" || next2_char != "-")
+                            {
+                                return false;
+                            }
+                        }
+                        
+                    }
+
+                }
+
+
+
+            }
 
             return false;
+
+            
         }
       
     }
