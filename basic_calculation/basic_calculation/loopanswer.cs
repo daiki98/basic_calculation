@@ -11,8 +11,8 @@ namespace basic_calculation
             string res = null;
 
             string junkan = input.ToString();
-            int l = junkan.Length;
             string kan = junkan.Substring(junkan.IndexOf(".") + 1);//"."の後を切り出し
+            int l = kan.Length;
             for (int i = 0; i < l; i++)
             {
                 string k = kan.Substring(i, 3);//i番目から3文字を切り出し
@@ -23,7 +23,7 @@ namespace basic_calculation
                     {
                         double y = Math.Pow(10, an);//10の(an)乗
                         double x = input * y;
-                        double X = Calculate.ToRoundDown(x, an) - Calculate.ToRoundDown(input, an);//分子
+                        double X = Math.Truncate(x) - Math.Truncate(input);//分子
                         double Y = y - 1;//分母
 
 

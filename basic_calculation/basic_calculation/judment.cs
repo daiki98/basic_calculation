@@ -53,7 +53,7 @@ namespace basic_calculation
                     string next2_char;
                     int l_input = input.Length;//式の長さ
 
-                    for (int i = 2; i < l_input; i++)
+                    for (int i = 1; i < l_input; i++)
                     {
                         next2_char = input.Substring(S_index_num + i, 1);
                         if (next2_char != "□" || next2_char != "(")
@@ -97,7 +97,7 @@ namespace basic_calculation
                     string next2_char;
                     int l_input = input.Length;
 
-                    for (int i = 2; i < l_input; i++)
+                    for (int i = 1; i < l_input; i++)
                     {
                         next2_char = input.Substring(D_index_num + i, 1);
                         if (next2_char != "□" || next2_char != "(")
