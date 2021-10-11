@@ -154,24 +154,41 @@ namespace basic_calculation
                                     }
                                     else
                                     {
-                                        resultText.Text = Calres3;
+                                        resultText.Text = result_cal.ToString();
                                     }
                                 }
                                 else if (SDnumber == 1)//分数表示
                                 {
-                                    string Calres2 = result_cal.ToString("F5");
-                                    string Calres3 = Calres2.TrimEnd('0');
-                                    string s = Calres3.Substring(Calres3.IndexOf(".") + 1);//コンマの後の数値をs(=12)
-                                    double sL = s.Length;//sL：sの桁数(2)
-                                    double Deno = Math.Pow(10, sL);//分母：10のsL乗(=10^2=100)
-                                    double Nume = double.Parse(Calres3) * Deno;//分子：小数値×10のsL乗(=0.12*100=12)
+                                    string num = result_cal.ToString();
+                                    string num2 = num.Substring(num.IndexOf(".") + 1).TrimEnd('0');
+                                    if (num2.Length > 11)
+                                    {
+                                        if (loopanswer.Loop(result_cal) == "out")
+                                        {
+                                            resultText.Text = "out";
+                                        }
+                                        else
+                                        {
+                                            resultText.Text = loopanswer.Loop(result_cal);
+                                        }
+                                    }
 
-                                    //約分
-                                    double G = Euclid.Gcd(Nume, Deno);//最大公約数G
-                                    double Deno2 = Deno / G;
-                                    double Nume2 = Nume / G;
+                                    else
+                                    {
+                                        string Calres2 = result_cal.ToString("F5");
+                                        string Calres3 = Calres2.TrimEnd('0');
+                                        string s = Calres3.Substring(Calres3.IndexOf(".") + 1);//コンマの後の数値をs(=12)
+                                        double sL = s.Length;//sL：sの桁数(2)
+                                        double Deno = Math.Pow(10, sL);//分母：10のsL乗(=10^2=100)
+                                        double Nume = double.Parse(Calres3) * Deno;//分子：小数値×10のsL乗(=0.12*100=12)
 
-                                    resultText.Text = Nume2.ToString() + "/" + Deno2.ToString();
+                                        //約分
+                                        double G = Euclid.Gcd(Nume, Deno);//最大公約数G
+                                        double Deno2 = Deno / G;
+                                        double Nume2 = Nume / G;
+
+                                        resultText.Text = Nume2.ToString() + "/" + Deno2.ToString();
+                                    }
                                 }
                             }
                         }

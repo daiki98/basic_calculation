@@ -52,7 +52,7 @@ namespace basic_calculation
                         //解が見つかった場合
                         if (Rejub < 0)
                         {
-                            while (Math.Abs(initial_val1 - initial_val2) > 0.00001)          //ここで精度決める
+                            while (Math.Abs(initial_val1 - initial_val2) > 0.000000000000001)          //ここで精度決める
                             {
 
                                 mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
@@ -72,7 +72,7 @@ namespace basic_calculation
 
                             }
                             ffnum = 0;
-                            return ToRoundDown(mid_val, 10);
+                            return ToRoundDown(mid_val, 14);
                         }
                     }
 
@@ -92,7 +92,7 @@ namespace basic_calculation
                         //解が見つかった時
                         if (Rejub < 0)
                         {
-                            while (Math.Abs(initial_val1 - initial_val2) > 0.00001)          //ここで精度決める
+                            while (Math.Abs(initial_val1 - initial_val2) > 0.000000000000001)          //ここで精度決める
                             {
 
                                 mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
@@ -112,7 +112,7 @@ namespace basic_calculation
 
                             }
 
-                            return ToRoundDown(mid_val, 10);
+                            return ToRoundDown(mid_val, 14);
                         }
                     }
 
@@ -133,7 +133,7 @@ namespace basic_calculation
                     double REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
                     double Rejub = REres_initial1 * REres_initial2;
 
-                    while (Math.Abs(initial_val1 - initial_val2) > 0.00001)          //ここで精度決める
+                    while (Math.Abs(initial_val1 - initial_val2) > 0.000000000000001)          //ここで精度決める
                     {
 
                         mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
@@ -153,7 +153,7 @@ namespace basic_calculation
                     }
                 }
                 ffnum = 0;
-                return ToRoundDown(mid_val, 10);
+                return ToRoundDown(mid_val, 14);
 
             }
 
@@ -181,7 +181,7 @@ namespace basic_calculation
                         Rejub = REres_initial1 * REres_initial2;
                     }
 
-                    while (Math.Abs(initial_val1 - initial_val2) > 0.00001)          //ここで精度決める
+                    while (Math.Abs(initial_val1 - initial_val2) > 0.000000000000001)          //ここで精度決める
                     {
 
                         mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
@@ -204,7 +204,7 @@ namespace basic_calculation
                 }
                 else if (jub < 0)
                 {
-                    while (Math.Abs(initial_val1 - initial_val2) > 0.00001)          //ここで精度決める
+                    while (Math.Abs(initial_val1 - initial_val2) > 0.000000000000001)          //ここで精度決める
                     {
 
                         mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
@@ -227,7 +227,7 @@ namespace basic_calculation
                 }
 
             }
-            return ToRoundDown(mid_val, 10);
+            return ToRoundDown(mid_val, 14);
 
 
         }
