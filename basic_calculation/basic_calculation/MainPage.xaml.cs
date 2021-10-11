@@ -154,14 +154,14 @@ namespace basic_calculation
                                     }
                                     else
                                     {
-                                        resultText.Text = result_cal.ToString();
+                                        resultText.Text = result_cal.ToString("F5").TrimEnd('0');
                                     }
                                 }
                                 else if (SDnumber == 1)//分数表示
                                 {
-                                    string num = result_cal.ToString();
+                                    string num = result_cal.ToString("F9");
                                     string num2 = num.Substring(num.IndexOf(".") + 1).TrimEnd('0');
-                                    if (num2.Length > 11)
+                                    if (num2.Length > 8)
                                     {
                                         if (loopanswer.Loop(result_cal) == "out")
                                         {
