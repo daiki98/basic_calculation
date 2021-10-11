@@ -46,13 +46,7 @@
                     Text="0"
                     VerticalOptions="FillAndExpand" 
                     HorizontalOptions="FillAndExpand" IsReadOnly="True" Keyboard="Numeric"/>
-
-            <!--<Label  x:Name="SD"
-                    Text="分数" 
-                    TextColor="Black"
-                    HorizontalOptions="End"
-                    />-->
-
+            
             <Button x:Name="SD" 
                     Text="分数" 
                     FontSize="Small"
@@ -81,11 +75,6 @@
                TextColor="Black"
                VerticalTextAlignment="Center"
                Grid.Row="1" Grid.Column="0" Padding="20,0"/>
-
-
-        <!--<Button Text="D" Grid.Row="1" Grid.Column="0"
-                BackgroundColor="#02FFFA" TextColor="Black"
-                FontSize="30" BorderRadius="20" Clicked="OnSelectSD"/>-->
 
         <Button Text="7" Grid.Row="2" Grid.Column="0"
                 BackgroundColor="#B1B1B1" TextColor="White"
