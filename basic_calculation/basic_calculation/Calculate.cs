@@ -41,10 +41,10 @@ namespace basic_calculation
                     double Rejub = REres_initial1 * REres_initial2;
 
                     //プラス側に範囲をずらす
-                    for (int i = 0; i < 50000; i++)
+                    for (int i = 0; i < 80000; i++)
                     {
-                        initial_val1 += 1d;
-                        initial_val2 += 1d;
+                        initial_val1 += 0.7d;
+                        initial_val2 += 0.7d;
                         REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
                         REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
                         Rejub = REres_initial1 * REres_initial2;
@@ -80,11 +80,11 @@ namespace basic_calculation
                     initial_val2 = -10000d;
 
                     //プラス側に無く，マイナス側に範囲ずらす
-                    for (int i = 0; i < 50000; i++)
+                    for (int i = 0; i < 80000; i++)
                     {
 
-                        initial_val1 -= 1d;
-                        initial_val2 -= 1d;
+                        initial_val1 -= 0.7d;
+                        initial_val2 -= 0.7d;
                         REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
                         REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
                         Rejub = REres_initial1 * REres_initial2;
@@ -280,9 +280,13 @@ namespace basic_calculation
                         break;
 
                     case "/":
+                        
                         double A3 = calcResult.Pop();
                         double B3 = calcResult.Pop();
-
+                        if (A3 == 0)
+                        {
+                            break;
+                        }
                         double ans = B3 / A3;
                         string ans2 = ans.ToString("F12");
                         calcResult.Push(double.Parse(ans2));
