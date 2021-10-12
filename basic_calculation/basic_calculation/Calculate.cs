@@ -280,19 +280,29 @@ namespace basic_calculation
                         break;
 
                     case "/":
+                        
                         double A3 = calcResult.Pop();
                         double B3 = calcResult.Pop();
+<<<<<<< HEAD
 
+=======
+>>>>>>> abaae069d80edd75d6bf3cb924c54c7ba8c0eabe
                         if (A3 == 0)
                         {
                             break;
                         }
+<<<<<<< HEAD
                         else
                         {
                             double ans = B3 / A3;
                             string ans2 = ans.ToString("F12");
                             calcResult.Push(double.Parse(ans2));
                         }
+=======
+                        double ans = B3 / A3;
+                        string ans2 = ans.ToString("F12");
+                        calcResult.Push(double.Parse(ans2));
+>>>>>>> abaae069d80edd75d6bf3cb924c54c7ba8c0eabe
                         break;
 
                     case "%":
