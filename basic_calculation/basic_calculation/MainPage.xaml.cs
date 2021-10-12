@@ -155,7 +155,7 @@ namespace basic_calculation
                                     }
                                     else
                                     {
-                                        resultText.Text = result_cal.ToString("F5").TrimEnd('0');
+                                        resultText.Text = result_cal.ToString().TrimEnd('0');
                                     }
                                 }
                                 else if (SDnumber == 1)//分数表示

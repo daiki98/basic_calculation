@@ -13,8 +13,7 @@ namespace basic_calculation
             return s.Length - s.Replace(c.ToString(), "").Length;
         }
 
-        
-
+    
         public static bool FF(string input)//式を入れる
         {
             int S_index_num = input.IndexOf('/');//inputの/の番数

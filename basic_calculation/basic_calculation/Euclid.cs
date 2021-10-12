@@ -14,7 +14,7 @@ namespace basic_calculation
                 return Gcd(b, a);
             }
 
-            while (b != 0)
+            while (b != 0d)
             {
                 double remainder = a % b;
                 a = b;
