@@ -9,7 +9,7 @@ namespace basic_calculation
     {
 
         int SDnumber = 1; //0-S,1-D
-        int FFnum = 0; //1-分数関数 0-一次関数　2-高次関数
+        int FFnum = -1; //1-分数関数 0-一次関数　2-高次関数
 
         public MainPage()
         {
@@ -109,15 +109,17 @@ namespace basic_calculation
                         bool HOEjudL = judment.HOE(Left);
                         bool HOEjudR = judment.HOE(Right);
 
-                        if (FFjudL == true || FFjudR == true)
-                        {
-                            FFnum = 1;
-                        }
-                        else if(HOEjudL==true||HOEjudR==true)
+                       if(HOEjudL==true||HOEjudR==true)
                         {
                             FFnum = 2;
                         }
-                        else
+                       
+                        if(FFjudL == true || FFjudR == true)
+                        {
+                            FFnum = 1;
+                        }
+                        
+                        if(HOEjudL == false && HOEjudR == false&& FFjudL == false && FFjudR == false)
                         {
                             FFnum = 0;
                         }
@@ -129,8 +131,8 @@ namespace basic_calculation
 
                         string RPNres = Calculate.ReversePolishNotation(F);//  中置記法 →　後置記法(非分数）
                         string RPNres2 = RPNres.Replace("÷", "/");
-
-                        //resultText.Text = RPNres;
+                        
+                        //resultText.Text = FFnum.ToString();
 
                         double result_cal = Calculate.BisectionCal(RPNres2, FFnum);  //二分法答え(double)
                         //FFnum = 1;
@@ -159,6 +161,7 @@ namespace basic_calculation
                                     {
                                         string Calres4 = Calres3.Replace(".", "");
                                         resultText.Text = Calres4;
+
                                     }
                                     else
                                     {

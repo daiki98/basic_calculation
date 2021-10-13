@@ -34,23 +34,17 @@ namespace basic_calculation
             {
                 if (jub >= 0)//初期値で答えが無い場合
                 { 
-                    
+                    initial_val1 = 10000d;       //正の初期値
+                     initial_val2 = 0.0001d;      //負の初期値
                     double REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));        //再計算
                     double REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
                     double Rejub = REres_initial1 * REres_initial2;
 
-                     initial_val1 = 10000d;       //正の初期値
-                     initial_val2 = 0.0001d;      //負の初期値
+                     
 
                     //プラス側に範囲をずらす
                     for (int i = 0; i < 100000; i++)
-                    {
-                        initial_val1 += 0.01d;
-                        initial_val2 += 0.01d;
-                        REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
-                        REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
-                        Rejub = REres_initial1 * REres_initial2;
-
+                    {   
                         //解が見つかった場合
                         if (Rejub < 0)
                         {
@@ -76,20 +70,26 @@ namespace basic_calculation
                             ffnum = 0;
                             return ToRoundDown(mid_val, 9);
                         }
+                        else
+                        {
+                            initial_val1 += 0.01d;
+                            initial_val2 += 0.01d;
+                            REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
+                            REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
+
+                            Rejub = REres_initial1 * REres_initial2;
+                        }
                     }
 
                     initial_val1 = 0.0001d;       //初期値をリセット
                     initial_val2 = -10000d;
+                    REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
+                    REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
+                    Rejub = REres_initial1 * REres_initial2;
 
                     //プラス側に無く，マイナス側に範囲ずらす
-                    for (int i = 0; i < 10000; i++)
+                    for (int i = 0; i < 100000; i++)
                     {
-
-                        initial_val1 -= 0.01d;
-                        initial_val2 -= 0.01d;
-                        REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
-                        REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
-                        Rejub = REres_initial1 * REres_initial2;
 
                         //解が見つかった時
                         if (Rejub < 0)
@@ -115,6 +115,16 @@ namespace basic_calculation
                             }
 
                             return ToRoundDown(mid_val, 9);
+                        }
+                        else
+                        {   
+                            initial_val1 -= 0.01d;
+                            initial_val2 -= 0.01d;
+
+                            REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
+                            REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
+                            
+                            Rejub = REres_initial1 * REres_initial2;
                         }
                     }
 
@@ -233,9 +243,17 @@ namespace basic_calculation
             else if (ffnum == 1)
             {
                 //分数関数の時　総当たり
-                 string ans=Calculation(input);
-                double ansd = double.Parse(ans);
-                return ToRoundDown(ansd, 9);
+                 //エラーの時の処理必要
+                 if(Calculation(input)!= "Out of Range")
+                {
+                    double ansd = double.Parse(Calculation(input));
+                    return ToRoundDown(ansd, 9);
+                }else
+                {
+                    return 595959595d;
+                }
+                
+                
 
             }
             return 595959595d;
