@@ -9,7 +9,7 @@ namespace basic_calculation
     {
 
         int SDnumber = 1; //0-S,1-D
-        int FFnum = 0; //1-分数関数
+        int FFnum = 0; //1-分数関数 0-一次関数　2-高次関数
 
         public MainPage()
         {
@@ -106,10 +106,16 @@ namespace basic_calculation
                       
                         bool FFjudL = judment.FF(Left);
                         bool FFjudR = judment.FF(Right);
+                        bool HOEjudL = judment.HOE(Left);
+                        bool HOEjudR = judment.HOE(Right);
 
                         if (FFjudL == true || FFjudR == true)
                         {
                             FFnum = 1;
+                        }
+                        else if(HOEjudL==true||HOEjudR==true)
+                        {
+                            FFnum = 2;
                         }
                         else
                         {
