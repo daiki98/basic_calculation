@@ -52,7 +52,7 @@ namespace basic_calculation
                         //解が見つかった場合
                         if (Rejub < 0)
                         {
-                            while (Math.Abs(initial_val1 - initial_val2) > 0.00000000000001)          //ここで精度決める
+                            while (Math.Abs(initial_val1 - initial_val2) > 0.0000000001)          //ここで精度決める
                             {
 
                                 mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
@@ -72,7 +72,7 @@ namespace basic_calculation
 
                             }
                             ffnum = 0;
-                            return ToRoundDown(mid_val, 12);
+                            return ToRoundDown(mid_val, 9);
                         }
                     }
 
@@ -92,7 +92,7 @@ namespace basic_calculation
                         //解が見つかった時
                         if (Rejub < 0)
                         {
-                            while (Math.Abs(initial_val1 - initial_val2) > 0.00000000000001)          //ここで精度決める
+                            while (Math.Abs(initial_val1 - initial_val2) > 0.0000000001)          //ここで精度決める
                             {
 
                                 mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
@@ -112,7 +112,7 @@ namespace basic_calculation
 
                             }
 
-                            return ToRoundDown(mid_val, 12);
+                            return ToRoundDown(mid_val, 9);
                         }
                     }
 
@@ -133,7 +133,7 @@ namespace basic_calculation
                     double REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
                     double Rejub = REres_initial1 * REres_initial2;
 
-                    while (Math.Abs(initial_val1 - initial_val2) > 0.00000000000001)          //ここで精度決める
+                    while (Math.Abs(initial_val1 - initial_val2) > 0.0000000001)          //ここで精度決める
                     {
 
                         mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
@@ -153,7 +153,7 @@ namespace basic_calculation
                     }
                 }
                 ffnum = 0;
-                return ToRoundDown(mid_val, 12);
+                return ToRoundDown(mid_val, 9);
 
             }
 
@@ -181,7 +181,7 @@ namespace basic_calculation
                         Rejub = REres_initial1 * REres_initial2;
                     }
 
-                    while (Math.Abs(initial_val1 - initial_val2) > 0.00000000000001)          //ここで精度決める
+                    while (Math.Abs(initial_val1 - initial_val2) > 0.0000000001)          //ここで精度決める
                     {
 
                         mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
@@ -204,7 +204,7 @@ namespace basic_calculation
                 }
                 else if (jub < 0)
                 {
-                    while (Math.Abs(initial_val1 - initial_val2) > 0.00000000000001)          //ここで精度決める
+                    while (Math.Abs(initial_val1 - initial_val2) > 0.0000000001)          //ここで精度決める
                     {
 
                         mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
@@ -227,7 +227,7 @@ namespace basic_calculation
                 }
 
             }
-            return ToRoundDown(mid_val, 12);
+            return ToRoundDown(mid_val, 9);
 
 
         }
@@ -283,26 +283,16 @@ namespace basic_calculation
                         
                         double A3 = calcResult.Pop();
                         double B3 = calcResult.Pop();
-<<<<<<< HEAD
-
-=======
->>>>>>> abaae069d80edd75d6bf3cb924c54c7ba8c0eabe
                         if (A3 == 0)
                         {
                             break;
                         }
-<<<<<<< HEAD
                         else
                         {
                             double ans = B3 / A3;
                             string ans2 = ans.ToString("F12");
                             calcResult.Push(double.Parse(ans2));
                         }
-=======
-                        double ans = B3 / A3;
-                        string ans2 = ans.ToString("F12");
-                        calcResult.Push(double.Parse(ans2));
->>>>>>> abaae069d80edd75d6bf3cb924c54c7ba8c0eabe
                         break;
 
                     case "%":
@@ -363,8 +353,22 @@ namespace basic_calculation
                     case '(':
                         if (buffer.Count > 0 && currentState == 0)
                         {
-                            st.Push('*');
-                            currentState += 1;
+                            if (buffer.Pop() == '-')
+                            {
+                                if (buffer.Pop() == ' ')
+                                {
+                                    if (buffer.Peek() == '-')
+                                    {
+                                        st.Push('-');
+                                        currentState += 1;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                st.Push('*');
+                                currentState += 1;
+                            }
                         }
                         st.Push(token);
                         break;
@@ -381,7 +385,6 @@ namespace basic_calculation
                             {
                                 buffer.Push(Space);
                                 buffer.Push(t);
-                                currentState += 1;
                             }
                         }
                         break;
@@ -393,6 +396,7 @@ namespace basic_calculation
                             {
                                 buffer.Push(Space);
                                 buffer.Push(st.Pop());
+                                st.Push(token);
                             }
                             else if (st.Peek() == '÷')
                             {
@@ -406,13 +410,14 @@ namespace basic_calculation
                             {
                                 buffer.Push(Space);
                                 buffer.Push(st.Pop());
+                                st.Push(token);
                             }
                             else
                             {
+                                st.Push(token);
                                 break;
                             }
                         }
-                        st.Push(token);
                         currentState += 1;
                         break;
 
@@ -435,6 +440,22 @@ namespace basic_calculation
                         break;
 
                     case '+':
+                        while (st.Count > 0)
+                        {
+                            if (st.Peek() == '/' || st.Peek() == '*' || st.Peek() == '÷' || st.Peek() == '+' || st.Peek() == '-')
+                            {
+                                buffer.Push(Space);
+                                buffer.Push(st.Pop());
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        st.Push(token);
+                        currentState += 1;
+                        break;
+
                     case '-':
                         if (buffer.Count > 0 && currentState == 0)
                         {

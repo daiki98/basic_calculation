@@ -124,7 +124,8 @@ namespace basic_calculation
                         string RPNres = Calculate.ReversePolishNotation(F);//  中置記法 →　後置記法(非分数）
                         string RPNres2 = RPNres.Replace("÷", "/");
 
-                        //resultText.Text = RPNres2;
+                        //resultText.Text = RPNres;
+
                         double result_cal = Calculate.BisectionCal(RPNres2, FFnum);  //二分法答え(double)
                         //FFnum = 1;
 
