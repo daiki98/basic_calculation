@@ -16,9 +16,7 @@ namespace basic_calculation
          *    Calculation()  //後置記法　→　計算(非分数）
          *    ReversePolishNotation_Fraction() 中置記法　→　後置記法(分数）
          *    Calculation_Fraction()  後置記法　→　計算(分数）
-         *    
-         *    追加
-         *     IntMinJub()（整数，少数判定） 
+         *    IntMinJub()（整数，少数判定） 
          *    
          */
         public static double BisectionCal(string input, int ffnum)
@@ -35,16 +33,19 @@ namespace basic_calculation
             if (ffnum == 1)//分数関数，高次方程式
             {
                 if (jub >= 0)//初期値で答えが無い場合
-                {
+                { 
+                    
                     double REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));        //再計算
                     double REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
                     double Rejub = REres_initial1 * REres_initial2;
 
+                    
+
                     //プラス側に範囲をずらす
-                    for (int i = 0; i < 80000; i++)
+                    for (int i = 0; i < 8000; i++)
                     {
-                        initial_val1 += 0.7d;
-                        initial_val2 += 0.7d;
+                        initial_val1 += 1.17d;
+                        initial_val2 += 1.17d;
                         REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
                         REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
                         Rejub = REres_initial1 * REres_initial2;
@@ -80,11 +81,11 @@ namespace basic_calculation
                     initial_val2 = -10000d;
 
                     //プラス側に無く，マイナス側に範囲ずらす
-                    for (int i = 0; i < 80000; i++)
+                    for (int i = 0; i < 8000; i++)
                     {
 
-                        initial_val1 -= 0.7d;
-                        initial_val2 -= 0.7d;
+                        initial_val1 -= 1.17d;
+                        initial_val2 -= 1.17d;
                         REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
                         REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
                         Rejub = REres_initial1 * REres_initial2;
@@ -181,7 +182,8 @@ namespace basic_calculation
                         Rejub = REres_initial1 * REres_initial2;
                     }
 
-                    while (Math.Abs(initial_val1 - initial_val2) > 0.0000000001)          //ここで精度決める
+                    while (Math.Abs(initial_val1 - initial_val2) > 0.000000001)          //ここで精度決める
+
                     {
 
                         mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
@@ -227,6 +229,7 @@ namespace basic_calculation
                 }
 
             }
+
             return ToRoundDown(mid_val, 9);
 
 
@@ -315,7 +318,7 @@ namespace basic_calculation
 
         public static bool IntMinJub(double input)
         {
-            string reviseVal = input.ToString("F5");  //ここのF5は二分法の精度に合わせる
+            string reviseVal = input.ToString("F9");  //ここのF5は二分法の精度に合わせる
             double newinput = double.Parse(reviseVal);
 
             if ((int)newinput == newinput)
