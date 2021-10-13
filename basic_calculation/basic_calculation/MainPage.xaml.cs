@@ -106,8 +106,10 @@ namespace basic_calculation
                       
                         bool FFjudL = judment.FF(Left);
                         bool FFjudR = judment.FF(Right);
+                        bool HOEjudL = judment.HOE(Left);
+                        bool HOEjudR = judment.HOE(Right);
 
-                        if (FFjudL == true || FFjudR == true)
+                        if (FFjudL == true || FFjudR == true||HOEjudL==true||HOEjudR==true)
                         {
                             FFnum = 1;
                         }

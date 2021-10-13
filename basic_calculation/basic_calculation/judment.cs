@@ -159,6 +159,51 @@ namespace basic_calculation
         }
 
 
+        public static bool HOE(string input)
+        {
+            int X_num = CountChar(input, '□');
+            int M_num = CountChar(input, '×');
+
+            if (X_num >= 2)
+            {
+                int[] nums = new int[X_num];  //□の位置
+                string input2 = input;
+                int l_input = input.Length;
+
+                for(int i = 0; i < X_num - 1; i++)
+                {
+                    nums[i] = input2.IndexOf('□');
+                    input2 = input2.Substring(nums[i] + 1);
+                }
+
+                for(int i = 0; i < X_num - 1; i++)
+                {
+                    string pre_char = "";
+                    string next_char = "";
+
+                    if (nums[i] - 1 > 0)
+                    {
+                        pre_char = input.Substring(nums[i] - 1, 1);
+                    }
+
+                    if (nums[i] + 1 < l_input)
+                    {
+                        next_char = input.Substring(nums[i] + 1, 1);
+                    }
+                    
+                    if (pre_char == "×" || next_char == "×")
+                    {
+                        return true; //高次方程式
+                    }
+
+                }
+                return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 
 
