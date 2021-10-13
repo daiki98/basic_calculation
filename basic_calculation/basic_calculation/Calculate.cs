@@ -30,7 +30,7 @@ namespace basic_calculation
 
             double jub = res_initial1 * res_initial2;       //範囲の中に解があるか判断するやつ　正ー無し，負ーあり
 
-            if (ffnum == 1)//分数関数，高次方程式
+            if (ffnum == 2)//高次方程式
             {
                 if (jub >= 0)//初期値で答えが無い場合
                 { 
@@ -39,13 +39,14 @@ namespace basic_calculation
                     double REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
                     double Rejub = REres_initial1 * REres_initial2;
 
-                    
+                     initial_val1 = 10000d;       //正の初期値
+                     initial_val2 = 0.0001d;      //負の初期値
 
                     //プラス側に範囲をずらす
                     for (int i = 0; i < 10000; i++)
                     {
-                        initial_val1 += 0.51d;
-                        initial_val2 += 0.51d;
+                        initial_val1 += 1d;
+                        initial_val2 += 1d;
                         REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
                         REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
                         Rejub = REres_initial1 * REres_initial2;
@@ -77,15 +78,15 @@ namespace basic_calculation
                         }
                     }
 
-                    initial_val1 = 10000d;       //初期値をリセット
+                    initial_val1 = 0.0001d;       //初期値をリセット
                     initial_val2 = -10000d;
 
                     //プラス側に無く，マイナス側に範囲ずらす
                     for (int i = 0; i < 10000; i++)
                     {
 
-                        initial_val1 -= 0.51d;
-                        initial_val2 -= 0.51d;
+                        initial_val1 -= 1d;
+                        initial_val2 -= 1d;
                         REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
                         REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
                         Rejub = REres_initial1 * REres_initial2;
@@ -127,7 +128,7 @@ namespace basic_calculation
 
                     //初期値で答えがある場合（高次，分数関数）
                 }
-                else
+                else 
                 {
 
                     double REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
@@ -153,7 +154,7 @@ namespace basic_calculation
                         }
                     }
                 }
-                ffnum = 0;
+                
                 return ToRoundDown(mid_val, 9);
 
             }
@@ -224,12 +225,18 @@ namespace basic_calculation
                         }
 
                     }
-
+                     return ToRoundDown(mid_val,9);
                 }
 
+            }else if (ffnum == 1)
+            {
+                //分数関数の時　総当たり
+                /*
+                 * return 答え
+                 */
             }
-            return ToRoundDown(mid_val,9);
-
+            return 0; //テスト用　総当たり記述後削除
+            
 
         }
 
@@ -296,7 +303,6 @@ namespace basic_calculation
                             calcResult.Push(double.Parse(ans2));
                         }
 
-                        
 
                         break;
 
