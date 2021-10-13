@@ -67,7 +67,7 @@ namespace basic_calculation
                         }
                         else
                         {
-                            return false; //非分数関数
+                            
                         }
 
                     }
@@ -85,7 +85,7 @@ namespace basic_calculation
                             }
                             else if (next2_char != "+" || next2_char != "-")
                             {
-                                return false; //非分数関数
+                                
                             }
                         }
 
@@ -176,27 +176,15 @@ namespace basic_calculation
                     input2 = input2.Substring(nums[i] + 1);
                 }
 
-                for(int i = 0; i < X_num - 1; i++)
-                {
-                    string pre_char = "";
-                    string next_char = "";
+              /*
+               * 
+               * (2+□)*(3+□)などの時の判別追加
+               * 
+               * 
+               * 
+               */
 
-                    if (nums[i] - 1 > 0)
-                    {
-                        pre_char = input.Substring(nums[i] - 1, 1);
-                    }
 
-                    if (nums[i] + 1 < l_input)
-                    {
-                        next_char = input.Substring(nums[i] + 1, 1);
-                    }
-                    
-                    if (pre_char == "×" || next_char == "×")
-                    {
-                        return true; //高次方程式
-                    }
-
-                }
                 return false;
             }
             else
