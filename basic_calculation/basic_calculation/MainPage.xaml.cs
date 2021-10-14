@@ -109,12 +109,12 @@ namespace basic_calculation
                         bool HOEjudL = judment.HOE(Left);
                         bool HOEjudR = judment.HOE(Right);
 
-                       if(HOEjudL==true||HOEjudR==true)
+                       if (HOEjudL==true||HOEjudR==true)
                         {
                             FFnum = 2;
                         }
                        
-                        if(FFjudL == true || FFjudR == true)
+                        if (FFjudL == true || FFjudR == true)
                         {
                             FFnum = 1;
                         }
@@ -127,11 +127,23 @@ namespace basic_calculation
                         //式 F(x)=Right(右辺)-Left(左辺)
                         string f1 = Right + "-(" + Left + ")";
                         string f2 = f1.Replace("×", "*");
-                        char[] F = f2.ToCharArray();
+                        string f3 = f2.Replace("0(", "0*(");
+                        string f4 = f3.Replace("1(", "1*(");
+                        string f5 = f4.Replace("2(", "2*(");
+                        string f6 = f5.Replace("3(", "3*(");
+                        string f7 = f6.Replace("4(", "4*(");
+                        string f8 = f7.Replace("5(", "5*(");
+                        string f9 = f8.Replace("6(", "6*(");
+                        string f10 = f9.Replace("7(", "7*(");
+                        string f11 = f10.Replace("8(", "8*(");
+                        string f12 = f11.Replace("9(", "9*(");
+                        char[] F = f12.ToCharArray();
 
                         string RPNres = Calculate.ReversePolishNotation(F);//  中置記法 →　後置記法(非分数）
+                        //resultText.Text = RPNres;
+
                         string RPNres2 = RPNres.Replace("÷", "/");
-                        
+
                         //resultText.Text = FFnum.ToString();
 
                         double result_cal = Calculate.BisectionCal(RPNres2, FFnum);  //二分法答え(double)

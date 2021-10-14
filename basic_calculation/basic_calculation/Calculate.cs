@@ -378,25 +378,6 @@ namespace basic_calculation
                 switch (token)
                 {
                     case '(':
-                        if (buffer.Count > 0 && currentState == 0)
-                        {
-                            if (buffer.Pop() == '-')
-                            {
-                                if (buffer.Pop() == ' ')
-                                {
-                                    if (buffer.Peek() == '-')
-                                    {
-                                        st.Push('-');
-                                        currentState += 1;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                st.Push('*');
-                                currentState += 1;
-                            }
-                        }
                         st.Push(token);
                         break;
 
@@ -423,7 +404,6 @@ namespace basic_calculation
                             {
                                 buffer.Push(Space);
                                 buffer.Push(st.Pop());
-                                st.Push(token);
                             }
                             else if (st.Peek() == '÷')
                             {
@@ -437,13 +417,13 @@ namespace basic_calculation
                             {
                                 buffer.Push(Space);
                                 buffer.Push(st.Pop());
-                                st.Push(token);
                             }
-                            else
-                            {
-                                st.Push(token);
-                                break;
-                            }
+                        }
+                        while (st.Count == 0 || st.Peek() == '+'|| st.Peek() == '-'|| st.Peek() == '(')
+                        {
+                            st.Push(token);
+                            currentState += 1;
+                            break;
                         }
                         currentState += 1;
                         break;
@@ -603,188 +583,7 @@ namespace basic_calculation
             return res;
         }
 
-        //中置記法　→　後置記法(分数）
-        public static string ReversePolishNotation_Fraction(char[] input)
-        {
-            Stack<char> buffer = new Stack<char>();//バッファスタック
-            Stack<char> st = new Stack<char>();//作業用スタック
-
-            string space = " ";
-            char Space = space[0];
-            int currentState = 0;
-
-            foreach (char token in input)
-            {
-                switch (token)
-                {
-                    case '(':
-                        if (buffer.Count > 0 && currentState == 0)
-                        {
-                            st.Push('*');
-                            currentState += 1;
-                        }
-                        st.Push(token);
-                        break;
-
-                    case ')':
-                        while (st.Count > 0)
-                        {
-                            char t = st.Pop();
-                            if (t == '(')
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                buffer.Push(Space);
-                                buffer.Push(t);
-                            }
-                        }
-                        break;
-
-                    case '/':
-                        buffer.Push(token);
-                        currentState *= 0;
-                        break;
-
-                    case '*':
-                    case '÷':
-                        while (st.Count > 0)
-                        {
-                            if (st.Peek() == '*' || st.Peek() == '÷')
-                            {
-                                buffer.Push(Space);
-                                buffer.Push(st.Pop());
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                        st.Push(token);
-                        currentState += 1;
-                        break;
-
-                    case '+':
-                    case '-':
-                        if (buffer.Count > 0 && currentState == 0)
-                        {
-                            while (st.Count > 0)
-                            {
-                                if (st.Peek() == '*' || st.Peek() == '÷' || st.Peek() == '+' || st.Peek() == '-')
-                                {
-                                    buffer.Push(Space);
-                                    buffer.Push(st.Pop());
-                                }
-                                else
-                                {
-                                    break;
-                                }
-                            }
-                            st.Push(token);
-                            currentState += 1;
-                        }
-
-                        else if (buffer.Count == 0 && currentState == 0)
-                        {
-                            buffer.Push(token);
-                            currentState *= 0;
-                        }
-
-                        else if (currentState > 0)
-                        {
-                            buffer.Push(Space);
-                            buffer.Push(token);
-                            currentState *= 0;
-                        }
-                        break;
-
-                    case '□':
-                        if (buffer.Count > 0)
-                        {
-                            if (currentState > 0)
-                            {
-                                buffer.Push(Space);
-                                buffer.Push(token);
-                                currentState *= 0;
-                                break;
-                            }
-                            else if (currentState == 0 && buffer.Peek() != '/')
-                            {
-                                buffer.Push(Space);
-                                buffer.Push(token);
-                                buffer.Push(Space);
-                                buffer.Push('*');
-                                currentState *= 0;
-                                break;
-                            }
-                            else if (currentState == 0 && buffer.Peek() == '/')
-                            {
-                                buffer.Push(Space);
-                                buffer.Push(token);
-                                currentState *= 0;
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            buffer.Push(token);
-                            currentState *= 0;
-                            break;
-                        }
-                        break;
-
-                    case '%':
-                        buffer.Push(Space);
-                        buffer.Push(token);
-                        break;
-
-                    case '.':
-                        buffer.Push(token);
-                        break;
-
-
-                    //数字の場合
-                    default:
-                        if (st.Count > 0 && buffer.Count > 0)
-                        {
-                            if (currentState > 0)
-                            {
-                                buffer.Push(Space);
-                                buffer.Push(token);
-                                currentState *= 0;
-                                break;
-                            }
-                            else if (currentState == 0)
-                            {
-                                buffer.Push(token);
-                                currentState *= 0;
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            buffer.Push(token);
-                            currentState *= 0;
-                            break;
-                        }
-                        break;
-                }
-            }
-
-            //スタックが空になるまでpopしてバッファへ移動
-            while (st.Count > 0)
-            {
-                buffer.Push(Space);
-                buffer.Push(st.Pop());
-            }
-
-            //スタックの順番を逆順にして文字列に変換
-            string r = new string(buffer.Reverse().ToArray());
-            string res = r + "\r\n";
-
-            return res;
-        }
+        
 
         //後置記法　→　計算
         //解が分数の場合
