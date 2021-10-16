@@ -109,7 +109,7 @@ namespace basic_calculation
                         bool HOEjudL = judment.HOE(Left);
                         bool HOEjudR = judment.HOE(Right);
 
-                       if (HOEjudL==true||HOEjudR==true)
+                        if (HOEjudL == true || HOEjudR == true)
                         {
                             FFnum = 2;
                         }
@@ -119,7 +119,7 @@ namespace basic_calculation
                             FFnum = 1;
                         }
                         
-                        if(HOEjudL == false && HOEjudR == false&& FFjudL == false && FFjudR == false)
+                        if (HOEjudL == false && HOEjudR == false && FFjudL == false && FFjudR == false)
                         {
                             FFnum = 0;
                         }
@@ -137,10 +137,12 @@ namespace basic_calculation
                         string f10 = f9.Replace("7(", "7*(");
                         string f11 = f10.Replace("8(", "8*(");
                         string f12 = f11.Replace("9(", "9*(");
-                        char[] F = f12.ToCharArray();
+                        string f13 = f12.Replace("□(", "□*(");
+                        char[] F = f13.ToCharArray();
 
                         string RPNres = Calculate.ReversePolishNotation(F);//  中置記法 →　後置記法(非分数）
-                        //resultText.Text = RPNres;
+
+                        resultText.Text = RPNres;
 
                         string RPNres2 = RPNres.Replace("÷", "/");
 
@@ -177,14 +179,16 @@ namespace basic_calculation
                                     }
                                     else
                                     {
-                                        resultText.Text = result_cal.ToString().TrimEnd('0');
+                                        resultText.Text = result_cal.ToString("F8").TrimEnd('0');
                                     }
                                 }
                                 else if (SDnumber == 1)//分数表示
                                 {
-                                    string num = result_cal.ToString("F9");
+                                    string num = result_cal.ToString("F8");
                                     string num2 = num.Substring(num.IndexOf(".") + 1).TrimEnd('0');
-                                    if (num2.Length > 8)
+
+                                    //循環小数のとき
+                                    if (num2.Length > 7)
                                     {
                                         if (loopanswer.Loop(result_cal) == "out")
                                         {
@@ -196,6 +200,7 @@ namespace basic_calculation
                                         }
                                     }
 
+                                    //循環小数ではないとき
                                     else
                                     {
                                         string Calres2 = result_cal.ToString("F5");
@@ -210,7 +215,14 @@ namespace basic_calculation
                                         double Deno2 = Deno / G;
                                         double Nume2 = Nume / G;
 
-                                        resultText.Text = Nume2.ToString() + "/" + Deno2.ToString();
+                                        if (Deno2.ToString() == "1")
+                                        {
+                                            resultText.Text = Nume2.ToString();
+                                        }
+                                        else
+                                        {
+                                            resultText.Text = Nume2.ToString() + "/" + Deno2.ToString();
+                                        }
                                     }
                                 }
                             }

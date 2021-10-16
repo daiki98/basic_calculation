@@ -15,7 +15,7 @@ namespace basic_calculation
             int l = kan.Length;
             for (int i = 0; i < l; i++)
             {
-                string k = kan.Substring(i, 2);//i番目から3文字を切り出し
+                string k = kan.Substring(i, 2);//i番目から2文字を切り出し
 
                 if (kan.IndexOf(k, i + 1) == -1)
                 {
