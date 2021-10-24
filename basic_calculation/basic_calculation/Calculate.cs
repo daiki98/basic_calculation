@@ -6,8 +6,8 @@ namespace basic_calculation
 {
     public static class Calculate
     {
-
-        /*      Calculation2も計算系やしCalculateのクラスにまとめてひとつにしたわ
+   
+        /*   
          * 
          * 　 BisectionCal() 二分法
          * 　 ToRoundDown() 少数まるめ？？？
