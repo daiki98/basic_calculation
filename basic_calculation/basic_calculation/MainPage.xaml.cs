@@ -113,7 +113,7 @@ namespace basic_calculation
                         {
                             FFnum = 2;
                         }
-                       
+                        
                         if (FFjudL == true || FFjudR == true)
                         {
                             FFnum = 1;
@@ -123,9 +123,11 @@ namespace basic_calculation
                         {
                             FFnum = 0;
                         }
-                    
+
                         //式 F(x)=Right(右辺)-Left(左辺)
                         string f1 = Right + "-(" + Left + ")";
+
+                        //*の変換
                         string f2 = f1.Replace("×", "*");
                         string f3 = f2.Replace("0(", "0*(");
                         string f4 = f3.Replace("1(", "1*(");
@@ -142,7 +144,7 @@ namespace basic_calculation
 
                         string RPNres = Calculate.ReversePolishNotation(F);//  中置記法 →　後置記法(非分数）
 
-                        resultText.Text = RPNres;
+                        //resultText.Text = RPNres;
 
                         string RPNres2 = RPNres.Replace("÷", "/");
 
@@ -175,7 +177,6 @@ namespace basic_calculation
                                     {
                                         string Calres4 = Calres3.Replace(".", "");
                                         resultText.Text = Calres4;
-
                                     }
                                     else
                                     {

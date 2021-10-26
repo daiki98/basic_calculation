@@ -235,11 +235,11 @@ namespace basic_calculation
                     if (Calculation_F(input) != "Out of Range")
                     {
                         string ansd = Calculation_F(input);
-                        double Left = double.Parse(ansd.Substring(0, ansd.IndexOf("/")));
-                        double Right = double.Parse(ansd.Substring(ansd.IndexOf("/") + 1));
+                        //double Left = double.Parse(ansd.Substring(0, ansd.IndexOf("/")));
+                        //double Right = double.Parse(ansd.Substring(ansd.IndexOf("/") + 1));
 
-                        double ansd2 = Left / Right;
-                        return ToRoundDown(ansd2, 9);
+                        //double ansd2 = Left / Right;
+                        return ToRoundDown(double.Parse(ansd), 9); ;
                     }
                     else
                     {
@@ -704,7 +704,7 @@ namespace basic_calculation
                             case "*":
                                 double A2 = calcResult.Pop();
                                 double B2 = calcResult.Pop();
-                                double ans = B2 / A2;
+                                double ans = B2 * A2;
                                 string ans2 = ans.ToString("F5");
                                 calcResult.Push(double.Parse(ans2));
                                 break;
@@ -720,9 +720,24 @@ namespace basic_calculation
                                 {
                                     //calcResult.Push(B3 / A3);
                                     double ans3 = B3 / A3;
-                                    string ans4 = ans3.ToString("F5");
-                                    calcResult.Push(double.Parse(ans4));
-                                    break;
+                                    string ans4 = ans3.ToString("F6");
+                                    string ans5 = ans4.Substring(ans4.IndexOf(".") + 1).Substring(0,3);
+                                    if (ans5 == "000")
+                                    {
+                                        calcResult.Push(double.Parse(ans4.Substring(0, ans4.IndexOf("."))));
+                                        break;
+                                    }
+                                    else if (ans5 == "999")
+                                    {
+                                        double ans6 = double.Parse(ans4.Substring(0, ans4.IndexOf(".")));
+                                        calcResult.Push(ans6 + 1);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        calcResult.Push(double.Parse(ans4));
+                                        break;
+                                    }
                                 }
 
                             case "%":
@@ -739,7 +754,8 @@ namespace basic_calculation
 
                     if (calcResult.Peek() == 0)
                     {
-                        res = b.ToString() + "/" + B.ToString();
+                        double A = b/B;
+                        res = A.ToString("G29");
                         break;
                     }
                     b -= 1;
