@@ -19,14 +19,14 @@
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="Center"
                      Padding="50,0,0,10"
-                     BackgroundColor="#F8FEFF"
+                     BackgroundColor="White"
                      >
 
             <Image Source="number.jpg"
                HeightRequest="80"
                WidthRequest="80"/>
 
-            <Label Text="数字"
+            <Label Text=" 数字"
                    
                    HorizontalTextAlignment="Center"
                    VerticalTextAlignment="Center"
@@ -38,7 +38,7 @@
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="Start"
                       Padding="50,0,0,15"
-                     BackgroundColor="#F8FEFF">
+                     BackgroundColor="White">
 
             <Image Source="ope.jpg"
                HeightRequest="80"
@@ -55,7 +55,7 @@
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="Start"
                       Padding="58,0,0,15"
-                     BackgroundColor="#F8FEFF">
+                     BackgroundColor="White">
 
             <Image Source="etc.jpg"
                HeightRequest="60"
@@ -92,29 +92,29 @@
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="Start"
                       Padding="50,0,0,10"
-                     BackgroundColor="#F8FEFF">
+                     BackgroundColor="White">
 
             <Image Source="x.jpg"
                HeightRequest="70"
                WidthRequest="70"/>
 
-            <Label Text="なんて書こうかな"
+            <Label Text="  変数"
                    HorizontalTextAlignment="Center" 
                    VerticalTextAlignment="Center"
-                   FontSize="Small"
+                   FontSize="Medium"
                    Padding="50,0,0,0" FontAttributes="Bold"/>
 
         </StackLayout>
 
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="Start" Padding="50,0,0,20"
-                     BackgroundColor="#F8FEFF">
+                     BackgroundColor="White">
 
             <Image Source="cal.jpg"
               HeightRequest="70"
                WidthRequest="70"/>
 
-            <Label Text="計算スタート"
+            <Label Text="計算開始"
                    HorizontalTextAlignment="Center" 
                    VerticalTextAlignment="Center"
                    FontSize="Medium"
