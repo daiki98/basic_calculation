@@ -772,15 +772,15 @@ namespace basic_calculation
 
         //後置記法　→　計算（分数を入れて総当たり）*returnが分数
         //inputは後置記法の式
-        public static string Calculation_F2(string input)
+        public static string Calculation_F1_500(string input)
         {
             Stack<double> calcResult = new Stack<double>();
             string space = " ";
             char Space = space[0];
             string res = null;
 
-            double B = 1000;
-            for (double numB = 1; numB <= 1000; numB += 1)
+            double B = 500;
+            for (double numB = 1; numB <= 500; numB += 1)
             {
                 double b = 100;
                 for (double numb = 1; numb <= 200; numb += 1)
@@ -877,6 +877,117 @@ namespace basic_calculation
 
             return res;
         }
+
+
+
+        //後置記法　→　計算（分数を入れて総当たり）*returnが分数
+        //inputは後置記法の式
+        public static string Calculation_F500_1000(string input)
+        {
+            Stack<double> calcResult = new Stack<double>();
+            string space = " ";
+            char Space = space[0];
+            string res = null;
+
+            double B = 1000;
+            for (double numB = 1; numB <= 500; numB += 1)
+            {
+                double b = 100;
+                for (double numb = 1; numb <= 200; numb += 1)
+                {
+                    string res2 = input.Replace("□", b.ToString() + " " + B.ToString() + " " + "/");
+                    string[] res3 = res2.Trim().Split(Space);
+                    foreach (string token in res3)
+                    {
+                        switch (token)
+                        {
+                            case "+":
+                                double A0 = calcResult.Pop();
+                                double B0 = calcResult.Pop();
+                                calcResult.Push(B0 + A0);
+                                break;
+
+                            case "-":
+                                double A1 = calcResult.Pop();
+                                double B1 = 0;
+                                if (calcResult.Count > 0)
+                                {
+                                    B1 = calcResult.Pop();
+                                }
+                                calcResult.Push(B1 - A1);
+                                break;
+
+                            case "*":
+                                double A2 = calcResult.Pop();
+                                double B2 = calcResult.Pop();
+                                double ans = B2 * A2;
+                                string ans2 = ans.ToString("F5");
+                                calcResult.Push(double.Parse(ans2));
+                                break;
+
+                            case "/":
+                                double A3 = calcResult.Pop();
+                                double B3 = calcResult.Pop();
+                                if (A3 == 0)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    //calcResult.Push(B3 / A3);
+                                    double ans3 = B3 / A3;
+                                    string ans4 = ans3.ToString("F8");
+                                    string ans5 = ans4.Substring(ans4.IndexOf(".") + 1).Substring(0, 3);
+                                    if (ans5 == "000")
+                                    {
+                                        calcResult.Push(double.Parse(ans4.Substring(0, ans4.IndexOf("."))));
+                                        break;
+                                    }
+                                    else if (ans5 == "999")
+                                    {
+                                        double ans6 = double.Parse(ans4.Substring(0, ans4.IndexOf(".")));
+                                        calcResult.Push(ans6 + 1);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        calcResult.Push(double.Parse(ans4));
+                                        break;
+                                    }
+                                }
+
+                            case "%":
+                                double A4 = calcResult.Pop();
+                                double B4 = 100;
+                                calcResult.Push(A4 / B4);
+                                break;
+
+                            default:
+                                calcResult.Push(double.Parse(token));
+                                break;
+                        }
+                    }
+
+                    if (calcResult.Peek() == 0)
+                    {
+                        //double A = b / B;
+                        res = b.ToString() + "/" + B.ToString();
+                        break;
+                    }
+                    b -= 1;
+                }
+                B -= 1;
+            }
+
+            //解が範囲外のとき
+            if (res == null)
+            {
+                res = "Out of Range";
+            }
+
+            return res;
+        }
+
     }
 
 }

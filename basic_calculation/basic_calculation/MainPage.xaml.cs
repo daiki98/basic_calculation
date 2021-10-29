@@ -192,9 +192,14 @@ namespace basic_calculation
                                     {
                                         if (loopanswer.Loop(result_cal) == "out")
                                         {
-                                            if (Calculate.Calculation_F2(RPNres2) != "Out of Range")
+                                            if (Calculate.Calculation_F1_500(RPNres2) != "Out of Range" && Calculate.Calculation_F500_1000(RPNres2) == "Out of Range")
                                             {
-                                                string ansd = Calculate.Calculation_F2(RPNres2);
+                                                string ansd = Calculate.Calculation_F1_500(RPNres2);
+                                                resultText.Text = ansd;
+                                            }
+                                            else if (Calculate.Calculation_F500_1000(RPNres2) != "Out of Range" && Calculate.Calculation_F1_500(RPNres2) == "Out of Range")
+                                            {
+                                                string ansd = Calculate.Calculation_F500_1000(RPNres2);
                                                 resultText.Text = ansd;
                                             }
                                             else
