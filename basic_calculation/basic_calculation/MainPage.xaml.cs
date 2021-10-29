@@ -193,7 +193,7 @@ namespace basic_calculation
                                     {
                                         if (loopanswer.Loop(result_cal) == "out")
                                         {
-                                            resultText.Text = "out";
+                                            resultText.Text = "sorry...";
                                         }
                                         else
                                         {

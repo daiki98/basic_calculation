@@ -673,11 +673,11 @@ namespace basic_calculation
             char Space = space[0];
             string res = null;
 
-            double B = 50;
-            for (double numB = 1; numB <= 50; numB += 1)
+            double B = 100;
+            for (double numB = 1; numB <= 100; numB += 1)
             {
-                double b = 50;
-                for (double numb = 1; numb <= 50; numb += 1)
+                double b = 100;
+                for (double numb = 1; numb <= 200; numb += 1)
                 {
                     string res2 = input.Replace("□", b.ToString() + " " + B.ToString() + " " + "/");
                     string[] res3 = res2.Trim().Split(Space);
