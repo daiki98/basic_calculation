@@ -204,7 +204,17 @@ namespace basic_calculation
                                             }
                                             else
                                             {
-                                                resultText.Text = "sorry...";
+                                                string Calres2 = result_cal.ToString("F5");
+                                                string Calres3 = Calres2.TrimEnd('0');
+                                                if (Calres3.Substring(Calres3.Length - 1) == ".")
+                                                {
+                                                    string Calres4 = Calres3.Replace(".", "");
+                                                    resultText.Text = Calres4;
+                                                }
+                                                else
+                                                {
+                                                    resultText.Text = result_cal.ToString("F8").TrimEnd('0');
+                                                }
                                             }
                                         }
 
