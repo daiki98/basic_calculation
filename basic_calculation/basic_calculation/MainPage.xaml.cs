@@ -100,10 +100,9 @@ namespace basic_calculation
                     {
                         resultText.Text = "Wrong";  //＝の後になんもないやつ
                     }
-                    else
 
+                    else
                     {
-                      
                         bool FFjudL = judment.FF(Left);
                         bool FFjudR = judment.FF(Right);
                         bool HOEjudL = judment.HOE(Left);
@@ -189,12 +188,21 @@ namespace basic_calculation
                                     string num2 = num.Substring(num.IndexOf(".") + 1).TrimEnd('0');
 
                                     //循環小数のとき
-                                    if (num2.Length > 7)
+                                    if (num2.Length >= 7)
                                     {
                                         if (loopanswer.Loop(result_cal) == "out")
                                         {
-                                            resultText.Text = "sorry...";
+                                            if (Calculate.Calculation_F2(RPNres2) != "Out of Range")
+                                            {
+                                                string ansd = Calculate.Calculation_F2(RPNres2);
+                                                resultText.Text = ansd;
+                                            }
+                                            else
+                                            {
+                                                resultText.Text = "sorry...";
+                                            }
                                         }
+
                                         else
                                         {
                                             resultText.Text = loopanswer.Loop(result_cal);

@@ -9,25 +9,21 @@
     <StackLayout  Orientation="Vertical">
 
         <Label Text="四則逆算計算機"
-                   Padding="0,20,0,20" 
-                   
-                    FontSize="Large"
-                   HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center" FontAttributes="Bold" TextType="Html" BackgroundColor="#E9FBFD" 
-                   />
+               Padding="0,20,0,20" 
+               FontSize="Large"
+               HorizontalTextAlignment="Center" 
+               VerticalTextAlignment="Center" FontAttributes="Bold" TextType="Html" BackgroundColor="#E9FBFD" />
 
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="Center"
                      Padding="50,0,0,10"
-                     BackgroundColor="White"
-                     >
+                     BackgroundColor="White">
 
             <Image Source="number.jpg"
-               HeightRequest="80"
-               WidthRequest="80"/>
+                   HeightRequest="80"
+                   WidthRequest="80"/>
 
             <Label Text=" 数字"
-                   
                    HorizontalTextAlignment="Center"
                    VerticalTextAlignment="Center"
                    FontSize="Medium" Margin="0" IsTabStop="False" Padding="50,0,0,0" FontAttributes="Bold"/>
@@ -37,12 +33,12 @@
 
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="Start"
-                      Padding="50,0,0,15"
+                     Padding="50,0,0,15"
                      BackgroundColor="White">
 
             <Image Source="ope.jpg"
-               HeightRequest="80"
-               WidthRequest="80"/>
+                   HeightRequest="80"
+                   WidthRequest="80"/>
 
             <Label Text="演算子"
                    HorizontalTextAlignment="Center" 
@@ -54,36 +50,36 @@
 
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="Start"
-                      Padding="58,0,0,15"
+                     Padding="58,0,0,15"
                      BackgroundColor="White">
 
             <Image Source="etc.jpg"
-               HeightRequest="60"
-               WidthRequest="60"/>
+                   HeightRequest="60"
+                   WidthRequest="60"/>
 
             <StackLayout Orientation="Vertical">
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="D   　　   小数"
-                   HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center"
+                    <Label Text="DEL  　文字削除"
+                           HorizontalTextAlignment="Center" 
+                           VerticalTextAlignment="Center"
                            Padding="50,0,0,0" FontAttributes="Bold"/>
                     
                 </StackLayout>
 
-                <Label Text="F　      　分数"
-                   HorizontalTextAlignment="Start" 
-                   VerticalTextAlignment="Center"
+                <Label Text="C　       リセット"
+                       HorizontalTextAlignment="Start" 
+                       VerticalTextAlignment="Center"
                        Padding="50,0,0,0" FontAttributes="Bold"/>
 
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="DEL  　文字削除"
-                   HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center"
+                    <Label Text="D　       　小数"
+                           HorizontalTextAlignment="Center" 
+                           VerticalTextAlignment="Center"
                            Padding="50,0,0,0" FontAttributes="Bold"/>
                 </StackLayout>
-                <Label Text="C　       リセット"
-                   HorizontalTextAlignment="Start" 
-                   VerticalTextAlignment="Center"
+                <Label Text="F　       　分数"
+                       HorizontalTextAlignment="Start" 
+                       VerticalTextAlignment="Center"
                        Padding="50,0,0,0" FontAttributes="Bold"/>
             </StackLayout>
 
@@ -91,14 +87,14 @@
 
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="Start"
-                      Padding="50,0,0,10"
+                     Padding="50,0,0,10"
                      BackgroundColor="White">
 
             <Image Source="x.jpg"
-               HeightRequest="70"
-               WidthRequest="70"/>
+                   HeightRequest="70"
+                   WidthRequest="70"/>
 
-            <Label Text="  変数"
+            <Label Text="   変数"
                    HorizontalTextAlignment="Center" 
                    VerticalTextAlignment="Center"
                    FontSize="Medium"
@@ -111,8 +107,8 @@
                      BackgroundColor="White">
 
             <Image Source="cal.jpg"
-              HeightRequest="70"
-               WidthRequest="70"/>
+                   HeightRequest="70"
+                   WidthRequest="70"/>
 
             <Label Text="計算開始"
                    HorizontalTextAlignment="Center" 
@@ -125,14 +121,19 @@
 
 
         <Button x:Name="NextButton"
-                    Text="Go Calculate" FontAttributes="Bold" HorizontalOptions="Center" 
-                BackgroundColor="#E9FBFD"
-                />
+                Text="Go Calculate" FontAttributes="Bold" HorizontalOptions="Center" 
+                BackgroundColor="#E9FBFD"/>
 
-        <Label Text="注意書き(どーしても直せんかったエラーをここに書く？）"
-                   HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center"
-                   FontSize="Medium"/>
+        <Label Text="注意書き"
+               HorizontalTextAlignment="Center" 
+               VerticalTextAlignment="Center"
+               FontAttributes="Bold"
+               FontSize="Medium"/>
+
+        <Label Text="a"
+               HorizontalTextAlignment="Center" 
+               VerticalTextAlignment="Center"
+               FontSize="Medium"/>
 
     </StackLayout>
 
