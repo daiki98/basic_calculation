@@ -746,17 +746,40 @@ namespace basic_calculation
                                     //calcResult.Push(B4 / A4);
                                     double ans5 = B4 / A4;
                                     string ans6 = ans5.ToString("F8");
-                                    string ans7 = ans6.Substring(ans6.IndexOf(".") + 1).Substring(0,3);
-                                    if (ans7 == "000")
+                                    string ans7 = ans6.Substring(ans6.IndexOf(".") + 1);
+                                    if (ans7.Contains("000"))
                                     {
-                                        calcResult.Push(double.Parse(ans6.Substring(0, ans6.IndexOf("."))));
-                                        break;
+                                        int z = ans7.IndexOf("000", 0);
+                                        if (z == 0)
+                                        {
+                                            calcResult.Push(double.Parse(ans5.ToString("F0")));
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            decimal a = decimal.Parse(ans6);
+                                            decimal a2 = Math.Round(a, z);
+                                            calcResult.Push(double.Parse(a2.ToString("F8")));
+                                            break;
+                                        }
                                     }
-                                    else if (ans7 == "999")
+                                    else if (ans7.Contains("999"))
                                     {
-                                        double ans8 = double.Parse(ans6.Substring(0, ans6.IndexOf(".")));
-                                        calcResult.Push(ans8 + 1);
-                                        break;
+                                        int z = ans7.IndexOf("999", 0);
+                                        if (z == 0)
+                                        {
+                                            decimal a = decimal.Parse(ans6);
+                                            decimal a2 = Math.Round(a, 0);
+                                            calcResult.Push(double.Parse(a2.ToString()));
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            decimal a = decimal.Parse(ans6);
+                                            decimal a2 = Math.Round(a, z);
+                                            calcResult.Push(double.Parse(a2.ToString("F8")));
+                                            break;
+                                        }
                                     }
                                     else
                                     {
@@ -865,17 +888,40 @@ namespace basic_calculation
                                     //calcResult.Push(B4 / A4);
                                     double ans5 = B4 / A4;
                                     string ans6 = ans5.ToString("F8");
-                                    string ans7 = ans6.Substring(ans6.IndexOf(".") + 1).Substring(0, 3);
-                                    if (ans7 == "000")
+                                    string ans7 = ans6.Substring(ans6.IndexOf(".") + 1);
+                                    if (ans7.Contains("000"))
                                     {
-                                        calcResult.Push(double.Parse(ans6.Substring(0, ans6.IndexOf("."))));
-                                        break;
+                                        int z = ans7.IndexOf("000", 0);
+                                        if (z == 0)
+                                        {
+                                            calcResult.Push(double.Parse(ans5.ToString("F0")));
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            decimal a = decimal.Parse(ans6);
+                                            decimal a2 = Math.Round(a, z);
+                                            calcResult.Push(double.Parse(a2.ToString("F6")));
+                                            break;
+                                        }
                                     }
-                                    else if (ans7 == "999")
+                                    else if (ans7.Contains("999"))
                                     {
-                                        double ans8 = double.Parse(ans6.Substring(0, ans6.IndexOf(".")));
-                                        calcResult.Push(ans8 + 1);
-                                        break;
+                                        int z = ans7.IndexOf("999", 0);
+                                        if (z == 0)
+                                        {
+                                            decimal a = decimal.Parse(ans6);
+                                            decimal a2 = Math.Round(a, 0);
+                                            calcResult.Push(double.Parse(a2.ToString()));
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            decimal a = decimal.Parse(ans6);
+                                            decimal a2 = Math.Round(a, z);
+                                            calcResult.Push(double.Parse(a2.ToString("F6")));
+                                            break;
+                                        }
                                     }
                                     else
                                     {
@@ -984,17 +1030,40 @@ namespace basic_calculation
                                     //calcResult.Push(B4 / A4);
                                     double ans5 = B4 / A4;
                                     string ans6 = ans5.ToString("F8");
-                                    string ans7 = ans6.Substring(ans6.IndexOf(".") + 1).Substring(0, 3);
-                                    if (ans7 == "000")
+                                    string ans7 = ans6.Substring(ans6.IndexOf(".") + 1);
+                                    if (ans7.Contains("000"))
                                     {
-                                        calcResult.Push(double.Parse(ans6.Substring(0, ans6.IndexOf("."))));
-                                        break;
+                                        int z = ans7.IndexOf("000", 0);
+                                        if (z == 0)
+                                        {
+                                            calcResult.Push(double.Parse(ans5.ToString("F0")));
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            decimal a = decimal.Parse(ans6);
+                                            decimal a2 = Math.Round(a, z);
+                                            calcResult.Push(double.Parse(a2.ToString("F8")));
+                                            break;
+                                        }
                                     }
-                                    else if (ans7 == "999")
+                                    else if (ans7.Contains("999"))
                                     {
-                                        double ans8 = double.Parse(ans6.Substring(0, ans6.IndexOf(".")));
-                                        calcResult.Push(ans8 + 1);
-                                        break;
+                                        int z = ans7.IndexOf("999", 0);
+                                        if (z == 0)
+                                        {
+                                            decimal a = decimal.Parse(ans6);
+                                            decimal a2 = Math.Round(a, 0);
+                                            calcResult.Push(double.Parse(a2.ToString()));
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            decimal a = decimal.Parse(ans6);
+                                            decimal a2 = Math.Round(a, z);
+                                            calcResult.Push(double.Parse(a2.ToString("F8")));
+                                            break;
+                                        }
                                     }
                                     else
                                     {
