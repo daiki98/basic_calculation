@@ -388,12 +388,12 @@ namespace basic_calculation
                     case '/':
                         while (st.Count > 0)
                         {
-                            if (st.Peek() == '/' || st.Peek() == '・')
+                            if (st.Peek() == '・')
                             {
                                 buffer.Push(Space);
                                 buffer.Push(st.Pop());
                             }
-                            else if (st.Peek() == '÷')
+                            else if (st.Peek() == '÷'|| st.Peek() == '/')
                             {
                                 buffer.Push(Space);
                                 buffer.Push(st.Pop());
@@ -401,7 +401,7 @@ namespace basic_calculation
                                 currentState += 1;
                                 break;
                             }
-                            else if (st.Peek() == '*' && buffer.Peek() != '÷')
+                            else if (st.Peek() == '*' && buffer.Peek() != '÷' && buffer.Peek() != '/')
                             {
                                 buffer.Push(Space);
                                 buffer.Push(st.Pop());
@@ -760,7 +760,7 @@ namespace basic_calculation
                                         {
                                             decimal a = decimal.Parse(ans6);
                                             decimal a2 = Math.Round(a, z);
-                                            calcResult.Push(double.Parse(a2.ToString("F8")));
+                                            calcResult.Push(double.Parse(a2.ToString()));
                                             break;
                                         }
                                     }
@@ -778,7 +778,7 @@ namespace basic_calculation
                                         {
                                             decimal a = decimal.Parse(ans6);
                                             decimal a2 = Math.Round(a, z);
-                                            calcResult.Push(double.Parse(a2.ToString("F8")));
+                                            calcResult.Push(double.Parse(a2.ToString()));
                                             break;
                                         }
                                     }
