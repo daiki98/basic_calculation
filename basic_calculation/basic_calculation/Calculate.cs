@@ -222,7 +222,7 @@ namespace basic_calculation
 
             else if (ffnum == 1)
             {
-                //分数関数の時　総当たり
+                //分数関数の時　漸近線付近で二分法
 
                 double initial1 = asypotenum + 0.001;
                 double initial2 = asypotenum + 10;

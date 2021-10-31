@@ -12,11 +12,11 @@ namespace basic_calculation
         int FFnum = -1; //1-分数関数 0-一次関数　2-高次関数
         string questionText = null;
 
-        string numerator = null;
-        string denominator = null;
-        string savestring = null;
+        string numerator = null;　　//分子
+        string denominator = null;　//分母
+        string savestring = null;　　//保存用
 
-        double AsympoteNum;
+        double AsympoteNum;　　//漸近線
 
         public MainPage()
         {
@@ -29,11 +29,11 @@ namespace basic_calculation
             Button button = (Button)sender;
             string pressed = button.Text;
 
-            questionText += pressed;
-            displayText.Text += pressed;
+            questionText += pressed;　　//計算用
+            displayText.Text += pressed;　//表示用
 
 
-            displayText.CursorPosition += 1;
+           // displayText.CursorPosition += 1;　
         }
 
         //分数ボタン
@@ -42,7 +42,8 @@ namespace basic_calculation
             Button button = (Button)sender;
             string pressed = button.Text;
 
-            if (F.Text == " ")
+            //文字変更
+            if (F.Text == " ") 
             {
                 savestring = displayText.Text;
                 F.Text = "分子";
@@ -72,7 +73,7 @@ namespace basic_calculation
 
         }
 
-        //矢印ボタン
+        //矢印ボタン(いらんな　多分消す）
         void OnSelectL(object sender, EventArgs e)
         {
             Button button = (Button)sender;

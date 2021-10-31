@@ -39,11 +39,10 @@ namespace basic_calculation
             }
         }
 
-        public static double Asympote(string input)
+        //漸近線計算
+        public static double Asympote(string input)  
         {
-            //string reinput = input.TrimStart();
-            //string rereinput = reinput.TrimEnd();
-
+         
             int judnum = JUD(input);
             char[] F = input.ToCharArray();
             string RPNres = Calculate.ReversePolishNotation(F);//  中置記法 →　後置記法
