@@ -20,7 +20,7 @@ namespace basic_calculation
          *    
          */
 
-        public static double BisectionCal(string input, int ffnum)
+        public static double BisectionCal(string input, int ffnum,string left,string right)
         {
             double initial_val1 = 10000d;       //正の初期値
             double initial_val2 = -10000d;      //負の初期値
@@ -160,8 +160,8 @@ namespace basic_calculation
             {
                 if (jub >= 0)
                 {
-                    initial_val1 += 100;
-                    initial_val2 -= 100;
+                    initial_val1 += 10000;
+                    initial_val2 -= 10000;
                     double REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
                     double REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
 
@@ -169,8 +169,8 @@ namespace basic_calculation
 
                     while (Rejub >= 0)
                     {
-                        initial_val1 += 100;
-                        initial_val2 -= 100;
+                        initial_val1 += 10000;
+                        initial_val2 -= 10000;
                         REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
                         REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
 
@@ -223,8 +223,114 @@ namespace basic_calculation
             else if (ffnum == 1)
             {
                 //分数関数の時　総当たり
-                //エラーの時の処理必要
+                //漸近線付近に解を想定
 
+                if (left != null&&right==null)
+                {
+                    int S_num = judment.CountChar(left, "/"); //"/"の数
+                    int S_index = left.IndexOf("/");
+                   
+
+                    // "/"の全位置確認
+                    int[] nums = new int[S_num];
+                    string input2 = input;
+                    for (int i = 0; i <= S_num - 1; i++)
+                    {
+                        nums[i] = input2.IndexOf('/');
+                        input2 = input2.Substring(nums[i] + 1);
+                    }
+
+                    //"/"以下を確認
+                    for (int i = 0; i <= S_num - 1; i++)
+                    {
+                        string next_char = input.Substring(nums[i] + 1, 1);//"/"の後の1文字を切り出し
+                        if (next_char == "□")
+                        {
+                            string reinput = input.Substring(nums[i] + 2);  //□の次の位置から最後まで
+                            int ppos = reinput.IndexOf("+");
+                            int mpos = reinput.IndexOf("-");
+                            if (ppos == 0 || mpos == 0||(ppos==-1&&mpos==-1))
+                            {
+                                //0付近に答え
+                            }
+                            else if(ppos!=0&&ppos!=-1)
+                            {
+                                string cal = input.Substring(nums[i] + 1, ppos);
+                                // calの計算結果が漸近線
+                            }else if (mpos != 0&&mpos!=-1)
+                            {
+                                string cal = input.Substring(nums[i] + 1, mpos);
+                                // calの計算結果が漸近線
+                            }
+                        }
+                        else if (next_char == "(")
+                        {
+                            string reinput = input.Substring(nums[i] + 1); //（以降を切り出し
+                            string re2input = reinput.Substring(0, reinput.IndexOf(')'));//)の前まで切り出し
+
+                            //leftに"("が2つ以上ある場合は一番最後の(と）の全位置取得
+                            //( () ) と()() ()+()に場合分け
+                            
+                            //1つの場合はreinputの答えが漸近線
+                        }
+                        else
+                        {
+                            string next2_char;
+                            int l_input = input.Length;//式の長さ
+
+                            for (int j = 1; j < l_input; j++)
+                            {
+                                next2_char = input.Substring(nums[i] + j, 1);
+                                if (next2_char == "□" )
+                                {
+                                    string next3_char;
+                                    if (nums[i] + j + 1 < l_input)
+                                    {
+                                        next3_char = input.Substring(nums[i] + j+1, 1);
+                                    }
+                                    else
+                                    {
+                                        // 0が漸近線
+                                    }
+
+                                    if (next3_char == "(")
+                                    {
+                                        //leftに"("が2つ以上ある場合は一番最後の(と）の全位置取得
+                                        //( () ) と()() ()+()に場合分け
+
+                                        //1つの場合はreinputの答えが漸近線
+                                    }
+
+                                }
+                                else if (next2_char == "(")
+                                {
+                                    //( () ) と()() ()+()に場合分け
+                                    //()内の答えが漸近線
+                                }
+                            }
+
+                        }
+
+
+                    }
+
+                }
+                else if (right != null&&left==null)
+                {
+
+                }else if (left != null && right != null)
+                {
+
+                }
+
+
+
+
+
+
+
+
+        /*
                 if (Calculation(input) != "Out of Range")
                 {
                     double ansd = double.Parse(Calculation(input));
@@ -242,6 +348,7 @@ namespace basic_calculation
                         return 595959595d;
                     }
                 }
+        */
             }
             return 595959595d;
         }

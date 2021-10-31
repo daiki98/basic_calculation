@@ -130,11 +130,12 @@ namespace basic_calculation
                         for (int j = 1; j < l_input; j++)
                         {
                             next2_char = input.Substring(d_nums[i] + j, 1);
-                            if (next2_char != "□" || next2_char != "(")
+                            if (next2_char == "□" || next2_char == "(")
                             {
                                 return true; //分数関数
+                                //"("のあと見る必要あるかも
                             }
-                            else if (next2_char != "+" || next2_char != "-")
+                            else if (next2_char == "+" || next2_char == "-")
                             {
                                 return false;  //非分数関数
                             }

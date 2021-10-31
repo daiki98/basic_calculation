@@ -96,6 +96,10 @@ namespace basic_calculation
                     string Right = str.Substring(str.IndexOf("=") + 1);
                     int R = Right.Length;
 
+                    //漸近線確認用
+                    string check_asymptoteL = null;
+                    string check_asymptoteR = null;
+
                     if (L < 1 || R < 1)
                     {
                         resultText.Text = "Wrong";  //＝の後になんもないやつ
@@ -116,6 +120,19 @@ namespace basic_calculation
                         if (FFjudL == true || FFjudR == true)
                         {
                             FFnum = 1;
+
+                            if (FFjudL == true&&FFjudR==false)
+                            {
+                                check_asymptoteL = Left;
+                            }else if (FFjudR == true&&FFjudL==false)
+                            {
+                                check_asymptoteR = Right;
+                            }
+                            else if(FFjudL==true&&FFjudR==true)
+                            {
+                                check_asymptoteL = Left;
+                                check_asymptoteR = Right;
+                            }
                         }
                         
                         if (HOEjudL == false && HOEjudR == false && FFjudL == false && FFjudR == false)
@@ -149,7 +166,7 @@ namespace basic_calculation
 
                         //resultText.Text = FFnum.ToString();
 
-                        double result_cal = Calculate.BisectionCal(RPNres2, FFnum);  //二分法答え(double)
+                        double result_cal = Calculate.BisectionCal(RPNres2, FFnum,check_asymptoteL,check_asymptoteR);  //二分法答え(double)
                         //FFnum = 1;
 
                         if (result_cal == 595959595)
