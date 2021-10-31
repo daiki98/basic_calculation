@@ -291,6 +291,7 @@ namespace basic_calculation
                         calcResult.Push(AB2);
                         break;
 
+                        //分母の優先掛け算
                     case "・":
                         double A3 = calcResult.Pop();
                         double B3 = calcResult.Pop();
