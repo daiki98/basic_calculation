@@ -36,14 +36,14 @@ namespace basic_calculation
                             double X = Math.Truncate(x) - Math.Truncate(input);//分子
                             double Y = y - 1;//分母
 
-
                             //約分
                             double G = Euclid.Gcd(X, Y);//最大公約数G
+
                             double Deno = Y / G;
                             double Nume = X / G;
 
-                            string Deno2 = Deno.ToString("F4").TrimEnd('0');
-                            string Nume2 = Nume.ToString("F4").TrimEnd('0');
+                            string Deno2 = Deno.ToString("F5").TrimEnd('0');
+                            string Nume2 = Nume.ToString("F5").TrimEnd('0');
                             res = Nume2.Substring(0, Nume2.IndexOf(".")) + "/" + Deno2.Substring(0, Deno2.IndexOf("."));
                             break;
                         }
@@ -55,14 +55,13 @@ namespace basic_calculation
                             double x = input * y;
                             double X = Calculate.ToRoundDown(x, i) - Calculate.ToRoundDown(input, i);//分子
                             double Y = y - 1;//分母
-
                             double G = Euclid.Gcd(X, Y);//最大公約数;
-
+                            
                             double Deno = Y / G;
                             double Nume = X / G;
 
-                            string Deno2 = Deno.ToString("F4").TrimEnd('0');
-                            string Nume2 = Nume.ToString("F4").TrimEnd('0');
+                            string Deno2 = Deno.ToString("F5").TrimEnd('0');
+                            string Nume2 = Nume.ToString("F5").TrimEnd('0');
                             res = Nume2.Substring(0, Nume2.IndexOf(".")) + "/" + Deno2.Substring(0, Deno2.IndexOf("."));
                             break;
                         }

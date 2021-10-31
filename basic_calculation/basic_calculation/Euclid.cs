@@ -14,11 +14,11 @@ namespace basic_calculation
                 return Gcd(b, a);
             }
 
-            while (b != 0d)
+            while (b != 0)
             {
-                double remainder = a % b;
+                decimal remainder = decimal.Parse(a.ToString()) % decimal.Parse(b.ToString());
                 a = b;
-                b = remainder;
+                b = double.Parse(remainder.ToString());
             }
             return a;
         }
