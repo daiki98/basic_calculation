@@ -20,7 +20,7 @@ namespace basic_calculation
          *    
          */
 
-        public static double BisectionCal(string input, int ffnum,string left,string right)
+        public static double BisectionCal(string input, int ffnum,double asypotenum)
         {
             double initial_val1 = 10000d;       //正の初期値
             double initial_val2 = -10000d;      //負の初期値
@@ -34,9 +34,9 @@ namespace basic_calculation
             if (ffnum == 2)//高次方程式
             {
                 if (jub >= 0)//初期値で答えが無い場合
-                { 
+                {
                     initial_val1 = 10000d;       //正の初期値
-                     initial_val2 = 0.0001d;      //負の初期値
+                    initial_val2 = 0.0001d;      //負の初期値
                     double REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));        //再計算
                     double REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
                     double Rejub = REres_initial1 * REres_initial2;
@@ -107,13 +107,13 @@ namespace basic_calculation
                         }
 
                         else
-                        {   
+                        {
                             initial_val1 -= 0.01d;
                             initial_val2 -= 0.01d;
 
                             REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
                             REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
-                            
+
                             Rejub = REres_initial1 * REres_initial2;
                         }
                     }
@@ -128,7 +128,7 @@ namespace basic_calculation
                     //初期値で答えがある場合（高次，分数関数）
                 }
 
-                else 
+                else
                 {
                     double REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
                     double REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
@@ -151,7 +151,7 @@ namespace basic_calculation
 
                         }
                     }
-                }           
+                }
                 return ToRoundDown(mid_val, 9);
             }
 
@@ -216,7 +216,7 @@ namespace basic_calculation
                         }
                     }
                 }
-                return ToRoundDown(mid_val,9);
+                return ToRoundDown(mid_val, 9);
             }
 
 
@@ -224,24 +224,97 @@ namespace basic_calculation
             {
                 //分数関数の時　総当たり
 
-                if (Calculation(input) != "Out of Range")
+                double initial1 = asypotenum + 0.001;
+                double initial2 = asypotenum + 10;
+                double mid = 0;
+
+                double res1 = double.Parse(Calculation_forBisection(input, initial1));      //解きたい式に初期値1を代入したときの値
+                double res2 = double.Parse(Calculation_forBisection(input, initial2));      //解きたい式に初期値2を代入したときの値
+
+                double Jub = initial1 * initial2;       //範囲の中に解があるか判断するやつ　正ー無し，負ーあり
+
+                while(initial1>asypotenum)
                 {
-                    double ansd = double.Parse(Calculation(input));
-                    return ToRoundDown(ansd, 9);
-                }
-                else
-                {
-                    if (Calculation_F(input) != "Out of Range")
+                    //解が見つかった場合
+                    if (Jub < 0)
                     {
-                        string ansd = Calculation_F(input);
-                        return ToRoundDown(double.Parse(ansd), 9);
+                        while (Math.Abs(initial1 - initial2) > 0.0000000001)          //ここで精度決める
+                        {
+                            mid = (initial1 + initial2) / 2;            //中間値の再計算
+
+                            double res_mid = double.Parse(Calculation_forBisection(input, mid));        //中間値の値
+
+                            if (res1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
+                            {
+                                initial1 = mid;
+                            }
+                            else
+                            {
+                                initial2 = mid;
+                            }
+                        }
+                        ffnum = 0;
+                        return ToRoundDown(mid, 9);
                     }
                     else
                     {
-                        return 595959595d;
+                        initial1 -= 0.0001d;
+                        initial2 += 0.1d;
+                        res1 = double.Parse(Calculation_forBisection(input, initial1));
+                        res2 = double.Parse(Calculation_forBisection(input, initial2));
+
+                        Jub = res1 * res2;
                     }
-               }
-        
+                }
+                initial1 = -0.0001d;       //初期値をリセット
+                initial2 = -100d;
+                res1 = double.Parse(Calculation_forBisection(input, initial1));
+                res2 = double.Parse(Calculation_forBisection(input, initial2));
+                Jub = res1 * res2;
+
+               while(initial1<asypotenum)
+                {
+                    //解が見つかった時
+                    if (Jub < 0)
+                    {
+                        while (Math.Abs(initial1 - initial2) > 0.0000000001)          //ここで精度決める
+                        {
+                            mid = (initial1 + initial2) / 2;            //中間値の再計算
+
+                            double res_mid = double.Parse(Calculation_forBisection(input, mid));        //中間値の値
+
+                            if (res1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
+                            {
+                                initial1 = mid;
+                            }
+                            else
+                            {
+                                initial2 = mid;
+                            }
+                        }
+                        return ToRoundDown(mid, 9);
+                    }
+
+                    else
+                    {
+                        initial1 += 0.0001d;
+                        initial2 -= 0.1d;
+
+                        res1 = double.Parse(Calculation_forBisection(input, initial1));
+                        res2 = double.Parse(Calculation_forBisection(input, initial2));
+
+                        Jub = res1 * res2;
+                    }
+                }
+
+                //プラスにもマイナスにも解がない場合
+                if (Jub > 0)
+                {
+
+                    return 595959595d;
+
+                }
+
             }
             return 595959595d;
         }
@@ -586,15 +659,15 @@ namespace basic_calculation
 
 
         //後置記法　→　計算（数字を入れて総当たり）
-        public static string Calculation(string input)
+        public static string Calculation(string input,double asympote)
         {
             Stack<double> calcResult = new Stack<double>();
             string space = " ";
             char Space = space[0];
             string res = null;
-            decimal m = -100.00M;//代入値の初期値
+            decimal m = (decimal)asympote-10;//代入値の初期値
 
-            for (double num = -100.00D; num <= 2000.00D; num += 0.01)//代入値(n)
+            for (double num =0; num <= 1000.00D; num ++)//代入値(n)
             {
                 string res2 = input.Replace("□", m.ToString());
                 string[] res3 = res2.Trim().Split(Space);

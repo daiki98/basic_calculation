@@ -36,21 +36,24 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
 
         
-        <StackLayout Grid.Row="0" Grid.ColumnSpan="5" Padding="20,0">
+        <StackLayout Grid.Row="0" Grid.ColumnSpan="6" Padding="20,0">
 
-            <Entry x:Name="questionText"
+            <Entry x:Name="displayText"
                     FontSize="Large"
                     MaxLength="30"
-                    CursorPosition="5"
+                    CursorPosition="0"
                     TextColor="Black"
                     Text="0"
                     VerticalOptions="FillAndExpand" 
-                    HorizontalOptions="FillAndExpand" IsReadOnly="True" Keyboard="Numeric"/>
-            
+                    HorizontalOptions="FillAndExpand" IsReadOnly="True" Keyboard="Numeric"
+                   />
+
+            <StackLayout Orientation="Horizontal">
             <Button x:Name="SD" 
                     Text="分数" 
                     FontSize="Small"
@@ -59,7 +62,17 @@
                     Clicked="OnSelectSD"
                     HorizontalOptions="End"
                     BorderRadius="20"/>
-
+            
+            <Label x:Name="F"
+                   Text=" "
+                   FontSize="Small"
+                   HorizontalTextAlignment="End" 
+                   VerticalTextAlignment="Center"
+                    BackgroundColor="White" 
+                    TextColor="Black"
+                    HorizontalOptions="Start"/>
+            </StackLayout>
+               
         </StackLayout>
 
 
@@ -71,11 +84,11 @@
                HorizontalTextAlignment="End" 
                VerticalTextAlignment="Center"
                LineBreakMode="NoWrap" 
-               Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Padding="20,0"/>
+               Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Padding="20,0"/>
 
-        <Label Text="Ans"
+        <Label Text="A"
                BackgroundColor="White"
-               FontSize="Small"
+               FontSize="Medium"
                TextColor="Black"
                VerticalTextAlignment="Center"
                Grid.Row="1" Grid.Column="0" Padding="20,0"/>
@@ -122,41 +135,56 @@
                 BackgroundColor="#B1B1B1" TextColor="White"
                 FontSize="36" BorderRadius="20" Clicked="OnSelect"/>
 
-        <Button Text="÷" Grid.Row="3" Grid.Column="4"
+        <Button Text="÷" Grid.Row="2" Grid.Column="4"
                 BackgroundColor="Gray" TextColor="White"
                 FontSize="36" BorderRadius="20" Clicked="OnSelect"/>
-        <Button Text="×" Grid.Row="3" Grid.Column="3"
+        <Button Text="×" Grid.Row="2" Grid.Column="3"
                 BackgroundColor="Gray" TextColor="White"
                 FontSize="36" BorderRadius="20" Clicked="OnSelect"/>
-        <Button Text="-" Grid.Row="4" Grid.Column="3"
+        <Button Text="-" Grid.Row="3" Grid.Column="3"
                 BackgroundColor="Gray" TextColor="White"
                 FontSize="36" BorderRadius="20" Clicked="OnSelect"/>
-        <Button Text="+" Grid.Row="4" Grid.Column="4"
+        <Button Text="+" Grid.Row="3" Grid.Column="4"
                 BackgroundColor="Gray" TextColor="White"
                 FontSize="36" BorderRadius="20" Clicked="OnSelect"/>
-        <Button Text="/" Grid.Row="5" Grid.Column="3"
-                BackgroundColor="Gray" TextColor="White"
-                FontSize="36" BorderRadius="20" Clicked="OnSelect"/>
-
-        <Button Text="%" Grid.Row="5" Grid.Column="4"
+        <Button Text="/" Grid.Row="4" Grid.Column="3"
                 BackgroundColor="Gray" TextColor="White"
                 FontSize="36" BorderRadius="20" Clicked="OnSelect"/>
 
-
-        <Button Text="(" Grid.Row="6" Grid.Column="3"
+        <Button Text="%" Grid.Row="4" Grid.Column="4"
                 BackgroundColor="Gray" TextColor="White"
                 FontSize="36" BorderRadius="20" Clicked="OnSelect"/>
 
-        <Button Text=")" Grid.Row="6" Grid.Column="4"
+
+        <Button Text="(" Grid.Row="5" Grid.Column="3"
                 BackgroundColor="Gray" TextColor="White"
                 FontSize="36" BorderRadius="20" Clicked="OnSelect"/>
 
-        <Button Text="C" Grid.Row="2" Grid.Column="4" 
+        <Button Text=")" Grid.Row="5" Grid.Column="4"
+                BackgroundColor="Gray" TextColor="White"
+                FontSize="36" BorderRadius="20" Clicked="OnSelect"/>
+
+        <Button Text="←" Grid.Row="6" Grid.Column="3"
+                BackgroundColor="Gray" TextColor="White"
+                FontSize="36" BorderRadius="20" Clicked="OnSelectL"/>
+
+        <Button Text="→" Grid.Row="6" Grid.Column="4"
+                BackgroundColor="Gray" TextColor="White"
+                FontSize="36" BorderRadius="20" Clicked="OnSelectR"/>
+
+
+        <Button Text="C" Grid.Row="2" Grid.Column="5" 
                 BackgroundColor="#02FFFA" TextColor="Black"
                 FontSize="36" BorderRadius="20" Clicked="OnClear"/>
-        <Button Text="DEL" Grid.Row="2" Grid.Column="3"
+        <Button Text="DEL" Grid.Row="3" Grid.Column="5"
                 BackgroundColor="#02FFFA" TextColor="Black"
                 FontSize="Medium" BorderRadius="20" Clicked="OnDel"/>
+        <Button Text="決定" Grid.Row="4" Grid.Column="5" 
+                BackgroundColor="Gray" TextColor="White"
+                FontSize="Small" BorderRadius="20" Clicked="Ondecide"/>
+        <Button Text="分数" Grid.Row="5" Grid.Column="5" 
+                BackgroundColor="Gray" TextColor="White"
+                FontSize="Small" BorderRadius="20" Clicked="OnF"/>
 
         <Button Text="=" Grid.Row="6" Grid.Column="2" 
                 BackgroundColor="Gray" TextColor="White"

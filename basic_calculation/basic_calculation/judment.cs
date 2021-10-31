@@ -13,6 +13,49 @@ namespace basic_calculation
             return s.Length - s.Replace(c,"").Length;
         }
 
+        public static int JUD(string input)
+        {
+            bool FFjud = judment.FF(input);
+            bool HOEjud = judment.HOE(input);
+            int FFnum = -1;
+
+            if (HOEjud == true)
+            {
+                return FFnum = 2;
+            }
+
+            if (FFjud == true)
+            {
+                return FFnum = 1;
+            }
+
+            if (HOEjud == false && FFjud == false)
+            {
+                return FFnum = 0;
+            }
+            else
+            {
+                return FFnum = -1;
+            }
+        }
+
+        public static double Asympote(string input)
+        {
+            //string reinput = input.TrimStart();
+            //string rereinput = reinput.TrimEnd();
+
+            int judnum = JUD(input);
+            char[] F = input.ToCharArray();
+            string RPNres = Calculate.ReversePolishNotation(F);//  中置記法 →　後置記法
+            string RPNres2 = RPNres.Replace("÷", "/");
+
+            double Asy = Calculate.BisectionCal(RPNres2, judnum,5959595959);
+
+            if (Asy == 595959595d) return 595959595d;
+
+            return Asy;
+        }
+
     
         public static bool FF(string input)//式を入れる
         {
@@ -206,11 +249,10 @@ namespace basic_calculation
             {
                 return false;
             }
-        }
-
-
-
-
+        }        
+       
+        
+             
     }
 
 }

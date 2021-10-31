@@ -10,6 +10,13 @@ namespace basic_calculation
 
         int SDnumber = 1; //0-S,1-D
         int FFnum = -1; //1-分数関数 0-一次関数　2-高次関数
+        string questionText = null;
+
+        string numerator = null;
+        string denominator = null;
+        string savestring = null;
+
+        double AsympoteNum;
 
         public MainPage()
         {
@@ -21,25 +28,91 @@ namespace basic_calculation
         {
             Button button = (Button)sender;
             string pressed = button.Text;
-            questionText.Text += pressed;
+
+            questionText += pressed;
+            displayText.Text += pressed;
+
+
+            displayText.CursorPosition += 1;
+        }
+
+        //分数ボタン
+        void OnF(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            string pressed = button.Text;
+
+            if (F.Text == " ")
+            {
+                savestring = displayText.Text;
+                F.Text = "分子";
+                displayText.Text = "";
+
+            }
+
+        }
+
+        //決定ボタン
+        void Ondecide(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            string pressed = button.Text;
+            if (F.Text == "分母")
+            {
+                F.Text = " ";
+                denominator = displayText.Text;
+                displayText.Text = savestring + "{" + numerator + "}" + "/" + "{" + denominator + "}";
+                questionText = savestring + numerator + "/" + denominator;
+            } else if (F.Text == "分子")
+            {
+                F.Text = "分母";
+                numerator = displayText.Text;
+                displayText.Text = "";
+            }
+
+        }
+
+        //矢印ボタン
+        void OnSelectL(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            if (displayText.CursorPosition > 0)
+            {
+                displayText.CursorPosition -= 1;
+            }
+        }
+
+        void OnSelectR(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            if (displayText.CursorPosition < displayText.Text.Length)
+            {
+                displayText.CursorPosition += 1;
+            }
+
         }
 
 
         // Cボタン
         void OnClear(object sender, EventArgs e)
         {
-            questionText.Text = "";
+            questionText = "";
+            displayText.Text = "";
             resultText.Text = "";
         }
 
         //Delボタン
         void OnDel(object sender, EventArgs e)
         {
-            if (questionText.Text.Length > 0)
+            if (questionText.Length > 0)
             {
-                questionText.Text = questionText.Text.Substring(0, questionText.Text.Length - 1);
+                questionText = questionText.Substring(0, questionText.Length - 1);
             }
-
+            if (displayText.Text.Length > 0)
+            {
+                displayText.Text = displayText.Text.Substring(0, displayText.Text.Length - 1);
+            }
+            displayText.CursorPosition = displayText.Text.Length;
         }
 
         //分数，小数変換ボタン
@@ -65,7 +138,8 @@ namespace basic_calculation
         // STARTボタン
         void OnCalculate(object sender, EventArgs e)
         {
-            string str = questionText.Text;
+            resultText.Text = denominator;
+            string str = questionText;
             if (str.Count(x => x == '=') == 1 && str.Contains("□"))
             {
                 if (str.Contains("++") || str.Contains("+×") || str.Contains("+÷") || str.Contains("+/") || str.Contains("+%") ||
@@ -77,9 +151,9 @@ namespace basic_calculation
                         str.Contains("+=") || str.Contains("×=") || str.Contains("÷=") || str.Contains("/=") ||
                         str.Contains("(+") || str.Contains("(×") || str.Contains("(÷") || str.Contains("(/") || str.Contains("(%") ||
                         str.Contains("+)") || str.Contains("×)") || str.Contains("÷)") || str.Contains("/)") || str.Contains("-)") ||
-                        str.Contains("(=") || str.Contains("=)") || str.Contains("==") || str.Contains("%%") || str.Contains("()") || str.Contains(")(")||
+                        str.Contains("(=") || str.Contains("=)") || str.Contains("==") || str.Contains("%%") || str.Contains("()") || str.Contains(")(") ||
                         str.Contains(".+") || str.Contains(".×") || str.Contains(".÷") || str.Contains("./") || str.Contains(".%") ||
-                        str.Contains("+.") || str.Contains("-.") || str.Contains("×.") || str.Contains("÷.") || str.Contains("%.")||
+                        str.Contains("+.") || str.Contains("-.") || str.Contains("×.") || str.Contains("÷.") || str.Contains("%.") ||
                         str.Contains(".-") || str.Contains("=.") || str.Contains(".=") || str.Contains(".."))
 
                 {
@@ -96,9 +170,6 @@ namespace basic_calculation
                     string Right = str.Substring(str.IndexOf("=") + 1);
                     int R = Right.Length;
 
-                    //漸近線確認用
-                    string check_asymptoteL = null;
-                    string check_asymptoteR = null;
 
                     if (L < 1 || R < 1)
                     {
@@ -116,25 +187,13 @@ namespace basic_calculation
                         {
                             FFnum = 2;
                         }
-                        
+
                         if (FFjudL == true || FFjudR == true)
                         {
                             FFnum = 1;
-
-                            if (FFjudL == true&&FFjudR==false)
-                            {
-                                check_asymptoteL = Left;
-                            }else if (FFjudR == true&&FFjudL==false)
-                            {
-                                check_asymptoteR = Right;
-                            }
-                            else if(FFjudL==true&&FFjudR==true)
-                            {
-                                check_asymptoteL = Left;
-                                check_asymptoteR = Right;
-                            }
+                            AsympoteNum = judment.Asympote(denominator);
                         }
-                        
+
                         if (HOEjudL == false && HOEjudR == false && FFjudL == false && FFjudR == false)
                         {
                             FFnum = 0;
@@ -164,10 +223,10 @@ namespace basic_calculation
 
                         string RPNres2 = RPNres.Replace("÷", "/");
 
-                        //resultText.Text = FFnum.ToString();
+                        resultText.Text = denominator;// } } } } } }
 
-                        double result_cal = Calculate.BisectionCal(RPNres2, FFnum,check_asymptoteL,check_asymptoteR);  //二分法答え(double)
-                        //FFnum = 1;
+                        double result_cal = Calculate.BisectionCal(RPNres2, FFnum,AsympoteNum);  //二分法答え(double)
+                        
 
                         if (result_cal == 595959595)
                         {
@@ -268,11 +327,12 @@ namespace basic_calculation
                                     }
                                 }
                             }
+                      
                         }
                     }
                 }
-            }
-
+           }
+ 
             else if (str.Count(x => x == '=') > 1)
             {
                 resultText.Text = "Many =";
@@ -281,7 +341,9 @@ namespace basic_calculation
             else
             {
                 resultText.Text = "Not Exsit □ or =";
-            }
+           }
         }
+
+        
     }
 }
