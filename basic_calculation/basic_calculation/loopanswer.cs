@@ -30,7 +30,7 @@ namespace basic_calculation
                         //②0.1428571428...の場合
                         if (i == 0)
                         {
-                            int an = kan.IndexOf(k, i + 1);//i+1番目以降の3文字がある番数
+                            int an = kan.IndexOf(k, i + 1);//i+1番目以降(i+1番目も含む)の3文字がある番数
                             double y = Math.Pow(10, an);//10の(an)乗
                             double x = input * y;
                             double X = Math.Truncate(x) - Math.Truncate(input);//分子

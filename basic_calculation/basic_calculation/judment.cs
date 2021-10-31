@@ -133,7 +133,7 @@ namespace basic_calculation
                             if (next2_char == "□" || next2_char == "(")
                             {
                                 return true; //分数関数
-                                //"("のあと見る必要あるかも
+                                //"("のあとgi見る必要あるかも
                             }
                             else if (next2_char == "+" || next2_char == "-")
                             {
