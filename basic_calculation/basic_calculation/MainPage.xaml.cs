@@ -270,6 +270,10 @@ namespace basic_calculation
                                     {
                                         if (loopanswer.Loop(result_cal) == "out")
                                         {
+                                            string ansd = Calculate.Calculation_Predict(RPNres2,result_cal);
+
+                                            resultText.Text = ansd;
+                                            /*
                                             if (Calculate.Calculation_F1_500(RPNres2) != "Out of Range" && Calculate.Calculation_F500_1000(RPNres2) == "Out of Range")
                                             {
                                                 string ansd = Calculate.Calculation_F1_500(RPNres2);
@@ -294,6 +298,7 @@ namespace basic_calculation
                                                     resultText.Text = result_cal.ToString("F8").TrimEnd('0');
                                                 }
                                             }
+                                            */
                                         }
 
                                         else
