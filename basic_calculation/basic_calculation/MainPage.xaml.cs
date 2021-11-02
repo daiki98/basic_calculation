@@ -10,11 +10,13 @@ namespace basic_calculation
 
         int SDnumber = 1; //0-S,1-D
         int FFnum = -1; //1-分数関数 0-一次関数　2-高次関数
+        int numState = 0;//項1つあたりの桁数チェック
         string questionText = null;
 
         string numerator = null;　　//分子
         string denominator = null;　//分母
         string savestring = null;　　//保存用
+        
 
         double AsympoteNum;　　//漸近線
 
@@ -32,7 +34,7 @@ namespace basic_calculation
             questionText += pressed;　　//計算用
             displayText.Text += pressed;　//表示用
 
-
+            
            // displayText.CursorPosition += 1;　
         }
 
@@ -201,7 +203,9 @@ namespace basic_calculation
                         //resultText.Text = RPNres2;
                         //resultText.Text = questionText;
                        
-                        /* 確認用
+                        /* 確認用 
+                         * 
+                         * お願いします
                          * 分母に□が2つあるときにエラー
                          * denominatorのRPNresがおかしそう
                          * (□×□）→□＊□＊で出力
@@ -217,11 +221,14 @@ namespace basic_calculation
 
                         double result_cal = Calculate.BisectionCal(RPNres2, FFnum,AsympoteNum);  //二分法答え(double)
                         
-
-                        if (result_cal == 595959595)
+                        
+                        if (result_cal == 595959595)　　　//計算外エラー
                         {
                             resultText.Text = "sorry...";
                             FFnum = 0;
+                        }else if(result_cal== 5959595959)　//時間制限エラー(フリーズ防止）
+                        {
+                            resultText.Text = "time error";
                         }
                         else
                         {
@@ -273,7 +280,9 @@ namespace basic_calculation
                                                 string ansd = Calculate.Calculation_F500_1000(RPNres2);
                                                 resultText.Text = ansd;
                                             }
-                                            else
+                                            
+                                             */
+                                            if (ansd == "Out of Range")
                                             {
                                                 string Calres2 = result_cal.ToString("F5");
                                                 string Calres3 = Calres2.TrimEnd('0');
@@ -287,8 +296,9 @@ namespace basic_calculation
                                                     resultText.Text = result_cal.ToString("F8").TrimEnd('0');
                                                 }
                                             }
-                                        */   // 
-                                        }
+                                         }
+                                         //  */ 
+                                        
 
                                         else
                                         {

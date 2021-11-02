@@ -23,6 +23,8 @@ namespace basic_calculation
          *    
          */
 
+      
+
         public static double BisectionCal(string input, int ffnum,double asypotenum)
         {
             double initial_val1 = 10000d;       //正の初期値
@@ -34,10 +36,17 @@ namespace basic_calculation
 
             double jub = res_initial1 * res_initial2;       //範囲の中に解があるか判断するやつ　正ー無し，負ーあり
 
+            var timer = new System.Diagnostics.Stopwatch();  //処理時間計測
+            double F0time = 1.0d; //一次関数のときの時間制限(秒）
+            double F1time = 2.0d; //分数関数のときの時間制限(秒）
+            double F2time = 2.0d; //高次関数のときの時間制限(秒）
+
             if (ffnum == 2)//高次方程式
             {
+                timer.Start();
                 if (jub >= 0)//初期値で答えが無い場合
                 {
+                   
                     initial_val1 = 10000d;       //正の初期値
                     initial_val2 = 0.0001d;      //負の初期値
                     double REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));        //再計算
@@ -47,36 +56,46 @@ namespace basic_calculation
                     //プラス側に範囲をずらす
                     for (int i = 0; i < 100000; i++)
                     {
-                        //解が見つかった場合
-                        if (Rejub < 0)
-                        {
-                            while (Math.Abs(initial_val1 - initial_val2) > 0.0000000001)          //ここで精度決める
+          
+                            //解が見つかった場合
+                            if (Rejub < 0)
                             {
-                                mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
-
-                                double res_mid = double.Parse(Calculation_forBisection(input, mid_val));        //中間値の値
-
-                                if (REres_initial1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
+                                while (Math.Abs(initial_val1 - initial_val2) > 0.0000000001)          //ここで精度決める
                                 {
-                                    initial_val1 = mid_val;
-                                }
-                                else
+                                    mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
+
+                                    double res_mid = double.Parse(Calculation_forBisection(input, mid_val));        //中間値の値
+
+                                    if (REres_initial1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
+                                    {
+                                        initial_val1 = mid_val;
+                                    }
+                                    else
+                                    {
+                                        initial_val2 = mid_val;
+                                    }
+                                if (timer.Elapsed.TotalSeconds > F2time)
                                 {
-                                    initial_val2 = mid_val;
+                                    return 5959595959;
                                 }
-                            }
-                            ffnum = 0;
+                            }                                      
+                            //ffnum = 0;
                             return ToRoundDown(mid_val, 9);
-                        }
-                        else
-                        {
-                            initial_val1 += 0.01d;
-                            initial_val2 += 0.01d;
-                            REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
-                            REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
+                            }
+                            else
+                            {
+                                initial_val1 += 0.01d;
+                                initial_val2 += 0.01d;
+                                REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
+                                REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
 
-                            Rejub = REres_initial1 * REres_initial2;
+                                Rejub = REres_initial1 * REres_initial2;
+                            if (timer.Elapsed.TotalSeconds > F2time)
+                            {
+                                return 5959595959;
+                            }
                         }
+
                     }
 
                     initial_val1 = 0.0001d;       //初期値をリセット
@@ -88,37 +107,47 @@ namespace basic_calculation
                     //プラス側に無く，マイナス側に範囲ずらす
                     for (int i = 0; i < 100000; i++)
                     {
-                        //解が見つかった時
-                        if (Rejub < 0)
-                        {
-                            while (Math.Abs(initial_val1 - initial_val2) > 0.0000000001)          //ここで精度決める
+                        
+                            //解が見つかった時
+                            if (Rejub < 0)
                             {
-                                mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
-
-                                double res_mid = double.Parse(Calculation_forBisection(input, mid_val));        //中間値の値
-
-                                if (REres_initial1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
+                                while (Math.Abs(initial_val1 - initial_val2) > 0.0000000001)          //ここで精度決める
                                 {
-                                    initial_val1 = mid_val;
-                                }
-                                else
+                                    mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
+
+                                    double res_mid = double.Parse(Calculation_forBisection(input, mid_val));        //中間値の値
+
+                                    if (REres_initial1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
+                                    {
+                                        initial_val1 = mid_val;
+                                    }
+                                    else
+                                    {
+                                        initial_val2 = mid_val;
+                                    }
+                                if (timer.Elapsed.TotalSeconds > F2time)
                                 {
-                                    initial_val2 = mid_val;
+                                    return 5959595959;
                                 }
                             }
-                            return ToRoundDown(mid_val, 9);
+                                return ToRoundDown(mid_val, 9);
+                            }
+
+                            else
+                            {
+                                initial_val1 -= 0.01d;
+                                initial_val2 -= 0.01d;
+
+                                REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
+                                REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
+
+                                Rejub = REres_initial1 * REres_initial2;
+                            if (timer.Elapsed.TotalSeconds > F2time)
+                            {
+                                return 5959595959;
+                            }
                         }
-
-                        else
-                        {
-                            initial_val1 -= 0.01d;
-                            initial_val2 -= 0.01d;
-
-                            REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
-                            REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
-
-                            Rejub = REres_initial1 * REres_initial2;
-                        }
+                        
                     }
 
                     //プラスにもマイナスにも解がない場合
@@ -128,9 +157,9 @@ namespace basic_calculation
                         return 595959595d;
 
                     }
-                    //初期値で答えがある場合（高次，分数関数）
-                }
 
+                 //初期値で答えがある場合（高次，分数関数）
+                }
                 else
                 {
                     double REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
@@ -153,14 +182,20 @@ namespace basic_calculation
                             initial_val2 = mid_val;
 
                         }
+                        if (timer.Elapsed.TotalSeconds > F2time)
+                        {
+                            return 5959595959;
+                        }
                     }
                 }
                 return ToRoundDown(mid_val, 9);
             }
 
+
             //1次方程式の時
             else if (ffnum == 0)
             {
+                timer.Start();
                 if (jub >= 0)
                 {
                     initial_val1 += 10000;
@@ -169,54 +204,82 @@ namespace basic_calculation
                     double REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
 
                     double Rejub = REres_initial1 * REres_initial2;
+                    
 
-                    while (Rejub >= 0)
+                    while (Rejub > 0)
                     {
-                        initial_val1 += 10000;
-                        initial_val2 -= 10000;
-                        REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
-                        REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
+                        
+                            initial_val1 += 10000000;
+                            initial_val2 -= 10000000;
+                            REres_initial1 = double.Parse(Calculation_forBisection(input, initial_val1));
+                            REres_initial2 = double.Parse(Calculation_forBisection(input, initial_val2));
 
-                        Rejub = REres_initial1 * REres_initial2;
+                            Rejub = REres_initial1 * REres_initial2;
+
+                        
+                        if (timer.Elapsed.TotalSeconds >F0time)
+                        {
+                            return 5959595959;
+                        }
+                        
                     }
 
-                    while (Math.Abs(initial_val1 - initial_val2) > 0.000000001)          //ここで精度決める
+                    if (Rejub < 0)
                     {
-                        mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
 
-                        double res_mid = double.Parse(Calculation_forBisection(input, mid_val));        //中間値の値
-
-                        if (REres_initial1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
+                        while (Math.Abs(initial_val1 - initial_val2) > 0.0000000001)          //ここで精度決める
                         {
-                            initial_val1 = mid_val;
+                            mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
 
-                        }
-                        else
-                        {
-                            initial_val2 = mid_val;
+                            double res_mid = double.Parse(Calculation_forBisection(input, mid_val));        //中間値の値
 
+                            if (REres_initial1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
+                            {
+                                initial_val1 = mid_val;
+
+                            }
+                            else
+                            {
+                                initial_val2 = mid_val;
+                            }
+
+                           
+                            if (timer.Elapsed.TotalSeconds > F0time)
+                            {
+                                return 5959595959;
+                            }
+                            
                         }
+
                     }
                 }
+                
 
                 else if (jub < 0)
                 {
                     while (Math.Abs(initial_val1 - initial_val2) > 0.0000000001)          //ここで精度決める
                     {
-                        mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
+                           mid_val = (initial_val1 + initial_val2) / 2;            //中間値の再計算
 
-                        double res_mid = double.Parse(Calculation_forBisection(input, mid_val));        //中間値の値
+                            double res_mid = double.Parse(Calculation_forBisection(input, mid_val));        //中間値の値
 
-                        if (res_initial1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
+                            if (res_initial1 * res_mid > 0)     //解がどっちの初期値側に寄っているか判別
+                            {
+                                initial_val1 = mid_val;
+
+                            }
+                            else
+                            {
+                                initial_val2 = mid_val;
+
+                            }
+
+                        
+                        if (timer.Elapsed.TotalSeconds > F0time)
                         {
-                            initial_val1 = mid_val;
-
+                            return 5959595959;
                         }
-                        else
-                        {
-                            initial_val2 = mid_val;
-
-                        }
+                        
                     }
                 }
                 return ToRoundDown(mid_val, 9);
@@ -236,7 +299,8 @@ namespace basic_calculation
 
                 double Jub = initial1 * initial2;       //範囲の中に解があるか判断するやつ　正ー無し，負ーあり
 
-                while(initial1>asypotenum)
+                timer.Start();
+                while (initial1>asypotenum)
                 {
                     //解が見つかった場合
                     if (Jub < 0)
@@ -255,6 +319,10 @@ namespace basic_calculation
                             {
                                 initial2 = mid;
                             }
+                            if (timer.Elapsed.TotalSeconds > F1time)
+                            {
+                                return 5959595959;
+                            }
                         }
                         ffnum = 0;
                         return ToRoundDown(mid, 9);
@@ -267,6 +335,11 @@ namespace basic_calculation
                         res2 = double.Parse(Calculation_forBisection(input, initial2));
 
                         Jub = res1 * res2;
+
+                        if (timer.Elapsed.TotalSeconds > F1time)
+                        {
+                            return 5959595959;
+                        }
                     }
                 }
                 initial1 = -0.0001d;       //初期値をリセット
@@ -294,6 +367,11 @@ namespace basic_calculation
                             {
                                 initial2 = mid;
                             }
+
+                            if (timer.Elapsed.TotalSeconds > F1time)
+                            {
+                                return 5959595959;
+                            }
                         }
                         return ToRoundDown(mid, 9);
                     }
@@ -307,6 +385,11 @@ namespace basic_calculation
                         res2 = double.Parse(Calculation_forBisection(input, initial2));
 
                         Jub = res1 * res2;
+
+                        if (timer.Elapsed.TotalSeconds > F1time)
+                        {
+                            return 5959595959;
+                        }
                     }
                 }
 
