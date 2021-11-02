@@ -164,15 +164,6 @@
                 BackgroundColor="Gray" TextColor="White"
                 FontSize="36" BorderRadius="20" Clicked="OnSelect"/>
 
-        <Button Text="←" Grid.Row="6" Grid.Column="3"
-                BackgroundColor="Gray" TextColor="White"
-                FontSize="36" BorderRadius="20" Clicked="OnSelectL"/>
-
-        <Button Text="→" Grid.Row="6" Grid.Column="4"
-                BackgroundColor="Gray" TextColor="White"
-                FontSize="36" BorderRadius="20" Clicked="OnSelectR"/>
-
-
         <Button Text="C" Grid.Row="2" Grid.Column="5" 
                 BackgroundColor="#02FFFA" TextColor="Black"
                 FontSize="36" BorderRadius="20" Clicked="OnClear"/>
@@ -182,15 +173,15 @@
         <Button Text="決定" Grid.Row="4" Grid.Column="5" 
                 BackgroundColor="Gray" TextColor="White"
                 FontSize="Small" BorderRadius="20" Clicked="Ondecide"/>
-        <Button Text="分数" Grid.Row="5" Grid.Column="5" 
+        <Button Text="/" Grid.Row="5" Grid.Column="5" 
                 BackgroundColor="Gray" TextColor="White"
-                FontSize="Small" BorderRadius="20" Clicked="OnF"/>
+                FontSize="36" BorderRadius="20" Clicked="OnF"/>
 
-        <Button Text="=" Grid.Row="6" Grid.Column="2" 
+        <Button Text="=" Grid.Row="6" Grid.Column="5" 
                 BackgroundColor="Gray" TextColor="White"
                 FontSize="36" BorderRadius="20" Clicked="OnSelect"/>
 
-        <Button Text="Cal" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+        <Button Text="Cal" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5"
                 BackgroundColor="#02FFFA" TextColor="Black"
                 FontSize="Large" BorderRadius="20" Clicked="OnCalculate"/>
 

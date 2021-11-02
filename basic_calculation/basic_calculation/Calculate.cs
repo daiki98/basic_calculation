@@ -272,7 +272,7 @@ namespace basic_calculation
                 res2 = double.Parse(Calculation_forBisection(input, initial2));
                 Jub = res1 * res2;
 
-               while(initial1<asypotenum)
+               while (initial1 < asypotenum)
                 {
                     //解が見つかった時
                     if (Jub < 0)

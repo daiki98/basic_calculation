@@ -30,10 +30,10 @@ namespace basic_calculation
             string pressed = button.Text;
 
             questionText += pressed;　　//計算用
-            displayText.Text += pressed;　//表示用
+            displayText.Text += pressed; //表示用
 
 
-           // displayText.CursorPosition += 1;　
+            // displayText.CursorPosition += 1;　
         }
 
         //分数ボタン
@@ -62,7 +62,7 @@ namespace basic_calculation
             {
                 F.Text = " ";
                 denominator = displayText.Text;
-                displayText.Text = savestring + "{" + numerator + "}" + "/" + "{" + denominator + "}";
+                displayText.Text = savestring + numerator + "/" + denominator;
                 questionText = savestring + numerator + "/" + denominator;
             } else if (F.Text == "分子")
             {
@@ -71,16 +71,6 @@ namespace basic_calculation
                 displayText.Text = "";
             }
 
-        }
-
-        //矢印ボタン(いらんな　多分消す）
-        void OnSelectL(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            if (displayText.CursorPosition > 0)
-            {
-                displayText.CursorPosition -= 1;
-            }
         }
 
         void OnSelectR(object sender, EventArgs e)
