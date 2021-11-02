@@ -48,51 +48,27 @@ namespace basic_calculation
                 savestring = displayText.Text;
                 F.Text = "分子";
                 displayText.Text = "";
-
+                button.Text = "決定";
             }
-
-        }
-
-        //決定ボタン
-        void Ondecide(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            string pressed = button.Text;
-            if (F.Text == "分母")
+            else if (F.Text == "分母")
             {
                 F.Text = " ";
                 denominator = displayText.Text;
-                displayText.Text = savestring + "{" + numerator + "}" + "/" + "{" + denominator + "}";
-                questionText = savestring + numerator + "/" + denominator;
-            } else if (F.Text == "分子")
+                displayText.Text = savestring + "{" + numerator + "/" + denominator + "}";
+                questionText = savestring + "(" + numerator + ")"+ "/"  + "("+denominator + ")";
+                button.Text = "分数";
+            }
+            else if (F.Text == "分子")
             {
                 F.Text = "分母";
                 numerator = displayText.Text;
                 displayText.Text = "";
+                button.Text = "決定";
             }
 
         }
 
-        //矢印ボタン(いらんな　多分消す）
-        void OnSelectL(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            if (displayText.CursorPosition > 0)
-            {
-                displayText.CursorPosition -= 1;
-            }
-        }
-
-        void OnSelectR(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            if (displayText.CursorPosition < displayText.Text.Length)
-            {
-                displayText.CursorPosition += 1;
-            }
-
-        }
-
+        
 
         // Cボタン
         void OnClear(object sender, EventArgs e)
@@ -139,7 +115,7 @@ namespace basic_calculation
         // STARTボタン
         void OnCalculate(object sender, EventArgs e)
         {
-            resultText.Text = denominator;
+           // resultText.Text = denominator;
             string str = questionText;
             if (str.Count(x => x == '=') == 1 && str.Contains("□"))
             {
@@ -171,8 +147,7 @@ namespace basic_calculation
                     string Right = str.Substring(str.IndexOf("=") + 1);
                     int R = Right.Length;
 
-
-                    if (L < 1 || R < 1)
+                   if (L < 1 || R < 1)
                     {
                         resultText.Text = "Wrong";  //＝の後になんもないやつ
                     }
@@ -192,7 +167,7 @@ namespace basic_calculation
                         if (FFjudL == true || FFjudR == true)
                         {
                             FFnum = 1;
-                            AsympoteNum = judment.Asympote(denominator);
+                           //AsympoteNum = judment.Asympote(denominator);
                         }
 
                         if (HOEjudL == false && HOEjudR == false && FFjudL == false && FFjudR == false)
@@ -203,7 +178,7 @@ namespace basic_calculation
                         //式 F(x)=Right(右辺)-Left(左辺)
                         string f1 = Right + "-(" + Left + ")";
 
-                        //*の変換
+                      //*の変換
                         string f2 = f1.Replace("×", "*");
                         string f3 = f2.Replace("0(", "0・(");
                         string f4 = f3.Replace("1(", "1・(");
@@ -215,16 +190,30 @@ namespace basic_calculation
                         string f10 = f9.Replace("7(", "7・(");
                         string f11 = f10.Replace("8(", "8・(");
                         string f12 = f11.Replace("9(", "9・(");
-                        string f13 = f12.Replace("□(", "□・(");
-                        char[] F = f13.ToCharArray();
+                       string f13 = f12.Replace("□(", "□・(");
+                       char[] F = f13.ToCharArray();
 
                         string RPNres = Calculate.ReversePolishNotation(F);//  中置記法 →　後置記法(非分数）
 
-                        //resultText.Text = RPNres;
+                        
 
                         string RPNres2 = RPNres.Replace("÷", "/");
+                        //resultText.Text = RPNres2;
+                        //resultText.Text = questionText;
+                       
+                        /* 確認用
+                         * 分母に□が2つあるときにエラー
+                         * denominatorのRPNresがおかしそう
+                         * (□×□）→□＊□＊で出力
+                         * (□＋３）×(□ー３）→□３＋＊□＊３ーで出力
+                         * 
+                        char[] F1 = denominator.ToCharArray();
+                        string RPNres = Calculate.ReversePolishNotation(F1);//  中置記法 →　後置記法(非分数）
+                        string f21 = RPNres.Replace("×", "*");
+                        resultText.Text = f21;
+                        */
 
-                        resultText.Text = denominator;// } } } } } }
+               //     } } } } } }
 
                         double result_cal = Calculate.BisectionCal(RPNres2, FFnum,AsympoteNum);  //二分法答え(double)
                         
@@ -298,7 +287,7 @@ namespace basic_calculation
                                                     resultText.Text = result_cal.ToString("F8").TrimEnd('0');
                                                 }
                                             }
-                                            */
+                                        */   // 
                                         }
 
                                         else
@@ -353,3 +342,4 @@ namespace basic_calculation
         
     }
 }
+  
