@@ -290,8 +290,9 @@ namespace basic_calculation
             {
                 //分数関数の時　漸近線付近で二分法
 
-                double initial1 = asypotenum + 0.001;
-                double initial2 = asypotenum + 10;
+
+                double initial1 = asypotenum + 0.00001;
+                double initial2 = asypotenum + 100;
                 double mid = 0;
 
                 double res1 = double.Parse(Calculation_forBisection(input, initial1));      //解きたい式に初期値1を代入したときの値
@@ -329,8 +330,8 @@ namespace basic_calculation
                     }
                     else
                     {
-                        initial1 -= 0.0001d;
-                        initial2 += 0.1d;
+                        initial1 -= 0.000001d;
+                        initial2 += 100d;
                         res1 = double.Parse(Calculation_forBisection(input, initial1));
                         res2 = double.Parse(Calculation_forBisection(input, initial2));
 
@@ -342,8 +343,8 @@ namespace basic_calculation
                         }
                     }
                 }
-                initial1 = -0.0001d;       //初期値をリセット
-                initial2 = -100d;
+                initial1 = asypotenum - 0.00001d;       //初期値をリセット
+                initial2 = asypotenum - 100d;
                 res1 = double.Parse(Calculation_forBisection(input, initial1));
                 res2 = double.Parse(Calculation_forBisection(input, initial2));
                 Jub = res1 * res2;
@@ -378,8 +379,8 @@ namespace basic_calculation
 
                     else
                     {
-                        initial1 += 0.0001d;
-                        initial2 -= 0.1d;
+                        initial1 += 0.000001d;
+                        initial2 -= 100d;
 
                         res1 = double.Parse(Calculation_forBisection(input, initial1));
                         res2 = double.Parse(Calculation_forBisection(input, initial2));
