@@ -169,7 +169,8 @@ namespace basic_calculation
                         if (FFjudL == true || FFjudR == true)
                         {
                             FFnum = 1;
-                           AsympoteNum = judment.Asympote(denominator);　//分母＝０より漸近線計算
+                            string redenominator = denominator.Replace("×", "*");
+                            AsympoteNum = judment.Asympote(redenominator);　//分母＝０より漸近線計算
                         }
 
                         if (HOEjudL == false && HOEjudR == false && FFjudL == false && FFjudR == false)
