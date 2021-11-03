@@ -197,7 +197,7 @@ namespace basic_calculation
         public static bool HOE(string input)
         {
             int X_num = CountChar(input, "□");
-            int M_num = CountChar(input, "×");
+            int M_num = CountChar(input, "*");
 
             if (X_num > 1)
             {
@@ -215,8 +215,8 @@ namespace basic_calculation
                 {
                     string before_input = input.Substring(nums[i] + 1);
                     string after_input = before_input.Substring(0,before_input.IndexOf('□'));
-                    if (after_input.Contains(")(") || after_input.Contains(")×(") || after_input.Contains(")×2(") || after_input.Contains(")×3(") || after_input.Contains(")×4(")
-                        || after_input.Contains(")×5(") || after_input.Contains(")×6(") || after_input.Contains(")×7(") || after_input.Contains(")×8(") || after_input.Contains(")×9("))
+                    if (after_input.Contains(")(") || after_input.Contains(")*(") || after_input.Contains(")*2(") || after_input.Contains(")*3(") || after_input.Contains(")*4(")
+                        || after_input.Contains(")*5(") || after_input.Contains(")*6(") || after_input.Contains(")*7(") || after_input.Contains(")*8(") || after_input.Contains(")*9("))
                     {
                         return true;
                     }                  
@@ -237,7 +237,7 @@ namespace basic_calculation
                         next_char = input.Substring(nums[i] + 1, 1);
                     }
 
-                    if (pre_char == "×" || next_char == "×")
+                    if (pre_char == "*" || next_char == "*")
                     {
                         return true;
                     }

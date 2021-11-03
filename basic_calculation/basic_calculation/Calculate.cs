@@ -39,7 +39,7 @@ namespace basic_calculation
             var timer = new System.Diagnostics.Stopwatch();  //処理時間計測
             double F0time = 1.0d; //一次関数のときの時間制限(秒）
             double F1time = 2.0d; //分数関数のときの時間制限(秒）
-            double F2time = 2.0d; //高次関数のときの時間制限(秒）
+            double F2time = 10.0d; //高次関数のときの時間制限(秒）
 
             if (ffnum == 2)//高次方程式
             {

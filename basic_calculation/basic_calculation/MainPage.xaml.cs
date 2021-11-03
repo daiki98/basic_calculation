@@ -215,9 +215,9 @@ namespace basic_calculation
                         /* 
                         char[] F1 = denominator.ToCharArray();
                         string RPNres = Calculate.ReversePolishNotation(F1);//  中置記法 →　後置記法(非分数）
-                        string f21 = RPNres.Replace("×", "*");
+                        string f21 = RPNres.Replace("×", "*");*/
                         resultText.Text = AsympoteNum.ToString();
-                       */
+                       
 
                    // } } } } } }
 
@@ -283,7 +283,7 @@ namespace basic_calculation
                                                 resultText.Text = ansd;
                                             }
                                             
-                                          */  // 
+                                         */   // 
                                             if (ansd == "Out of Range")
                                             {
                                                 string Calres2 = result_cal.ToString("F5");
@@ -353,5 +353,4 @@ namespace basic_calculation
 
         
     }
-}
-  
+} 
