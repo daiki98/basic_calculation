@@ -48,6 +48,7 @@ namespace basic_calculation
             string RPNres = Calculate.ReversePolishNotation(F);//  中置記法 →　後置記法
             string RPNres2 = RPNres.Replace("÷", "/");
 
+            
             double Asy = Calculate.BisectionCal(RPNres2, judnum,5959595959);
 
             if (Asy == 595959595d) return 595959595d;
