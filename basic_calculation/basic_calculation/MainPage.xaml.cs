@@ -176,7 +176,8 @@ namespace basic_calculation
                         if (FFjudL == true || FFjudR == true)
                         {
                             FFnum = 1;
-                           AsympoteNum = judment.Asympote(denominator);　//分母＝０より漸近線計算
+                            string redenominator = denominator.Replace("×", "*");
+                            AsympoteNum = judment.Asympote(redenominator);　//分母＝０より漸近線計算
                         }
 
                         if (HOEjudL == false && HOEjudR == false && FFjudL == false && FFjudR == false)
@@ -207,145 +208,129 @@ namespace basic_calculation
                         
 
                         string RPNres2 = RPNres.Replace("÷", "/");
-                        resultText.Text = RPNres2;
+                        //resultText.Text = RPNres2;
                         //resultText.Text = questionText;
-                       
-                        /* 確認用 
-                         * 
-                         * 
-                         * 分母に□が2つあるとき??にエラー
-                         * denominator(分母）のRPNresがおかしそう
-                         * (□×□）→□＊□＊で出力
-                         * (□＋３）×(□ー３）→□３＋＊□＊３ーで出力
-                         * 
-                         *///お願いします
-                        /* 
-                        char[] F1 = denominator.ToCharArray();
-                        string RPNres = Calculate.ReversePolishNotation(F1);//  中置記法 →　後置記法(非分数）
-                        string f21 = RPNres.Replace("×", "*");
+
                         resultText.Text = AsympoteNum.ToString();
-                       */
 
-                   // } } } } } }
+                        double result_cal = Calculate.BisectionCal(RPNres2, FFnum, AsympoteNum);  //二分法答え(double)
 
-                        //double result_cal = Calculate.BisectionCal(RPNres2, FFnum,AsympoteNum);  //二分法答え(double)
-                        
-                        
-                        //if (result_cal == 595959595)　　　//計算外エラー
-                        //{
-                        //    resultText.Text = "sorry...";
-                        //    FFnum = 0;
-                        //}else if(result_cal== 5959595959)　//時間制限エラー(フリーズ防止）
-                        //{
-                        //    resultText.Text = "time error";
-                        //}
-                        //else
-                        //{
-                        //    bool IMjub = Calculate.IntMinJub(result_cal);       //答えが整数か少数か(trueで整数）；
+                        if (result_cal == 595959595)　　　//計算外エラー
+                        {
+                            resultText.Text = "sorry...";
+                            FFnum = 0;
+                        }
+                        else if (result_cal == 5959595959)　//時間制限エラー(フリーズ防止）
+                        {
+                            resultText.Text = "time error";
+                        }
+                        else
+                        {
+                            bool IMjub = Calculate.IntMinJub(result_cal);       //答えが整数か少数か(trueで整数）；
 
-                        //    if (IMjub)
-                        //    {
-                        //        string Calres2 = result_cal.ToString("F0");  //整数表示
-                        //        resultText.Text = Calres2;
-                        //    }
-                        //    else
-                        //    {
-                        //        if (SDnumber == 0)//小数表示
-                        //        {
-                        //            string Calres2 = result_cal.ToString("F5");
-                        //            string Calres3 = Calres2.TrimEnd('0');
-                        //            if (Calres3.Substring(Calres3.Length - 1) == ".")
-                        //            {
-                        //                string Calres4 = Calres3.Replace(".", "");
-                        //                resultText.Text = Calres4;
-                        //            }
-                        //            else
-                        //            {
-                        //                resultText.Text = result_cal.ToString("F8").TrimEnd('0');
-                        //            }
-                        //        }
+                            if (IMjub)
+                            {
+                                string Calres2 = result_cal.ToString("F0");  //整数表示
+                                resultText.Text = Calres2;
+                            }
+                            else
+                            {
+                                if (SDnumber == 0)//小数表示
+                                {
+                                    string Calres2 = result_cal.ToString("F5");
+                                    string Calres3 = Calres2.TrimEnd('0');
+                                    if (Calres3.Substring(Calres3.Length - 1) == ".")
+                                    {
+                                        string Calres4 = Calres3.Replace(".", "");
+                                        resultText.Text = Calres4;
+                                    }
+                                    else
+                                    {
+                                        resultText.Text = result_cal.ToString("F8").TrimEnd('0');
+                                    }
+                                }
 
-                        //        else if (SDnumber == 1)//分数表示
-                        //        {
-                        //            string num = result_cal.ToString("F8");
-                        //            string num2 = num.Substring(num.IndexOf(".") + 1).TrimEnd('0');
+                                else if (SDnumber == 1)//分数表示
+                                {
+                                    string num = result_cal.ToString("F8");
+                                    string num2 = num.Substring(num.IndexOf(".") + 1).TrimEnd('0');
 
-                        //            //循環小数のとき
-                        //            if (num2.Length >= 7)
-                        //            {
-                        //                if (loopanswer.Loop(result_cal) == "out")
-                        //                {
-                        //                    string ansd = Calculate.Calculation_Predict(RPNres2,result_cal);
+                                    //循環小数のとき
+                                    if (num2.Length >= 7)
+                                    {
+                                        if (loopanswer.Loop(result_cal) == "out")
+                                        {
+                                            string ansd = Calculate.Calculation_Predict(RPNres2, result_cal);
 
-                        //                    resultText.Text = ansd;
-                        //                    /*
-                        //                    if (Calculate.Calculation_F1_500(RPNres2) != "Out of Range" && Calculate.Calculation_F500_1000(RPNres2) == "Out of Range")
-                        //                    {
-                        //                        string ansd = Calculate.Calculation_F1_500(RPNres2);
-                        //                        resultText.Text = ansd;
-                        //                    }
-                        //                    else if (Calculate.Calculation_F500_1000(RPNres2) != "Out of Range" && Calculate.Calculation_F1_500(RPNres2) == "Out of Range")
-                        //                    {
-                        //                        string ansd = Calculate.Calculation_F500_1000(RPNres2);
-                        //                        resultText.Text = ansd;
-                        //                    }
-                                            
-                        //                  */  // 
-                        //                    if (ansd == "Out of Range")
-                        //                    {
-                        //                        string Calres2 = result_cal.ToString("F5");
-                        //                        string Calres3 = Calres2.TrimEnd('0');
-                        //                        if (Calres3.Substring(Calres3.Length - 1) == ".")
-                        //                        {
-                        //                            string Calres4 = Calres3.Replace(".", "");
-                        //                            resultText.Text = Calres4;
-                        //                        }
-                        //                        else
-                        //                        {
-                        //                            resultText.Text = result_cal.ToString("F8").TrimEnd('0');
-                        //                        }
-                        //                    }
-                        //                 }
-                        //                 //  
-                                        
+                                            resultText.Text = ansd;
+                                            /*
+                                            if (Calculate.Calculation_F1_500(RPNres2) != "Out of Range" && Calculate.Calculation_F500_1000(RPNres2) == "Out of Range")
+                                            {
+                                                string ansd = Calculate.Calculation_F1_500(RPNres2);
+                                                resultText.Text = ansd;
+                                            }
+                                            else if (Calculate.Calculation_F500_1000(RPNres2) != "Out of Range" && Calculate.Calculation_F1_500(RPNres2) == "Out of Range")
+                                            {
+                                                string ansd = Calculate.Calculation_F500_1000(RPNres2);
+                                                resultText.Text = ansd;
+                                            }
+                                            */
 
-                        //                else
-                        //                {
-                        //                    resultText.Text = loopanswer.Loop(result_cal);
-                        //                }
-                        //            }
+                                            if (ansd == "Out of Range")
+                                            {
+                                                string Calres2 = result_cal.ToString("F5");
+                                                string Calres3 = Calres2.TrimEnd('0');
+                                                if (Calres3.Substring(Calres3.Length - 1) == ".")
+                                                {
+                                                    string Calres4 = Calres3.Replace(".", "");
+                                                    resultText.Text = Calres4;
+                                                }
+                                                else
+                                                {
+                                                    resultText.Text = result_cal.ToString("F8").TrimEnd('0');
+                                                }
+                                            }
+                                        }
+                                        //  
 
-                        //            //循環小数ではないとき
-                        //            else
-                        //            {
-                        //                string Calres2 = result_cal.ToString("F5");
-                        //                string Calres3 = Calres2.TrimEnd('0');
-                        //                string s = Calres3.Substring(Calres3.IndexOf(".") + 1);//コンマの後の数値をs(=12)
-                        //                double sL = s.Length;//sL：sの桁数(2)
-                        //                double Deno = Math.Pow(10, sL);//分母：10のsL乗(=10^2=100)
-                        //                double Nume = double.Parse(Calres3) * Deno;//分子：小数値×10のsL乗(=0.12*100=12)
 
-                        //                //約分
-                        //                double G = Euclid.Gcd(Nume, Deno);//最大公約数G
-                        //                double Deno2 = Deno / G;
-                        //                double Nume2 = Nume / G;
+                                        else
+                                        {
+                                            resultText.Text = loopanswer.Loop(result_cal);
+                                        }
+                                    }
 
-                        //                if (Deno2.ToString() == "1")
-                        //                {
-                        //                    resultText.Text = Nume2.ToString();
-                        //                }
-                        //                else
-                        //                {
-                        //                    resultText.Text = Nume2.ToString() + "/" + Deno2.ToString();
-                        //                }
-                        //            }
-                        //        }
-                            //}
-                      
-                        //}
+                                    //循環小数ではないとき
+                                    else
+                                    {
+                                        string Calres2 = result_cal.ToString("F5");
+                                        string Calres3 = Calres2.TrimEnd('0');
+                                        string s = Calres3.Substring(Calres3.IndexOf(".") + 1);//コンマの後の数値をs(=12)
+                                        double sL = s.Length;//sL：sの桁数(2)
+                                        double Deno = Math.Pow(10, sL);//分母：10のsL乗(=10^2=100)
+                                        double Nume = double.Parse(Calres3) * Deno;//分子：小数値×10のsL乗(=0.12*100=12)
+
+                                        //約分
+                                        double G = Euclid.Gcd(Nume, Deno);//最大公約数G
+                                        double Deno2 = Deno / G;
+                                        double Nume2 = Nume / G;
+
+                                        if (Deno2.ToString() == "1")
+                                        {
+                                            resultText.Text = Nume2.ToString();
+                                        }
+                                        else
+                                        {
+                                            resultText.Text = Nume2.ToString() + "/" + Deno2.ToString();
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
                     }
                 }
-           }
+            }
  
             else if (str.Count(x => x == '=') > 1)
             {
@@ -360,5 +345,4 @@ namespace basic_calculation
 
         
     }
-}
-  
+} 
