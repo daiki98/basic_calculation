@@ -124,17 +124,10 @@
                 Text="Go Calculate" FontAttributes="Bold" HorizontalOptions="Center" 
                 BackgroundColor="#E9FBFD"/>
 
-        <Label Text="注意書き"
-               HorizontalTextAlignment="Center" 
-               VerticalTextAlignment="Center"
-               FontAttributes="Bold"
-               FontSize="Medium"/>
-
-        <Label Text="a"
-               HorizontalTextAlignment="Center" 
-               VerticalTextAlignment="Center"
-               FontSize="Medium"/>
-
+        <Button x:Name="ExplainPage"
+                Text="説明ページ" FontAttributes="Bold" HorizontalOptions="Center" 
+                BackgroundColor="#E9FBFD"/>
+        
     </StackLayout>
 
 
