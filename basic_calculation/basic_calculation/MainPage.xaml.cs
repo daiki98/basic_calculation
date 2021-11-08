@@ -10,8 +10,10 @@ namespace basic_calculation
 
         int SDnumber = 1; //0-S,1-D
         int FFnum = -1; //1-分数関数 0-一次関数　2-高次関数
-        int numState = 0;//項1つあたりの桁数チェック
+        int bbState = 0;//分数ボタンの状況チェック 1-あり，0-なし
+        int espnum = 0;
         string questionText = null;
+
 
         string numerator = null;　　//分子
         string denominator = null;　//分母
@@ -56,6 +58,7 @@ namespace basic_calculation
                 displayText.Text = savestring + "{" + numerator + "/" + denominator + "}";
                 questionText = savestring +　"(" + numerator + ")" + "/" + "(" + denominator + ")";
                 button.Text = "分数";
+                bbState = 1;　//分数ボタンチェック
             } 
             else if (F.Text == "分子")
             {
@@ -67,24 +70,13 @@ namespace basic_calculation
 
         }
 
-
-        void OnSelectR(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            if (displayText.CursorPosition < displayText.Text.Length)
-            {
-                displayText.CursorPosition += 1;
-            }
-
-        }
-
-
         // Cボタン
         void OnClear(object sender, EventArgs e)
         {
             questionText = "";
             displayText.Text = "";
             resultText.Text = "";
+            bbState = 0;
         }
 
         //Delボタン
@@ -94,9 +86,17 @@ namespace basic_calculation
             {
                 questionText = questionText.Substring(0, questionText.Length - 1);
             }
-            if (displayText.Text.Length > 0)
+
+            if (displayText.Text.Length > 0&& displayText.Text.Substring(displayText.Text.Length-1) != "}")
             {
                 displayText.Text = displayText.Text.Substring(0, displayText.Text.Length - 1);
+            }
+            else if(displayText.Text.Length > 0 && displayText.Text.Substring(displayText.Text.Length-1) == "}")
+            {
+                int firstnum = displayText.Text.LastIndexOf("{");
+                displayText.Text=displayText.Text.Substring(0, firstnum );
+                questionText = questionText.Substring(0, firstnum);
+                bbState = 0;
             }
             displayText.CursorPosition = displayText.Text.Length;
         }
@@ -144,6 +144,7 @@ namespace basic_calculation
 
                 {
                     resultText.Text = "Wrong";
+                    espnum = 1;
                 }
 
                 else
@@ -159,10 +160,28 @@ namespace basic_calculation
                    if (L < 1 || R < 1)
                     {
                         resultText.Text = "Wrong";  //＝の後になんもないやつ
+                        espnum = 1;
                     }
 
-                    else
+                    bool FFjudLb = judment.FF(Left);
+                    bool FFjudRb = judment.FF(Right);
+
+                    if (FFjudLb == true || FFjudRb == true)
                     {
+                        if (bbState == 0)
+                        {
+                            resultText.Text = "入力ミス";
+                            espnum = 1;
+                        }
+                        else
+                        {
+                            
+                        }
+                    }
+
+                    if(espnum==0)
+                    {
+
                         bool FFjudL = judment.FF(Left);
                         bool FFjudR = judment.FF(Right);
                         bool HOEjudL = judment.HOE(Left);
@@ -177,7 +196,7 @@ namespace basic_calculation
                         {
                             FFnum = 1;
                             string redenominator = denominator.Replace("×", "*");
-                            AsympoteNum = judment.Asympote(redenominator);　//分母＝０より漸近線計算
+                            AsympoteNum = judment.Asympote(redenominator);　//分母＝０より漸近線計算       
                         }
 
                         if (HOEjudL == false && HOEjudR == false && FFjudL == false && FFjudR == false)
@@ -189,7 +208,7 @@ namespace basic_calculation
                         string f1 = Right + "-(" + Left + ")";
 
                         //resultText.Text = f1;
-                      //*の変換
+                        //*の変換
                         string f2 = f1.Replace("×", "*");
                         string f3 = f2.Replace("0(", "0・(");
                         string f4 = f3.Replace("1(", "1・(");
@@ -203,9 +222,11 @@ namespace basic_calculation
                         string f12 = f11.Replace("9(", "9・(");
                         string f13 = f12.Replace("□(", "□・(");
                         char[] F = f13.ToCharArray();
+
+
                         string RPNres = Calculate.ReversePolishNotation(F);//  中置記法 →　後置記法(非分数）
 
-                        
+
 
                         string RPNres2 = RPNres.Replace("÷", "/");
                         //resultText.Text = RPNres2;
@@ -213,7 +234,7 @@ namespace basic_calculation
 
                         resultText.Text = AsympoteNum.ToString();
 
-                        double result_cal = Calculate.BisectionCal(RPNres2, FFnum, AsympoteNum);  //二分法答え(double)
+                        qdouble result_cal = Calculate.BisectionCal(RPNres2, FFnum, AsympoteNum);  //二分法答え(double)
 
                         if (result_cal == 595959595)　　　//計算外エラー
                         {
@@ -327,8 +348,10 @@ namespace basic_calculation
                                 }
                             }
 
+
                         }
                     }
+                    
                 }
             }
  
