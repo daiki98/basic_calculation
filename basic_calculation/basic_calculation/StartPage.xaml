@@ -5,8 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="basic_calculation.StartPage">
-
-    <StackLayout  Orientation="Vertical">
+    <ScrollView>
+        <StackLayout  Orientation="Vertical">
 
         <Label Text="四則逆算計算機"
                Padding="0,20,0,20" 
@@ -63,7 +63,7 @@
                            HorizontalTextAlignment="Center" 
                            VerticalTextAlignment="Center"
                            Padding="50,0,0,0" FontAttributes="Bold"/>
-                    
+
                 </StackLayout>
 
                 <Label Text="C　       リセット"
@@ -127,10 +127,13 @@
         <Button x:Name="ExplainPage"
                 Text="説明ページ" FontAttributes="Bold" HorizontalOptions="Center" 
                 BackgroundColor="#E9FBFD"/>
+
+            
+           
+        </StackLayout>
         
-    </StackLayout>
+        
 
-
-
+    </ScrollView>
 
 </ContentPage>

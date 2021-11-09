@@ -234,7 +234,7 @@ namespace basic_calculation
 
                         resultText.Text = AsympoteNum.ToString();
 
-                        qdouble result_cal = Calculate.BisectionCal(RPNres2, FFnum, AsympoteNum);  //二分法答え(double)
+                        double result_cal = Calculate.BisectionCal(RPNres2, FFnum, AsympoteNum);  //二分法答え(double)
 
                         if (result_cal == 595959595)　　　//計算外エラー
                         {
