@@ -16,7 +16,7 @@ namespace basic_calculation
         {
             InitializeComponent();
             NextButton.Clicked += NextButton_Clicked;
-            ExplainPage.Clicked += ExplainPage_Clicked;
+            //ExplainPage.Clicked += ExplainPage_Clicked;
 
             NavigationPage.SetHasNavigationBar(this, false);
 

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="basic_calculation.StartPage">
+<ContentPage    xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                mc:Ignorable="d"
+                x:Class="basic_calculation.StartPage">
 
     <StackLayout  Orientation="Vertical">
 
@@ -13,6 +13,10 @@
                FontSize="Large"
                HorizontalTextAlignment="Center" 
                VerticalTextAlignment="Center" FontAttributes="Bold" TextType="Html" BackgroundColor="#E9FBFD" />
+
+        <Button x:Name="NextButton"
+                Text="Go Calculate" FontAttributes="Bold" HorizontalOptions="Center" 
+                BackgroundColor="#E9FBFD"/>
 
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="Center"
@@ -118,19 +122,13 @@
 
         </StackLayout>
 
-
-
-        <Button x:Name="NextButton"
-                Text="Go Calculate" FontAttributes="Bold" HorizontalOptions="Center" 
-                BackgroundColor="#E9FBFD"/>
-
-        <Button x:Name="ExplainPage"
+        <!--<Button x:Name="ExplainPage"
                 Text="説明ページ" FontAttributes="Bold" HorizontalOptions="Center" 
-                BackgroundColor="#E9FBFD"/>
+                BackgroundColor="#E9FBFD"/>-->
         
     </StackLayout>
 
-
-
-
+    
+    
+    
 </ContentPage>
