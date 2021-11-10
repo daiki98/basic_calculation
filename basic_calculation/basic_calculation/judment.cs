@@ -170,7 +170,7 @@ namespace basic_calculation
                         string next2_char;
                         int l_input = input.Length;//式の長さ
 
-                        for (int j = 1; j < l_input; j++)
+                        for (int j = 1; j < l_input-d_nums[i]; j++)
                         {
                             next2_char = input.Substring(d_nums[i] + j, 1);
                             if (next2_char == "□" || next2_char == "(")
@@ -182,6 +182,7 @@ namespace basic_calculation
                             {
                                 return false;  //非分数関数
                             }
+                            
                         }
 
                     }
