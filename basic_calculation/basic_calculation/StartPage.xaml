@@ -1,134 +1,147 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage    xmlns="http://xamarin.com/schemas/2014/forms"
-                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                mc:Ignorable="d"
-                x:Class="basic_calculation.StartPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="basic_calculation.StartPage">
+    <ScrollView>
+        <StackLayout  Orientation="Vertical">
 
-    <StackLayout  Orientation="Vertical">
-
-        <Label Text="四則逆算計算機"
-               Padding="0,20,0,20" 
-               FontSize="Large"
-               HorizontalTextAlignment="Center" 
-               VerticalTextAlignment="Center" FontAttributes="Bold" TextType="Html" BackgroundColor="#E9FBFD" />
-
-        <Button x:Name="NextButton"
-                Text="Go Calculate" FontAttributes="Bold" HorizontalOptions="Center" 
-                BackgroundColor="#E9FBFD"/>
-
-        <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Center"
-                     Padding="50,0,0,10"
-                     BackgroundColor="White">
-
-            <Image Source="number.jpg"
-                   HeightRequest="80"
-                   WidthRequest="80"/>
-
-            <Label Text=" 数字"
-                   HorizontalTextAlignment="Center"
-                   VerticalTextAlignment="Center"
-                   FontSize="Medium" Margin="0" IsTabStop="False" Padding="50,0,0,0" FontAttributes="Bold"/>
-
-        </StackLayout>
-
-
-        <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Start"
-                     Padding="50,0,0,15"
-                     BackgroundColor="White">
-
-            <Image Source="ope.jpg"
-                   HeightRequest="80"
-                   WidthRequest="80"/>
-
-            <Label Text="演算子"
+            
+            <Label Text="四則逆算計算機"
+                   Padding="0,20,0,20" 
+                   FontSize="Large"
                    HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center"
-                   FontSize="Medium"
-                   Padding="50,0,0,0" FontAttributes="Bold"/>
-
-        </StackLayout>
-
-        <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Start"
-                     Padding="58,0,0,15"
-                     BackgroundColor="White">
-
-            <Image Source="etc.jpg"
-                   HeightRequest="60"
-                   WidthRequest="60"/>
+                   VerticalTextAlignment="Center" FontAttributes="Bold" 
+                   TextType="Html" BackgroundColor="#E9FBFD" />
 
             <StackLayout Orientation="Vertical">
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="DEL  　文字削除"
+                <Button x:Name="NextButton"
+                        Padding="10,20,10,20" 
+                        Margin="20"
+                        Text="Go Calculate" FontAttributes="Bold" HorizontalOptions="Center" 
+                        BackgroundColor="#00FFFF"
+                        BorderRadius="15"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                    <Label Text="--使い方---------------------------------------"
                            HorizontalTextAlignment="Center" 
                            VerticalTextAlignment="Center"
-                           Padding="50,0,0,0" FontAttributes="Bold"/>
-                    
+                           FontSize="Large" Margin="0" IsTabStop="False" 
+                           Padding="10,0,10,10" FontAttributes="Bold"
+                           />
                 </StackLayout>
 
-                <Label Text="C　       リセット"
-                       HorizontalTextAlignment="Start" 
-                       VerticalTextAlignment="Center"
-                       Padding="50,0,0,0" FontAttributes="Bold"/>
+                <StackLayout Orientation="Vertical">
+                    <Image Source="calhome.jpg"
+                           HeightRequest="200"
+                           WidthRequest="200"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical">
+                    <Label Text="①分数・小数表示切り替えボタン"
+                           HorizontalTextAlignment="Start" 
+                           VerticalTextAlignment="Center"
+                           FontSize="Large" Margin="0" IsTabStop="False"
+                           Padding="10,10,10,0" FontAttributes="Bold"/>
+
+                    <Label Text="答えの表示を分数と小数で切り替える。"
+                           HorizontalTextAlignment="Start" 
+                           VerticalTextAlignment="Center"
+                           FontSize="Medium" Margin="0" IsTabStop="False"
+                           Padding="30,0,10,0" FontAttributes="Bold"/>
+
+                </StackLayout>
 
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="D　       　小数"
+                    <Label Text="・分数"
                            HorizontalTextAlignment="Center" 
                            VerticalTextAlignment="Center"
-                           Padding="50,0,0,0" FontAttributes="Bold"/>
+                           FontSize="Medium" Margin="0" IsTabStop="False" 
+                           Padding="20,10,10,0" FontAttributes="Bold"
+                           />
                 </StackLayout>
-                <Label Text="F　       　分数"
+
+                <StackLayout Orientation="Vertical">
+                    <Image Source="bun.jpg"
+                           HeightRequest="200"
+                           WidthRequest="200"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="・小数"
+                           HorizontalTextAlignment="Center" 
+                           VerticalTextAlignment="Center"
+                           FontSize="Medium" Margin="0" IsTabStop="False" 
+                           Padding="20,20,10,0" FontAttributes="Bold"
+                           />
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical">
+                    <Image Source="shou.jpg"
+                           HeightRequest="200"
+                           WidthRequest="200"/>
+                </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="②変数□ボタン"
                        HorizontalTextAlignment="Start" 
                        VerticalTextAlignment="Center"
-                       Padding="50,0,0,0" FontAttributes="Bold"/>
+                       FontSize="Large" Margin="0" IsTabStop="False"
+                       Padding="10,20,5,0" FontAttributes="Bold"/>
+                <Image Source="sikaku.jpg" VerticalOptions="End"
+                       HeightRequest="30"
+                       WidthRequest="30"/>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Vertical">
+                <Label Text="式中に求めたい変数として□を入力する。"
+                       HorizontalTextAlignment="Start" 
+                       VerticalTextAlignment="Center"
+                       FontSize="Medium" Margin="0" IsTabStop="False"
+                       Padding="30,0,10,0" FontAttributes="Bold"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="③分数ボタン"
+                       HorizontalTextAlignment="Start" 
+                       VerticalTextAlignment="Center"
+                       FontSize="Large" Margin="0" IsTabStop="False"
+                       Padding="10,20,5,0" FontAttributes="Bold"/>
+                <Image Source="bunbutton.jpg" VerticalOptions="End"
+                       HeightRequest="30"
+                       WidthRequest="30"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <Label Text="分数を入力する時に使います。"  
+                       HorizontalTextAlignment="Start" 
+                       VerticalTextAlignment="Center"
+                       FontSize="Medium" Margin="0" IsTabStop="False"
+                       Padding="30,0,10,0" FontAttributes="Bold"/>
+
+                <Label Text="１，分数ボタンを押す"
+                       HorizontalTextAlignment="Start" 
+                       VerticalTextAlignment="Center"
+                       FontSize="Medium" Margin="0" IsTabStop="False"
+                       Padding="50,0,10,0" FontAttributes="Bold"/>
+                <Label Text="２，分子入力後、決定ボタンを押す"
+                       HorizontalTextAlignment="Start" 
+                       VerticalTextAlignment="Center"
+                       FontSize="Medium" Margin="0" IsTabStop="False"
+                       Padding="50,0,10,0" FontAttributes="Bold"/>
+                <Label Text="３，分母入力後、決定ボタンを押す"
+                       HorizontalTextAlignment="Start" 
+                       VerticalTextAlignment="Center"
+                       FontSize="Medium" Margin="0" IsTabStop="False"
+                       Padding="50,0,10,60" FontAttributes="Bold"/>
+
             </StackLayout>
 
         </StackLayout>
-
-        <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Start"
-                     Padding="50,0,0,10"
-                     BackgroundColor="White">
-
-            <Image Source="x.jpg"
-                   HeightRequest="70"
-                   WidthRequest="70"/>
-
-            <Label Text="   変数"
-                   HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center"
-                   FontSize="Medium"
-                   Padding="50,0,0,0" FontAttributes="Bold"/>
-
-        </StackLayout>
-
-        <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Start" Padding="50,0,0,20"
-                     BackgroundColor="White">
-
-            <Image Source="cal.jpg"
-                   HeightRequest="70"
-                   WidthRequest="70"/>
-
-            <Label Text="計算開始"
-                   HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center"
-                   FontSize="Medium"
-                   Padding="50,0,0,0" FontAttributes="Bold"/>
-
-        </StackLayout>
-
-        <!--<Button x:Name="ExplainPage"
-                Text="説明ページ" FontAttributes="Bold" HorizontalOptions="Center" 
-                BackgroundColor="#E9FBFD"/>-->
-        
-    </StackLayout>
-
-    
-    
-    
+    </ScrollView>
 </ContentPage>

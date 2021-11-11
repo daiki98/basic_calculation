@@ -298,7 +298,7 @@ namespace basic_calculation
                 double res1 = double.Parse(Calculation_forBisection(input, initial1));      //解きたい式に初期値1を代入したときの値
                 double res2 = double.Parse(Calculation_forBisection(input, initial2));      //解きたい式に初期値2を代入したときの値
 
-                double Jub = initial1 * initial2;       //範囲の中に解があるか判断するやつ　正ー無し，負ーあり
+                double Jub = res1 * res2;       //範囲の中に解があるか判断するやつ　正ー無し，負ーあり
 
                 timer.Start();
                 while (initial1>asypotenum)
@@ -325,7 +325,7 @@ namespace basic_calculation
                                 return 5959595959;
                             }
                         }
-                        ffnum = 0;
+                        //ffnum = 0;
                         return ToRoundDown(mid, 9);
                     }
                     else
