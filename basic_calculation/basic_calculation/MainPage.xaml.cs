@@ -124,6 +124,8 @@ namespace basic_calculation
         // STARTボタン
         void OnCalculate(object sender, EventArgs e)
         {
+            resultText.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
+            espnum = 0;
             //resultText.Text = denominator;
             string str = questionText;
             if (str.Count(x => x == '=') == 1 && str.Contains("□"))
@@ -143,7 +145,8 @@ namespace basic_calculation
                         str.Contains(".-") || str.Contains("=.") || str.Contains(".=") || str.Contains(".."))
 
                 {
-                    resultText.Text = "Wrong";
+                    resultText.FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label));
+                    resultText.Text = "無効な式です";
                     espnum = 1;
                 }
 
@@ -159,7 +162,8 @@ namespace basic_calculation
 
                    if (L < 1 || R < 1)
                     {
-                        resultText.Text = "Wrong";  //＝の後になんもないやつ
+                        resultText.FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label));
+                        resultText.Text = "正しく入力してくだい";  //＝の後になんもないやつ
                         espnum = 1;
                     }
 
@@ -170,7 +174,8 @@ namespace basic_calculation
                     {
                         if (bbState == 0)
                         {
-                            resultText.Text = "入力ミス";
+                            resultText.FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Label));
+                            resultText.Text = "分数ボタンを使用してください";
                             espnum = 1;
                         }
                         else
@@ -238,12 +243,14 @@ namespace basic_calculation
 
                         if (result_cal == 595959595)　　　//計算外エラー
                         {
-                            resultText.Text = "sorry...";
+                            resultText.FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Label));
+                            resultText.Text = "計算できませんでした（値）";
                             FFnum = 0;
                         }
                         else if (result_cal == 5959595959)　//時間制限エラー(フリーズ防止）
                         {
-                            resultText.Text = "time error";
+                            resultText.FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Label));
+                            resultText.Text = "計算できませんでした（時間）";
                         }
                         else
                         {
@@ -355,12 +362,14 @@ namespace basic_calculation
  
             else if (str.Count(x => x == '=') > 1)
             {
-                resultText.Text = "Many =";
+                resultText.FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label));
+                resultText.Text = "＝ を1つにしてください";
             }
 
             else
             {
-                resultText.Text = "Not Exsit □ or =";
+                resultText.FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label));
+                resultText.Text = "□ または ＝ を入力";
            }
         }
 

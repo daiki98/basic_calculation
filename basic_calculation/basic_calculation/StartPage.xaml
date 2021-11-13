@@ -25,32 +25,43 @@
                         BorderRadius="15"/>
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal">
-                    <Label Text="--使い方---------------------------------------"
+            <StackLayout Orientation="Vertical">
+                <Line X1="0"
+                          X2="350"
+                          Stroke="Black"
+                         HorizontalOptions="Center"
+                          />
+                <Label Text="使い方"
+                           HorizontalOptions="Center"
                            HorizontalTextAlignment="Center" 
                            VerticalTextAlignment="Center"
                            FontSize="Large" Margin="0" IsTabStop="False" 
                            Padding="10,0,10,10" FontAttributes="Bold"
                            />
-                </StackLayout>
+           </StackLayout>
 
                 <StackLayout Orientation="Vertical">
                     <Image Source="calhome.jpg"
                            HeightRequest="200"
                            WidthRequest="200"/>
                 </StackLayout>
+            <Line X1="0"
+                          X2="350"
+                          Stroke="Black"
+                         HorizontalOptions="Center"
+                          />
 
                 <StackLayout Orientation="Vertical">
-                    <Label Text="①分数・小数表示切り替えボタン"
+                    <Label Text="①分数・小数ボタン"
                            HorizontalTextAlignment="Start" 
                            VerticalTextAlignment="Center"
                            FontSize="Large" Margin="0" IsTabStop="False"
                            Padding="10,10,10,0" FontAttributes="Bold"/>
 
-                    <Label Text="答えの表示を分数と小数で切り替える。"
+                    <Label Text="答えの表示を分数と小数で切り替え"
                            HorizontalTextAlignment="Start" 
                            VerticalTextAlignment="Center"
-                           FontSize="Medium" Margin="0" IsTabStop="False"
+                           FontSize="Small" Margin="0" IsTabStop="False"
                            Padding="30,0,10,0" FontAttributes="Bold"/>
 
                 </StackLayout>
@@ -83,28 +94,35 @@
                     <Image Source="shou.jpg"
                            HeightRequest="200"
                            WidthRequest="200"/>
-                </StackLayout>
 
+           
+            </StackLayout>
+          
 
             <StackLayout Orientation="Horizontal">
+               
                 <Label Text="②変数□ボタン"
                        HorizontalTextAlignment="Start" 
                        VerticalTextAlignment="Center"
                        FontSize="Large" Margin="0" IsTabStop="False"
-                       Padding="10,20,5,0" FontAttributes="Bold"/>
+                       Padding="10,30,5,0" FontAttributes="Bold"/>
                 <Image Source="sikaku.jpg" VerticalOptions="End"
-                       HeightRequest="30"
-                       WidthRequest="30"/>
+                       HeightRequest="50"
+                       WidthRequest="50"/>
             </StackLayout>
 
 
             <StackLayout Orientation="Vertical">
-                <Label Text="式中に求めたい変数として□を入力する。"
+                <Label Text="式中の求めたい変数として□を入力"
                        HorizontalTextAlignment="Start" 
                        VerticalTextAlignment="Center"
-                       FontSize="Medium" Margin="0" IsTabStop="False"
-                       Padding="30,0,10,0" FontAttributes="Bold"/>
+                       FontSize="Small" Margin="0" IsTabStop="False"
+                       Padding="30,20,10,0" FontAttributes="Bold"/>
+
+              
             </StackLayout>
+            
+     
 
             <StackLayout Orientation="Horizontal">
                 <Label Text="③分数ボタン"
@@ -113,31 +131,31 @@
                        FontSize="Large" Margin="0" IsTabStop="False"
                        Padding="10,20,5,0" FontAttributes="Bold"/>
                 <Image Source="bunbutton.jpg" VerticalOptions="End"
-                       HeightRequest="30"
-                       WidthRequest="30"/>
+                       HeightRequest="50"
+                       WidthRequest="50"/>
             </StackLayout>
 
             <StackLayout Orientation="Vertical">
-                <Label Text="分数を入力する時に使います。"  
+                <Label Text="分数を入力する時に使用"  
                        HorizontalTextAlignment="Start" 
                        VerticalTextAlignment="Center"
-                       FontSize="Medium" Margin="0" IsTabStop="False"
-                       Padding="30,0,10,0" FontAttributes="Bold"/>
+                       FontSize="Small" Margin="0" IsTabStop="False"
+                       Padding="30,20,10,0" FontAttributes="Bold"/>
 
-                <Label Text="１，分数ボタンを押す"
+                <Label Text="1.分数ボタンを押す"
                        HorizontalTextAlignment="Start" 
                        VerticalTextAlignment="Center"
-                       FontSize="Medium" Margin="0" IsTabStop="False"
+                       FontSize="Small" Margin="0" IsTabStop="False"
                        Padding="50,0,10,0" FontAttributes="Bold"/>
-                <Label Text="２，分子入力後、決定ボタンを押す"
+                <Label Text="2.分子入力後、決定ボタンを押す"
                        HorizontalTextAlignment="Start" 
                        VerticalTextAlignment="Center"
-                       FontSize="Medium" Margin="0" IsTabStop="False"
+                       FontSize="Small" Margin="0" IsTabStop="False"
                        Padding="50,0,10,0" FontAttributes="Bold"/>
-                <Label Text="３，分母入力後、決定ボタンを押す"
+                <Label Text="3.分母入力後、決定ボタンを押す"
                        HorizontalTextAlignment="Start" 
                        VerticalTextAlignment="Center"
-                       FontSize="Medium" Margin="0" IsTabStop="False"
+                       FontSize="Small" Margin="0" IsTabStop="False"
                        Padding="50,0,10,60" FontAttributes="Bold"/>
 
             </StackLayout>
