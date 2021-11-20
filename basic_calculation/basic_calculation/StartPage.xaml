@@ -9,7 +9,7 @@
         <StackLayout  Orientation="Vertical">
 
             
-            <Label Text="四則逆算計算機"
+            <Label Text="方程式計算機"
                    Padding="0,20,0,20" 
                    FontSize="Large"
                    HorizontalTextAlignment="Center" 
