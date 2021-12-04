@@ -156,18 +156,15 @@
                        HorizontalTextAlignment="Start" 
                        VerticalTextAlignment="Center"
                        FontSize="Small" Margin="0" IsTabStop="False"
-                       Padding="50,0,10,60" FontAttributes="Bold"/>
+                       Padding="50,0,10,20" FontAttributes="Bold"/>
 
             </StackLayout>
 
             <StackLayout Orientation="Vertical">
-                <Label Text="プライバシーポリシー"
-                        FontSize="Small"
-                       Padding="30,20,10,0"/>
-                <Label Text="URL"
-                        FontSize="Small"
-                       Padding="30,0,10,0"/>
-                <base:BaseLinkButton x:Name="linkButton1" Url="" Text="有効なリンク" IsDisabled="False" IsUnderline="True" HorizontalOptions="Center" />
+                <base:BaseLinkButton x:Name="linkButton1"
+                                     Url="https://basic-calculation.vercel.app/"
+                                     Text="プライバシーポリシー"
+                                     IsDisabled="False" IsUnderline="True" HorizontalOptions="Center" />
             </StackLayout>
 
         </StackLayout>
