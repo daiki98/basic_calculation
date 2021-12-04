@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:base="clr-namespace:basic_calculation"
              mc:Ignorable="d"
              x:Class="basic_calculation.StartPage">
     <ScrollView>
@@ -20,7 +20,7 @@
                 <Button x:Name="NextButton"
                         Padding="10,20,10,20" 
                         Margin="20"
-                        Text="Go Calculate" FontAttributes="Bold" HorizontalOptions="Center" 
+                        Text="計算機へ" FontAttributes="Bold" HorizontalOptions="Center" 
                         BackgroundColor="#00FFFF"
                         BorderRadius="15"/>
             </StackLayout>
@@ -101,7 +101,7 @@
 
             <StackLayout Orientation="Horizontal">
                
-                <Label Text="②変数□ボタン"
+                <Label Text="②変数 □ボタン"
                        HorizontalTextAlignment="Start" 
                        VerticalTextAlignment="Center"
                        FontSize="Large" Margin="0" IsTabStop="False"
@@ -158,6 +158,16 @@
                        FontSize="Small" Margin="0" IsTabStop="False"
                        Padding="50,0,10,60" FontAttributes="Bold"/>
 
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <Label Text="プライバシーポリシー"
+                        FontSize="Small"
+                       Padding="30,20,10,0"/>
+                <Label Text="URL"
+                        FontSize="Small"
+                       Padding="30,0,10,0"/>
+                <base:BaseLinkButton x:Name="linkButton1" Url="" Text="有効なリンク" IsDisabled="False" IsUnderline="True" HorizontalOptions="Center" />
             </StackLayout>
 
         </StackLayout>
