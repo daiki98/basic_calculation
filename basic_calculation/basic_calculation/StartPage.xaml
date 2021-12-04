@@ -160,12 +160,9 @@
 
             </StackLayout>
 
-            <StackLayout Orientation="Vertical">
-                <base:BaseLinkButton x:Name="linkButton1"
-                                     Url="https://basic-calculation.vercel.app/"
-                                     Text="プライバシーポリシー"
-                                     IsDisabled="False" IsUnderline="True" HorizontalOptions="Center" />
-            </StackLayout>
+
+            <base:BaseLinkButton x:Name="linkButton1" Url="https://basic-calculation.vercel.app/" Text="プライバシーポリシー" IsDisabled="False" IsUnderline="True" HorizontalOptions="Center" />
+       
 
         </StackLayout>
     </ScrollView>

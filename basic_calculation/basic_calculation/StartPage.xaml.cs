@@ -23,7 +23,10 @@ namespace basic_calculation
           //  Direction.Source = ImageSource.FromResource("basic_calculation.Image.DirectionImage.jpg"); 
         }
 
-      
+        private void ExplainPage_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Explain());
+        }
 
         private void NextButton_Clicked(object sender, EventArgs e)
         {
